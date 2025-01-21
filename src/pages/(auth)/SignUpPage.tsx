@@ -1,5 +1,5 @@
-import AuthDashboard from '../components/AuthDashboard';
-import { Box } from '../components/Box';
+import AuthDashboard from '../../components/AuthDashboard';
+import { Box } from '../../components/Box';
 
 export default function SignUpPage() {
   const footerLinks = [

@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import ForgotPassword from './pages/ForgotPassword';
-import LoginPage from './pages/LoginPage';
-import SignUpPage from './pages/SignUpPage';
+import ForgotPassword from './pages/(auth)/ForgotPassword';
+import LoginPage from './pages/(auth)/LoginPage';
+import SignUpPage from './pages/(auth)/SignUpPage';
 
 function App() {
   return (
