@@ -22,7 +22,7 @@ export default function LoginPage() {
         title="Login to your account"
         subtitle="Securely login to your PiggyVest"
       >
-        <div className="form pb-3 px-1 mt-5 text-left space-y-7">
+        <form className="form pb-3 px-1 mt-5 text-left space-y-7">
           {/* array of forms inputs */}
           {[
             {
@@ -43,11 +43,7 @@ export default function LoginPage() {
               >
                 {labelName}
               </label>
-              <input
-                className="w-full p-3 md:p-4  bg-gray-200 rounded-md focus:outline-none text-gray-900"
-                type={`${inputType}`}
-                id={`${labelName}`}
-              />
+              <input type={`${inputType}`} id={`${labelName}`} />
             </div>
           ))}
           <button
@@ -56,7 +52,7 @@ export default function LoginPage() {
           >
             log in
           </button>
-        </div>
+        </form>
       </Box>
 
       {footerLinks.map(({ label, href, id, linkName }) => (

@@ -11,7 +11,7 @@ export default function SignUpPage() {
     },
     {
       id: 'footer_link_id_04',
-      href: '/privacy',
+      href: '#',
       label: `privacy policy`,
       linkName: 'privacys',
     },
@@ -75,7 +75,7 @@ export default function SignUpPage() {
         title="Login to your account"
         subtitle="Securely login to your PiggyVest"
       >
-        <div className="form pb-3 px-1 mt-5 text-left space-y-7">
+        <form className="pb-3 px-1 mt-5 text-left space-y-7">
           {/* array of forms inputs */}
           {formInputs.map(
             ({ inputType, labelName, id, placeholder, values }) => (
@@ -88,10 +88,7 @@ export default function SignUpPage() {
                 </label>
 
                 {inputType === 'select' ? (
-                  <select
-                    className="w-full p-3 md:p-4 bg-gray-300 rounded-md focus:outline-none text-gray-900 "
-                    id={`${labelName}`}
-                  >
+                  <select id={`${labelName}`}>
                     {values?.map((option) => (
                       <option key={option} value={option}>
                         {option}
@@ -100,7 +97,6 @@ export default function SignUpPage() {
                   </select>
                 ) : (
                   <input
-                    className="w-full p-3 md:p-4 bg-gray-300 rounded-md focus:outline-none text-gray-900"
                     type={`${inputType}`}
                     id={`${labelName}`}
                     placeholder={`${placeholder}`}
@@ -116,7 +112,7 @@ export default function SignUpPage() {
           >
             Create Account
           </button>
-        </div>
+        </form>
       </Box>
 
       {footerLinks.map(({ label, href, id, linkName }) => (

@@ -16,3 +16,8 @@
 body {
   min-height: 100dvh;
 }
+
+input,
+select {
+  @apply py-3 pr-2 md:py-4 md:pr-4 w-full rounded-[0.25em] bg-gray-200 text-gray-900 outline-none pl-3 md:pl-4;
+}

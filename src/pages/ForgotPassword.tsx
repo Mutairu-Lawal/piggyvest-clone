@@ -38,7 +38,6 @@ export default function ForgotPassword() {
               </label>
 
               <input
-                className="w-full p-3 md:p-4 bg-gray-300 rounded-md focus:outline-none text-gray-900"
                 type={`${inputType}`}
                 id={`${labelName}`}
                 placeholder={`${placeholder}`}
