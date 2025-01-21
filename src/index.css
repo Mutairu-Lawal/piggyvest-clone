@@ -12,3 +12,7 @@
   list-style: none;
   text-decoration: none;
 }
+
+body {
+  min-height: 100dvh;
+}
