@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import AuthDashboard from '../../components/AuthDashboard';
 import { Box } from '../../components/Box';
 
@@ -56,14 +57,14 @@ export default function LoginPage() {
       </Box>
 
       {footerLinks.map(({ label, href, id, linkName }) => (
-        <a
+        <Link
           key={id}
-          href={href}
+          to={href}
           className="hover:text-gray-300 md:text-sm text-xs font-medium"
           aria-label={`click to vist ${linkName} page`}
         >
           <h6 className="mt-7">{label}</h6>
-        </a>
+        </Link>
       ))}
     </AuthDashboard>
   );
