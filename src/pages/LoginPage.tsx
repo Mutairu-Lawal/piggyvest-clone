@@ -1,54 +1,55 @@
+import AuthDashboard from '../components/AuthDashboard';
+import { Box } from '../components/Box';
+
 export default function LoginPage() {
+  const footerLinks = [
+    {
+      id: 'footer_link_id_01',
+      href: '/register',
+      linkName: 'register',
+      label: `Don't have an account? Register`,
+    },
+    {
+      id: 'footer_link_id_02',
+      href: '/forgot-password',
+      label: `Forgot Password`,
+      linkName: 'forgot password',
+    },
+  ];
   return (
-    <section className="bg-[#062863] min-h-dvh text-center py-14 px-5 text-white">
-      <div className="font-semibold text-4xl mb-12 flex place-content-center">
-        <a href="#" aria-label="click to go to the piggyvest homepage">
-          <img
-            src="https://dashboard.piggyvest.com/static/media/piggyvest-logo.0b78a8fa.svg"
-            alt="piggyvest-logo"
-            className="w-full h-full object-contains"
-          />
-        </a>
-      </div>
-
-      <div className="box max-w-md mx-auto text-black bg-white py-10 px-6 rounded-2xl rounded-bl-none">
-        <h2 className="text-[#083e9e] font-bold text-xl md:text-2xl">
-          Login to your account
-        </h2>
-        <h5 className="text-sm font-body text-gray-700 text-center">
-          Securely login to your PiggyVest
-        </h5>
-
+    <AuthDashboard>
+      <Box
+        title="Login to your account"
+        subtitle="Securely login to your PiggyVest"
+      >
         <div className="form pb-3 px-1 mt-5 text-left space-y-7">
-          <div className="form-group space-y-2">
-            <label
-              className="block text-xs text-gray-900 font-semibold"
-              htmlFor="text"
-            >
-              Email or Phone Number
-            </label>
-            <input
-              className="w-full p-3 md:p-4  bg-gray-200 rounded-md focus:outline-none text-gray-900"
-              type="text"
-              id="text"
-              autoFocus
-            />
-          </div>
-
-          <div className="form-group space-y-2">
-            <label
-              className="block text-xs text-gray-900 font-semibold"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <input
-              className="w-full p-3 md:p-4  bg-gray-200 rounded-md focus:outline-none text-gray-900"
-              type="password"
-              id="passsword"
-            />
-          </div>
-
+          {/* array of forms inputs */}
+          {[
+            {
+              labelName: 'Email or Phone Number',
+              inputType: 'text',
+              id: 'label_id_01',
+            },
+            {
+              labelName: 'Password',
+              inputType: 'password',
+              id: 'label_id_02',
+            },
+          ].map(({ inputType, labelName, id }) => (
+            <div key={id} className="form-group space-y-2">
+              <label
+                className="block text-xs text-gray-900 font-semibold"
+                htmlFor={`${inputType}`}
+              >
+                {labelName}
+              </label>
+              <input
+                className="w-full p-3 md:p-4  bg-gray-200 rounded-md focus:outline-none text-gray-900"
+                type={`${inputType}`}
+                id={`${inputType}`}
+              />
+            </div>
+          ))}
           <button
             type="submit"
             className="uppercase bg-[#0d60d8] hover:bg-[#0d4dd8] text-white px-5 py-3 rounded-lg w-full font-extrabold rounded-bl-none"
@@ -56,20 +57,18 @@ export default function LoginPage() {
             log in
           </button>
         </div>
-      </div>
+      </Box>
 
-      <a
-        href="/register"
-        className="hover:text-gray-300 md:text-sm text-xs font-medium"
-      >
-        <h6 className="mt-10">Don't have an account? Register</h6>
-      </a>
-      <a
-        href="/forgot-password"
-        className="hover:text-gray-300 md:text-sm text-xs font-medium"
-      >
-        <h6 className="mt-5">Forgot Password</h6>
-      </a>
-    </section>
+      {footerLinks.map(({ label, href, id, linkName }) => (
+        <a
+          key={id}
+          href={href}
+          className="hover:text-gray-300 md:text-sm text-xs font-medium"
+          aria-label={`click to vist ${linkName} page`}
+        >
+          <h6 className="mt-7">{label}</h6>
+        </a>
+      ))}
+    </AuthDashboard>
   );
 }
