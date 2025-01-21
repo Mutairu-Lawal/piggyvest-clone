@@ -39,14 +39,14 @@ export default function LoginPage() {
             <div key={id} className="form-group space-y-2">
               <label
                 className="block text-xs text-gray-900 font-semibold"
-                htmlFor={`${inputType}`}
+                htmlFor={`${labelName}`}
               >
                 {labelName}
               </label>
               <input
                 className="w-full p-3 md:p-4  bg-gray-200 rounded-md focus:outline-none text-gray-900"
                 type={`${inputType}`}
-                id={`${inputType}`}
+                id={`${labelName}`}
               />
             </div>
           ))}
