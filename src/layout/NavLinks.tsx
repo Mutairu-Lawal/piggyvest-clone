@@ -30,7 +30,7 @@ const navlinks = [
 
 export const NavLinks = () => {
   return (
-    <nav className="absolute bottom-0 left-0 w-full">
+    <nav className="sticky bottom-0 left-0 w-full bg-white">
       <div className="footer__container grid grid-cols-4">
         {navlinks.map(({ icon, url, text }) => (
           <NavLink
