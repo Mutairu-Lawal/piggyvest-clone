@@ -1,7 +1,7 @@
 const Todo = ({ type }: { type: string }) => {
   return (
-    <div className="brand--radius py-3 px-4 border flex items-center gap-4 rounded-lg">
-      <div className="circle w-[30px] h-[30px] border-2 rounded-full border-primary"></div>
+    <div className="brand--radius py-3 px-4 border flex items-center gap-3 rounded-lg">
+      <div className="w-[20px] h-[20px] border-2 rounded-full border-primary"></div>
       <p>{type}</p>
     </div>
   );

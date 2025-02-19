@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import AuthDashboard from '../../components/AuthDashboard';
 import { Box } from '../../components/Box';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
   const footerLinks = [
@@ -17,13 +18,21 @@ export default function LoginPage() {
       linkName: 'forgot password',
     },
   ];
+
+  const navigate = useNavigate();
   return (
     <AuthDashboard>
       <Box
         title="Login to your account"
         subtitle="Securely login to your PiggyVest"
       >
-        <form className="form pb-3 px-1 mt-5 text-left space-y-7">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            navigate('/');
+          }}
+          className="form pb-3 px-1 mt-5 text-left space-y-7"
+        >
           {/* array of forms inputs */}
           {[
             {

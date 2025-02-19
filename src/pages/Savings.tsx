@@ -1,3 +1,7 @@
 export const Savings = () => {
-  return <div>Savings</div>;
+  return (
+    <main className="min-h-screen border bg-green-600 border-red-600">
+      Savings
+    </main>
+  );
 };

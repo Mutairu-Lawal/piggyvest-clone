@@ -3,7 +3,7 @@ import { NavLinks } from './NavLinks';
 
 export const MainLayout = () => {
   return (
-    <div>
+    <div className="container mx-auto max-w-[700px] border">
       <Outlet />
       <NavLinks />
     </div>
