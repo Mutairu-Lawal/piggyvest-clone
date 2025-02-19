@@ -36,7 +36,7 @@ export const NavLinks = () => {
           <li key={text} className="border-t pt-2 flex justify-center">
             <NavLink
               to={url}
-              className="flex flex-col items-center justify-center border"
+              className="flex flex-col items-center justify-center"
             >
               {icon}
               <h2>{text}</h2>
