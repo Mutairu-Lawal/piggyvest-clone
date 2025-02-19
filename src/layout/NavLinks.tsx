@@ -34,6 +34,7 @@ export const NavLinks = () => {
       <div className="footer__container grid grid-cols-4">
         {navlinks.map(({ icon, url, text }) => (
           <NavLink
+            key={text}
             to={url}
             className="flex flex-col justify-center items-center border-t pt-2"
           >
