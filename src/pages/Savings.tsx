@@ -76,7 +76,11 @@ export const Savings = () => {
       <Header title="Savings" subtitle={`let's see how well you're doing.`} />
       <AccountBalance title="total balance" balance={2170.51} />
       <GetStarted title="build your savings">
-        <img src="" alt="hi" />
+        <img
+          src="/src/assets/piggyvest-crop.jpg"
+          alt="hi1"
+          className="w-full h-full"
+        />
       </GetStarted>
       <div className="cards grid grid-cols-2 justify-between gap-3">
         {savings.map(
