@@ -5,7 +5,7 @@ import { IoIosHeart } from 'react-icons/io';
 export const Navigations = () => {
   return (
     <div className="mt-6 space-y-3">
-      <div className="box brand--radius border py-3 px-4 rounded-lg border-blue-500 flex items-center gap-2 text-blue-500">
+      <div className="box rounded-bl-none border py-3 px-4 rounded-lg border-blue-500 flex items-center gap-2 text-blue-500">
         <div className="icon">
           <AiOutlineLike size={40} />
         </div>
@@ -16,7 +16,7 @@ export const Navigations = () => {
           </p>
         </div>
       </div>
-      <div className="box brand--radius border py-3 px-4 rounded-lg border-purple-700 flex items-center gap-2 text-purple-700">
+      <div className="box rounded-bl-none border py-3 px-4 rounded-lg border-purple-700 flex items-center gap-2 text-purple-700">
         <div className="icon">
           <FiAtSign size={40} />
         </div>

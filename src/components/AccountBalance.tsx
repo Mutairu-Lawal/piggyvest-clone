@@ -14,7 +14,7 @@ const AccountBalance = ({
   return (
     <div className="py-2">
       <div
-        className={`rounded-xl brand--radius p-6 flex items-center gap-4 ${
+        className={`rounded-xl rounded-bl-none p-6 flex items-center gap-4 ${
           isHome ? 'bg-primary text-white' : 'border'
         }  `}
       >

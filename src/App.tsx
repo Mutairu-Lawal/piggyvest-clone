@@ -7,6 +7,7 @@ import SignUpPage from './pages/(auth)/SignUpPage';
 import HomePage from './pages/HomePage';
 import { MainLayout } from './layout/MainLayout';
 import { Savings } from './pages/Savings';
+import Account from './pages/Account';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<HomePage />} />
             <Route path="savings" element={<Savings />} />
+            <Route path="account" element={<Account />} />
           </Route>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<SignUpPage />} />

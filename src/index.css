@@ -29,7 +29,6 @@ select {
 nav a.active {
   @apply text-primary;
 }
-
-.brand--radius {
-  @apply rounded-bl-none;
+nav a.active > p {
+  @apply text-black font-medium;
 }

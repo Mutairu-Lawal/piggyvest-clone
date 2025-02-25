@@ -6,7 +6,7 @@ export const Transactions = () => {
       <p className="text-sm uppercase font-medium text-gray-700 mb-2">
         recent activities
       </p>
-      <div className="box brand--radius border py-3 px-4 rounded-lg grid grid-cols-[70px_1fr] items-center">
+      <div className="box rounded-bl-none border py-3 px-4 rounded-lg grid grid-cols-[70px_1fr] items-center">
         <div className="icon w-[50px] h-[50px] rounded-[100%] bg-pink-600 text-white text-lg  overflow-hidden flex justify-center items-center">
           <IoWalletSharp />
         </div>

@@ -33,13 +33,16 @@ export const NavLinks = () => {
     <nav className="sticky bottom-0 left-0 w-full bg-white">
       <div className="footer__container grid grid-cols-4">
         {navlinks.map(({ icon, url, text }) => (
-          <li key={text} className="border-t pt-2 flex justify-center">
+          <li
+            key={text}
+            className="border-t pt-2 flex justify-center text-gray-400"
+          >
             <NavLink
               to={url}
               className="flex flex-col items-center justify-center"
             >
               {icon}
-              <h2>{text}</h2>
+              <p>{text}</p>
             </NavLink>
           </li>
         ))}
