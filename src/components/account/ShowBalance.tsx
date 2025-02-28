@@ -1,10 +1,15 @@
-import { useState } from 'react';
-
 import { LiaToggleOnSolid } from 'react-icons/lia';
 import { LiaToggleOffSolid } from 'react-icons/lia';
 
+import * as hooks from '../../app/hooks';
+import { toggleState } from '../../app/features/showBalanceSlice';
+
 const ShowBalance = () => {
-  const [showBalance, setShowBalance] = useState(false);
+  const showBalance = hooks.useAppSelector(
+    (state) => state.showBalance.isVisible
+  );
+
+  const dispatch = hooks.useAppDispatch();
 
   return (
     <section className="p-3 my-3 flex justify-between items-center">
@@ -12,7 +17,7 @@ const ShowBalance = () => {
       <div
         className="text-6xl cursor-pointer"
         onClick={() => {
-          setShowBalance((prev) => !prev);
+          dispatch(toggleState());
         }}
       >
         {showBalance ? (

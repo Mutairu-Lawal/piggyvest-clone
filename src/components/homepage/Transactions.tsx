@@ -1,6 +1,11 @@
 import { IoWalletSharp } from 'react-icons/io5';
 
+import * as hooks from '../../app/hooks';
+
 export const Transactions = () => {
+  const showBalance = hooks.useAppSelector(
+    (state) => state.showBalance.isVisible
+  );
   return (
     <div className=" mt-8">
       <p className="text-sm uppercase font-medium text-gray-700 mb-2">
@@ -13,7 +18,7 @@ export const Transactions = () => {
         <div className="content text-sm w-full">
           <div className="flex justify-between">
             <p className="">flex account credit</p>
-            <p>₦1.50</p>
+            <p>{showBalance ? '₦1.50' : '****'}</p>
           </div>
           <p className="text-gray-400 text-[12px]">6 days ago</p>
         </div>

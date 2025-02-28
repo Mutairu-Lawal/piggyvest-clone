@@ -1,5 +1,7 @@
 import { FiShield } from 'react-icons/fi';
 
+import * as hooks from '../app/hooks';
+
 interface AccountBalanceProps {
   title: string;
   balance: number;
@@ -11,6 +13,9 @@ const AccountBalance = ({
   balance,
   isHome = false,
 }: AccountBalanceProps) => {
+  const showBalance = hooks.useAppSelector(
+    (state) => state.showBalance.isVisible
+  );
   return (
     <div className="py-2">
       <div
@@ -34,10 +39,12 @@ const AccountBalance = ({
           <p
             className={`text-3xl font-extrabold ${!isHome && 'text-blue-900'}`}
           >
-            {balance.toLocaleString('en-NG', {
-              style: 'currency',
-              currency: 'NGN',
-            })}
+            {showBalance
+              ? balance.toLocaleString('en-NG', {
+                  style: 'currency',
+                  currency: 'NGN',
+                })
+              : '****'}
           </p>
         </div>
       </div>
