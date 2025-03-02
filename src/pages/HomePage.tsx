@@ -10,6 +10,12 @@ import AccountBalance from '../components/AccountBalance';
 
 export default function HomePage() {
   const user = 'lawal';
+
+  // useEffect(() => {
+  //   setSessionStorage('user', currentUser);
+  // }, [currentUser]);
+
+  // if (!currentUser) return <p>Loading...</p>;
   return (
     <main>
       <Header

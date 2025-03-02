@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -6,6 +7,7 @@ import { Bounce, ToastContainer, toast } from 'react-toastify';
 import { users } from '../../data/users';
 import AuthDashboard from '../../components/AuthDashboard';
 import { Box } from '../../components/Box';
+import { setSessionStorage } from '../../utils/sessionStorage';
 
 type CurrentUser = {
   emailOrPhoneNumber: string;
@@ -14,6 +16,7 @@ type CurrentUser = {
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const footerLinks = [
     {
@@ -37,31 +40,39 @@ export default function LoginPage() {
   } = useForm<CurrentUser>();
 
   const handleOnSubmit: SubmitHandler<CurrentUser> = (currentUser) => {
+    setIsLoading(true);
+
     const { emailOrPhoneNumber, password } = currentUser;
 
-    const userData = emailOrPhoneNumber.includes('@')
-      ? users.filter(
-          (user) => user.email === emailOrPhoneNumber.trim().toLowerCase()
-        )
-      : users.filter((user) => user.phoneNumber === emailOrPhoneNumber.trim());
+    setTimeout(() => {
+      const userData = emailOrPhoneNumber.includes('@')
+        ? users.filter(
+            (user) => user.email === emailOrPhoneNumber.trim().toLowerCase()
+          )
+        : users.filter(
+            (user) => user.phoneNumber === emailOrPhoneNumber.trim()
+          );
 
-    if (userData.length === 0) return;
+      if (userData.length === 0) return setIsLoading(false);
 
-    if (userData[0].password === password) {
-      navigate('/');
-    } else {
-      toast.error('Incorrect email or password', {
-        position: 'top-right',
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-        transition: Bounce,
-      });
-    }
+      if (userData[0].password === password) {
+        setSessionStorage('user', userData[0]);
+        setIsLoading(false);
+        navigate('/');
+      } else {
+        toast.error('Incorrect email or password', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+          transition: Bounce,
+        });
+      }
+    }, 1000);
   };
 
   return (
@@ -76,7 +87,7 @@ export default function LoginPage() {
             className="pb-3 px-1 mt-5 text-left space-y-7"
           >
             <div className="form-group">
-              <label>Email or Phone Number</label>
+              <label htmlFor="emailOrPhoneNumber">Email or Phone Number</label>
               <input
                 {...register('emailOrPhoneNumber', {
                   required: { value: true, message: 'field is required' },
@@ -93,7 +104,7 @@ export default function LoginPage() {
             </div>
 
             <div className="form-group">
-              <label>Password</label>
+              <label htmlFor="password">Password</label>
               <input
                 {...register('password', {
                   required: {
@@ -110,11 +121,17 @@ export default function LoginPage() {
                 <p className="text-red-500">{errors.password.message}</p>
               )}
             </div>
+
             <button
               type="submit"
               className="uppercase bg-[#0d60d8] hover:bg-[#0d4dd8] text-white px-5 py-3 rounded-lg w-full font-extrabold rounded-bl-none"
             >
-              log in
+              {!isLoading && 'Login'}
+              {isLoading && (
+                <div className="flex items-center justify-center py-1">
+                  <div className="loader"></div>
+                </div>
+              )}
             </button>
           </form>
         </Box>
