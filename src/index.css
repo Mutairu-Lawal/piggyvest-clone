@@ -32,3 +32,11 @@ nav a.active {
 nav a.active > p {
   @apply text-black font-medium;
 }
+
+.form-group {
+  @apply space-y-2;
+}
+
+.form-group label {
+  @apply block text-xs text-gray-900 font-semibold;
+}

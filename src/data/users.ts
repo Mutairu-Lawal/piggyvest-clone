@@ -1,16 +1,44 @@
-import { UserInterface } from '../types/types';
+type TransactionProps = {
+  id: string;
+  name: string;
+};
 
-export const users: Partial<UserInterface>[] = [
+interface UsersProps {
+  accountNumber: string;
+  email: string;
+  id: string;
+  password: string;
+  phoneNumber: string;
+  fullName: string;
+  promocode?: string;
+  referral?: string;
+  userName: string;
+  piggyPoints: number;
+  transactions?: Array<TransactionProps>;
+  showBalance: boolean;
+}
+
+export const users: Array<UsersProps> = [
   {
     accountNumber: '0163810053',
-    email: 'lawalmuktair@gail.com',
-    id: '',
+    email: 'lawalmuktair@gmail.com',
+    id: '001',
+    password: 'none',
     phoneNumber: '07037686956',
     fullName: 'lawal Mutairu',
-    promocode: '',
-    referral: '',
     userName: 'mtlaw',
     piggyPoints: 40,
-    transactions: [],
+    showBalance: false,
+  },
+  {
+    accountNumber: '5005634616',
+    email: 'mtlaw@gmail.com',
+    id: '002',
+    password: 'null',
+    phoneNumber: '07046086074',
+    fullName: 'lawal oluwaseuns',
+    userName: 'mtlaw11',
+    piggyPoints: 40,
+    showBalance: false,
   },
 ];
