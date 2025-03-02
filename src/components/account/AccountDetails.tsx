@@ -1,18 +1,21 @@
+import { useAppSelector } from '../../app/hooks';
+
 const AccountDetails = () => {
+  const userData = useAppSelector((state) => state.currentUserData.user);
   const accountDetails = [
     {
       id: 1,
-      headingValue: 8390602069,
-      heading: 'Flex Number by Sterling',
+      headingValue: userData?.accountNumber,
+      heading: 'Flex Number by Mt Enterprises',
     },
     {
       id: 2,
-      headingValue: 40,
+      headingValue: userData.piggyPoints,
       heading: 'Piggy Points',
     },
     {
       id: 3,
-      headingValue: '#mtlaw',
+      headingValue: `#${userData.userName}`,
       heading: 'Piggylink ID',
     },
     {

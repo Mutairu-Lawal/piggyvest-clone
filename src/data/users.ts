@@ -3,7 +3,7 @@ type TransactionProps = {
   name: string;
 };
 
-interface UsersProps {
+export interface UserProps {
   accountNumber: string;
   email: string;
   id: string;
@@ -13,12 +13,13 @@ interface UsersProps {
   promocode?: string;
   referral?: string;
   userName: string;
+  balance: number;
   piggyPoints: number;
   transactions?: Array<TransactionProps>;
   showBalance: boolean;
 }
 
-export const users: Array<UsersProps> = [
+export const users: Array<UserProps> = [
   {
     accountNumber: '0163810053',
     email: 'lawalmuktair@gmail.com',
@@ -29,14 +30,16 @@ export const users: Array<UsersProps> = [
     userName: 'mtlaw',
     piggyPoints: 40,
     showBalance: false,
+    balance: 50000,
   },
   {
     accountNumber: '5005634616',
+    balance: 107000.2,
     email: 'mtlaw@gmail.com',
     id: '002',
     password: 'null',
     phoneNumber: '07046086074',
-    fullName: 'lawal oluwaseuns',
+    fullName: 'mutairu oluwaseun',
     userName: 'mtlaw11',
     piggyPoints: 40,
     showBalance: false,

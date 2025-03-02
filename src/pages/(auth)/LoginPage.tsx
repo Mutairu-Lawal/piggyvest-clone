@@ -53,7 +53,21 @@ export default function LoginPage() {
             (user) => user.phoneNumber === emailOrPhoneNumber.trim()
           );
 
-      if (userData.length === 0) return setIsLoading(false);
+      if (userData.length === 0) {
+        toast.error('Incorrect email or password', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+          transition: Bounce,
+        });
+        setIsLoading(false);
+        return;
+      }
 
       if (userData[0].password === password) {
         setSessionStorage('user', userData[0]);
@@ -71,6 +85,7 @@ export default function LoginPage() {
           theme: 'light',
           transition: Bounce,
         });
+        setIsLoading(false);
       }
     }, 1000);
   };

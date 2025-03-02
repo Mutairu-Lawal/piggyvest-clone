@@ -10,6 +10,7 @@ import { FiCreditCard } from 'react-icons/fi';
 import { FiBook } from 'react-icons/fi';
 import { IoCallOutline } from 'react-icons/io5';
 import { LuLogOut } from 'react-icons/lu';
+import { removeSessionStorage } from '../../utils/sessionStorage';
 
 const AccountSettings = () => {
   const accountSettings = [
@@ -74,6 +75,9 @@ const AccountSettings = () => {
         <div
           key={index}
           onClick={() => {
+            if (heading === 'Log Out') {
+              removeSessionStorage('user');
+            }
             navigate(url);
           }}
           className={`rounded-bl-none border p-4 cursor-pointer rounded-xl flex items-center gap-1 ${

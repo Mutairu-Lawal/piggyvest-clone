@@ -2,11 +2,16 @@ import { LiaToggleOnSolid } from 'react-icons/lia';
 import { LiaToggleOffSolid } from 'react-icons/lia';
 
 import * as hooks from '../../app/hooks';
-import { toggleState } from '../../app/features/showBalanceSlice';
+
+import {
+  getSessionStorage,
+  setSessionStorage,
+} from '../../utils/sessionStorage';
+import { updateUserState } from '../../app/features/currentUserData';
 
 const ShowBalance = () => {
-  const showBalance = hooks.useAppSelector(
-    (state) => state.showBalance.isVisible
+  const userBalance = hooks.useAppSelector(
+    (state) => state.currentUserData.user
   );
 
   const dispatch = hooks.useAppDispatch();
@@ -17,10 +22,19 @@ const ShowBalance = () => {
       <div
         className="text-6xl cursor-pointer"
         onClick={() => {
-          dispatch(toggleState());
+          const currentState = getSessionStorage('user');
+
+          if (currentState) {
+            const updatedState = {
+              ...currentState,
+              showBalance: !currentState.showBalance,
+            };
+            setSessionStorage('user', updatedState);
+            dispatch(updateUserState(updatedState));
+          }
         }}
       >
-        {showBalance ? (
+        {userBalance.showBalance ? (
           <LiaToggleOnSolid color="green" />
         ) : (
           <LiaToggleOffSolid />

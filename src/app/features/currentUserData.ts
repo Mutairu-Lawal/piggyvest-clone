@@ -1,31 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { getSessionStorage } from '../../utils/sessionStorage';
 
 const initialState = {
-  user: {
-    accountNumber: '0163810053',
-    email: 'user@gmail.com',
-    id: '001',
-    password: 'user',
-    phoneNumber: '07037686956',
-    fullName: 'lawal Mutairu',
-    userName: 'mtlaw',
-    piggyPoints: 40,
-    showBalance: false,
-  },
+  user: getSessionStorage('user'),
 };
-export const showBalanceSlice = createSlice({
-  name: 'showBalance',
+
+export const currentUserDataSlice = createSlice({
+  name: 'currentUserData',
   initialState,
   reducers: {
-    toggleState: (state) => {
-      state.user.showBalance = !state.user.showBalance;
-    },
-    updateState: (state, action) => {
+    updateUserState: (state, action) => {
       state.user = action.payload;
     },
   },
 });
 
-export const { toggleState } = showBalanceSlice.actions;
+export const { updateUserState } = currentUserDataSlice.actions;
 
-export default showBalanceSlice.reducer;
+export default currentUserDataSlice.reducer;

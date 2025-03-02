@@ -13,9 +13,7 @@ const AccountBalance = ({
   balance,
   isHome = false,
 }: AccountBalanceProps) => {
-  const showBalance = hooks.useAppSelector(
-    (state) => state.showBalance.isVisible
-  );
+  const user = hooks.useAppSelector((state) => state.currentUserData.user);
   return (
     <div className="py-2">
       <div
@@ -39,7 +37,7 @@ const AccountBalance = ({
           <p
             className={`text-3xl font-extrabold ${!isHome && 'text-blue-900'}`}
           >
-            {showBalance
+            {user.showBalance
               ? balance.toLocaleString('en-NG', {
                   style: 'currency',
                   currency: 'NGN',

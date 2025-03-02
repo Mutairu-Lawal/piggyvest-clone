@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import showBalanceSliceReducer from './features/showBalanceSlice';
+import currentUserSliceReducer from './features/currentUserData';
 
 export const store = configureStore({
   reducer: {
-    showBalance: showBalanceSliceReducer,
+    currentUserData: currentUserSliceReducer,
   },
 });
 

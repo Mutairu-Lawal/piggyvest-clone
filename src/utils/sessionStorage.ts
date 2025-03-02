@@ -14,3 +14,11 @@ export function getSessionStorage(key: string) {
     console.log(error);
   }
 }
+
+export function removeSessionStorage(key: string) {
+  try {
+    sessionStorage.removeItem(key);
+  } catch (e) {
+    console.log(e);
+  }
+}
