@@ -4,18 +4,19 @@ type TransactionProps = {
 };
 
 export interface UserProps {
-  accountNumber: string;
-  email: string;
   id: string;
-  password: string;
-  phoneNumber: string;
   fullName: string;
-  promocode?: string;
-  referral?: string;
+  email: string;
+  accountNumber: string;
+  phoneNumber: string;
+  password: string;
+  referrerCode?: string;
+  referrerName?: string;
   userName: string;
   balance: number;
   piggyPoints: number;
   transactions?: Array<TransactionProps>;
+  authPin?: string | undefined;
   showBalance: boolean;
 }
 
