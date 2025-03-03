@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "accountNumber": "0163810053",
+      "email": "lawalmuktair@gmail.com",
+      "id": "b0b75173-350f-4a7c-8115-7f3c85910e04",
+      "password": "none",
+      "phoneNumber": "07037686956",
+      "fullName": "lawal mutairu",
+      "userName": "mtlaw",
+      "piggyPoints": 40,
+      "showBalance": false,
+      "balance": 50000
+    },
+    {
+      "accountNumber": "5005634616",
+      "balance": 107000,
+      "email": "mtlaw@gmail.com",
+      "id": "41440d4d-d3a4-46e8-a572-2e823b6df5a9",
+      "password": "null",
+      "phoneNumber": "07046086074",
+      "fullName": "mutairu oluwaseun",
+      "userName": "mtlaw11",
+      "piggyPoints": 40,
+      "showBalance": false
+    }
+  ]
+}
