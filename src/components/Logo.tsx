@@ -1,13 +1,14 @@
 export default function Logo() {
   return (
-    <div className="font-semibold text-4xl mb-12 flex place-content-center">
+    <div className="font-semibold text-4xl mb-3 flex justify-center items-center">
       <a href="#" aria-label="click to go to the piggyvest homepage">
         <img
-          src="https://dashboard.piggyvest.com/static/media/piggyvest-logo.0b78a8fa.svg"
+          src="https://storage.googleapis.com/piggyvestwebsite/piggywebsite2020/piggyvests_p_42275fc5ec/piggyvests_p_42275fc5ec.png"
           alt="piggyvest-logo"
-          className="w-full h-full object-contains"
+          className="w-20 h-20"
         />
       </a>
+      <h1 className="font-plus-jakartas font-extrabold">piggyVest</h1>
     </div>
   );
 }

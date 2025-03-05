@@ -8,7 +8,7 @@ export interface UserProps {
   fullName: string;
   email: string;
   accountNumber: string;
-  phoneNumber: string;
+  phoneNumber: string | number;
   password: string;
   referrerCode?: string;
   referrerName?: string;

@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "npx json-server src/data/db.json"
+    "server": "npx json-server --watch src/data/db.json"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.2",

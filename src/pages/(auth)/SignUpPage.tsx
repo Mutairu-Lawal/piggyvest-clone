@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
+import { users } from '../../data/users';
 
 const FooterLink = () => {
   const footerLinks = [
@@ -39,7 +40,11 @@ const FooterLink = () => {
 };
 
 export default function SignUpPage() {
-  const [isLoading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [postError, setPostError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
+
   const referrerNames = [
     '',
     'Facebook',
@@ -81,7 +86,9 @@ export default function SignUpPage() {
   });
 
   const onSubmit = (data: UserSchema) => {
-    setLoading(true);
+    // const API_URL = 'http://localhost:3000/users';
+    // const API_KEY = import.meta.env.VITE_SOME_KEY;
+
     const newClient = {
       id: uuidv4(),
       accountNumber: '',
@@ -93,25 +100,45 @@ export default function SignUpPage() {
       showBalance: false,
       ...data,
     };
+
     const postData = async () => {
       try {
-        const res = await fetch('s', {
+        setIsLoading(true);
+        setPostError(null);
+
+        await new Promise((resolve) => {
+          setTimeout(() => {
+            resolve('done');
+          }, 1000);
+        });
+
+        const res = await fetch('/api/users', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            // 'X-Master-Key': API_KEY,
           },
           body: JSON.stringify(newClient),
         });
 
         if (!res.ok) throw new Error('Error creating an account');
-      } catch (err) {
-        console.log(err.message);
+
+        users.push(newClient);
+      } catch (err: unknown) {
+        if (err instanceof Error) setPostError(err.message);
       } finally {
-        console.log('done');
+        setIsLoading(false);
+
+        // navigate to homepage
+        setTimeout(() => {
+          if (!postError) {
+            navigate('/');
+          }
+        }, 2000);
       }
     };
 
-    // postData();
+    postData();
   };
 
   return (
@@ -124,6 +151,7 @@ export default function SignUpPage() {
           onSubmit={handleSubmit(onSubmit)}
           className="pb-3 px-1 mt-5 text-left space-y-7"
         >
+          {/* fullName */}
           <div className="form-group">
             <label htmlFor="fullName">Full Name</label>
             <input
@@ -138,6 +166,7 @@ export default function SignUpPage() {
             )}
           </div>
 
+          {/* email */}
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
             <input
@@ -150,8 +179,12 @@ export default function SignUpPage() {
             {errors.email && (
               <span className="text-red-500">{errors.email.message}</span>
             )}
+            {/* {emailError && (
+              <span className="text-red-500">Email is available</span>
+            )} */}
           </div>
 
+          {/* phone  number */}
           <div className="form-group">
             <label htmlFor="phoneNumber">Phone Number</label>
             <input
@@ -166,6 +199,7 @@ export default function SignUpPage() {
             )}
           </div>
 
+          {/* password */}
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -181,6 +215,7 @@ export default function SignUpPage() {
             )}
           </div>
 
+          {/* referrer code */}
           <div className="form-group">
             <label htmlFor="referrerCode">
               Referrer Phone or Promo Code (Optional)
@@ -194,6 +229,7 @@ export default function SignUpPage() {
             />
           </div>
 
+          {/* referrer name */}
           <div className="form-group">
             <label htmlFor="referrerName">
               How Did You Hear About us? (Optional)
@@ -212,8 +248,17 @@ export default function SignUpPage() {
             className="uppercase bg-[#0d60d8] hover:bg-[#0d4dd8] text-white px-5 py-3 rounded-lg w-full font-extrabold rounded-bl-none"
             aria-label="click to submit the form"
           >
-            Create Account
+            {!isLoading && 'Create Account'}
+            {isLoading && (
+              <div className="flex items-center justify-center py-1">
+                <div className="loader"></div>
+              </div>
+            )}
           </button>
+
+          {postError && (
+            <div className="text-center text-red-600">{postError}</div>
+          )}
         </form>
       </Box>
       <FooterLink />
