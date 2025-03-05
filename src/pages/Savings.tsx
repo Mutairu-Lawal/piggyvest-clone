@@ -1,11 +1,11 @@
 import AccountBalance from '../components/AccountBalance';
 import Header from '../components/Header';
-import { GetStarted } from '../components/GetStarted';
+import GetStarted from '../components/GetStarted';
 import { SavingCategories } from '../components/savings/SavingCategories';
 
 import { useAppSelector } from '../app/hooks';
 
-export const Savings = () => {
+const Savings = () => {
   const user = useAppSelector((state) => state.currentUserData.user);
   return (
     <main className="min-h-screen">
@@ -22,3 +22,5 @@ export const Savings = () => {
     </main>
   );
 };
+
+export default Savings;

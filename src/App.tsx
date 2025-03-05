@@ -5,8 +5,8 @@ import ForgotPassword from './pages/(auth)/ForgotPassword';
 import LoginPage from './pages/(auth)/LoginPage';
 import SignUpPage from './pages/(auth)/SignUpPage';
 import HomePage from './pages/HomePage';
-import { MainLayout } from './layout/MainLayout';
-import { Savings } from './pages/Savings';
+import MainLayout from './layout/MainLayout';
+import Savings from './pages/Savings';
 import Account from './pages/Account';
 
 function App() {

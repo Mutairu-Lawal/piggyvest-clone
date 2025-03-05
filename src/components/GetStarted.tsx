@@ -6,11 +6,7 @@ interface GetStartedProps {
   isHome?: boolean;
 }
 
-export const GetStarted = ({
-  title,
-  children,
-  isHome = false,
-}: GetStartedProps) => {
+const GetStarted = ({ title, children, isHome = false }: GetStartedProps) => {
   return (
     <div className="space-y-2 my-3">
       <p className="text-sm uppercase font-normal text-gray-700">{title}</p>
@@ -28,3 +24,5 @@ export const GetStarted = ({
     </div>
   );
 };
+
+export default GetStarted;

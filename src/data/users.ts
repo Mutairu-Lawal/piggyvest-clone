@@ -15,8 +15,8 @@ export interface UserProps {
   userName: string;
   balance: number;
   piggyPoints: number;
-  transactions?: Array<TransactionProps>;
-  authPin?: string | undefined;
+  transactions: Array<TransactionProps> | [];
+  authPin: string | undefined;
   showBalance: boolean;
 }
 
@@ -32,6 +32,8 @@ export const users: Array<UserProps> = [
     piggyPoints: 40,
     showBalance: false,
     balance: 50000,
+    transactions: [],
+    authPin: undefined,
   },
   {
     accountNumber: '5005634616',
@@ -44,5 +46,7 @@ export const users: Array<UserProps> = [
     userName: 'mtlaw11',
     piggyPoints: 40,
     showBalance: false,
+    transactions: [],
+    authPin: undefined,
   },
 ];

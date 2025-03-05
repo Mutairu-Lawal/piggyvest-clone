@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { v4 as uuidv4 } from 'uuid';
+import { useState } from 'react';
 
 import AuthDashboard from '../../components/AuthDashboard';
-import { Box } from '../../components/Box';
+import Box from '../../components/Box';
 
 const FooterLink = () => {
   const footerLinks = [
@@ -37,6 +39,7 @@ const FooterLink = () => {
 };
 
 export default function SignUpPage() {
+  const [isLoading, setLoading] = useState(false);
   const referrerNames = [
     '',
     'Facebook',
@@ -78,7 +81,37 @@ export default function SignUpPage() {
   });
 
   const onSubmit = (data: UserSchema) => {
-    console.log(data);
+    setLoading(true);
+    const newClient = {
+      id: uuidv4(),
+      accountNumber: '',
+      userName: '',
+      balance: 0,
+      piggyPoints: 0,
+      transactions: [],
+      authPin: undefined,
+      showBalance: false,
+      ...data,
+    };
+    const postData = async () => {
+      try {
+        const res = await fetch('s', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newClient),
+        });
+
+        if (!res.ok) throw new Error('Error creating an account');
+      } catch (err) {
+        console.log(err.message);
+      } finally {
+        console.log('done');
+      }
+    };
+
+    // postData();
   };
 
   return (

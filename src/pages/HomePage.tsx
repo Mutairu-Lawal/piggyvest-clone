@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import Header from '../components/Header';
-import { GetStarted } from '../components/GetStarted';
+import GetStarted from '../components/GetStarted';
 import { Todos } from '../components/homepage/Todos';
 import { Navigations } from '../components/homepage/Navigations';
 import { Stores } from '../components/homepage/Stores';
@@ -14,6 +14,7 @@ import { UserProps } from '../data/users';
 
 export default function HomePage() {
   const [user, setUser] = useState<UserProps | null>(null);
+  // const time = Date.now();
 
   useEffect(() => {
     setUser(() => {

@@ -6,7 +6,7 @@ interface BoxPops {
   children: ReactNode;
 }
 
-export const Box = ({ title, subtitle, children }: BoxPops) => {
+const Box = ({ title, subtitle, children }: BoxPops) => {
   return (
     <div className="box max-w-md mx-auto text-black bg-white py-10 px-5 md:px-10 rounded-2xl rounded-bl-none">
       <h2 className="text-[#083e9e] font-bold text-xl md:text-2xl">{title}</h2>
@@ -17,3 +17,5 @@ export const Box = ({ title, subtitle, children }: BoxPops) => {
     </div>
   );
 };
+
+export default Box;

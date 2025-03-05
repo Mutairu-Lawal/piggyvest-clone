@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import AuthDashboard from '../../components/AuthDashboard';
-import { Box } from '../../components/Box';
+import Box from '../../components/Box';
 
 export default function ForgotPassword() {
   const footerLinks = [

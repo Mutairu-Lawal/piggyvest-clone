@@ -6,7 +6,7 @@ import { Bounce, ToastContainer, toast } from 'react-toastify';
 
 import { users } from '../../data/users';
 import AuthDashboard from '../../components/AuthDashboard';
-import { Box } from '../../components/Box';
+import Box from '../../components/Box';
 import { setSessionStorage } from '../../utils/sessionStorage';
 
 type CurrentUser = {

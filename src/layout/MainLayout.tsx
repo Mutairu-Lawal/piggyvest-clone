@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getSessionStorage } from '../utils/sessionStorage';
 
-export const MainLayout = () => {
+const MainLayout = () => {
   const [isloggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
@@ -26,3 +26,5 @@ export const MainLayout = () => {
     )
   );
 };
+
+export default MainLayout;
