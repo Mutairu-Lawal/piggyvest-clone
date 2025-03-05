@@ -1,11 +1,13 @@
+import piggyVestLogo from '../assets/piggyVest_logo.webp';
+
 export default function Logo() {
   return (
-    <div className="font-semibold text-4xl mb-3 flex justify-center items-center">
+    <div className="font-semibold text-4xl mb-3 flex justify-center items-center gap-2">
       <a href="#" aria-label="click to go to the piggyvest homepage">
         <img
-          src="https://storage.googleapis.com/piggyvestwebsite/piggywebsite2020/piggyvests_p_42275fc5ec/piggyvests_p_42275fc5ec.png"
+          src={piggyVestLogo}
           alt="piggyvest-logo"
-          className="w-20 h-20"
+          className="w-16 h-16 object-contain"
         />
       </a>
       <h1 className="font-plus-jakartas font-extrabold">piggyVest</h1>
