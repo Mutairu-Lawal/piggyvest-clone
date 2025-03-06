@@ -8,6 +8,8 @@ import { users } from '../../data/users';
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
 import { setSessionStorage } from '../../utils/sessionStorage';
+import * as hooks from '../../app/hooks';
+import { updateUserState } from '../../app/features/currentUserData';
 
 type CurrentUser = {
   emailOrPhoneNumber: string;
@@ -15,6 +17,7 @@ type CurrentUser = {
 };
 
 export default function LoginPage() {
+  const dispatch = hooks.useAppDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -72,6 +75,7 @@ export default function LoginPage() {
       if (userData[0].password === password) {
         setSessionStorage('user', userData[0]);
         setIsLoading(false);
+        dispatch(updateUserState(userData[0]))
         navigate('/');
       } else {
         toast.error('Incorrect email or password', {
