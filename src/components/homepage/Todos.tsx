@@ -7,7 +7,7 @@ const Todo = ({ type }: { type: string }) => {
   );
 };
 
-export const Todos = () => {
+const Todos = () => {
   return (
     <div className="space-y-2 my-3 mt-4">
       <p className="text-sm uppercase">to-do list</p>
@@ -16,3 +16,5 @@ export const Todos = () => {
     </div>
   );
 };
+
+export default Todos;

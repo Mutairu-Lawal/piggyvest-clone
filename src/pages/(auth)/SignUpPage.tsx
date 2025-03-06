@@ -8,7 +8,7 @@ import { useState } from 'react';
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
 import { users } from '../../data/users';
-import generateAccountNumber from '../../utils/fun';
+import { generateAccountNumber } from '../../utils/fun';
 
 const FooterLink = () => {
   const footerLinks = [

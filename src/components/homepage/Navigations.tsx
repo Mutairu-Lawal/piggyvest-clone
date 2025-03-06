@@ -2,7 +2,7 @@ import { AiOutlineLike } from 'react-icons/ai';
 import { FiAtSign } from 'react-icons/fi';
 import { IoIosHeart } from 'react-icons/io';
 
-export const Navigations = () => {
+const Navigations = () => {
   return (
     <div className="mt-6 space-y-3">
       <div className="box rounded-bl-none border py-3 px-4 rounded-lg border-blue-500 flex items-center gap-2 text-blue-500">
@@ -35,3 +35,5 @@ export const Navigations = () => {
     </div>
   );
 };
+
+export default Navigations;

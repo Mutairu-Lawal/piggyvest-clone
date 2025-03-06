@@ -1,4 +1,4 @@
-export const Stores = () => {
+const Stores = () => {
   return (
     <div className="space-y-2 mt-8">
       <p className="text-sm uppercase font-normal text-gray-700">
@@ -23,3 +23,5 @@ export const Stores = () => {
     </div>
   );
 };
+
+export default Stores;
