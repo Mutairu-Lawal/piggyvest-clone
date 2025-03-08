@@ -2,7 +2,7 @@ import { IoWalletSharp } from 'react-icons/io5';
 
 import * as hooks from '../../app/hooks';
 
-export const Transactions = () => {
+const Transactions = () => {
   const user = hooks.useAppSelector((state) => state.currentUserData.user);
   return (
     <div className=" mt-8">
@@ -27,3 +27,5 @@ export const Transactions = () => {
     </div>
   );
 };
+
+export default Transactions;

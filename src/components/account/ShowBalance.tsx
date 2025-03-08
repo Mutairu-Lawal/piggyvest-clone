@@ -1,8 +1,8 @@
 import { LiaToggleOnSolid } from 'react-icons/lia';
 import { LiaToggleOffSolid } from 'react-icons/lia';
 
-import * as hooks from '../../app/hooks';
 
+import * as hooks from '../../app/hooks';
 import {
   getSessionStorage,
   setSessionStorage,
@@ -10,7 +10,7 @@ import {
 import { updateUserState } from '../../app/features/currentUserData';
 
 const ShowBalance = () => {
-  const userBalance = hooks.useAppSelector(
+  const currentUserData = hooks.useAppSelector(
     (state) => state.currentUserData.user
   );
 
@@ -34,7 +34,7 @@ const ShowBalance = () => {
           }
         }}
       >
-        {userBalance.showBalance ? (
+        {currentUserData.showBalance ? (
           <LiaToggleOnSolid color="green" />
         ) : (
           <LiaToggleOffSolid />

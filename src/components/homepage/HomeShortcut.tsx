@@ -1,6 +1,6 @@
 import { BsArrowRepeat } from 'react-icons/bs';
 
-export const HomeShortcut = () => {
+const HomeShortcut = () => {
   return (
     <div className="flex justify-between items-center">
       <div className="icon font-extrabold text-2xl">
@@ -12,3 +12,5 @@ export const HomeShortcut = () => {
     </div>
   );
 };
+
+export default HomeShortcut;

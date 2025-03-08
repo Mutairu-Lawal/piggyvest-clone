@@ -1,4 +1,4 @@
-export const BestClient = () => {
+const BestClient = () => {
   return (
     <div className="space-y-2 mt-8">
       <p className="text-sm uppercase font-medium text-gray-700">
@@ -14,3 +14,5 @@ export const BestClient = () => {
     </div>
   );
 };
+
+export default BestClient;

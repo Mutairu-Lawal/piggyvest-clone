@@ -28,7 +28,7 @@ const navlinks = [
   },
 ];
 
-export const NavLinks = () => {
+const NavLinks = () => {
   return (
     <nav className="sticky bottom-0 left-0 w-full bg-white">
       <div className="footer__container grid grid-cols-4">
@@ -50,3 +50,5 @@ export const NavLinks = () => {
     </nav>
   );
 };
+
+export default NavLinks;
