@@ -14,3 +14,7 @@ export interface UserInterface {
   piggyPoints: number;
   transactions: Array<Transactions>;
 }
+
+export type ToggleStateProps = {
+  setStateAction: React.Dispatch<React.SetStateAction<boolean>>;
+};
