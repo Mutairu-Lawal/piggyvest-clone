@@ -15,8 +15,7 @@ import QuickSave from '../components/homepage/QuickSave';
 
 export default function HomePage() {
   const [user, setUser] = useState<UserProps | null>(null);
-  const [showQuickSave, setShowQuickSave] = useState(true);
-  // const time = Date.now();
+  const [showQuickSave, setShowQuickSave] = useState(false);
 
   useEffect(() => {
     setUser(() => {
@@ -53,7 +52,7 @@ export default function HomePage() {
         <Transactions />
       </main>
     ) : (
-      <QuickSave setStateAction={setShowQuickSave} />
+      <QuickSave setStateAction={setShowQuickSave} user={user} />
     ))
   );
 }
