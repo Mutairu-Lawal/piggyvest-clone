@@ -19,7 +19,7 @@ const MainLayout = () => {
 
   return (
     isLoggedIn && (
-      <div className="container mx-auto max-w-[700px] border">
+      <div className="relative container mx-auto max-w-[700px] border dark:bg-white dark:text-black min-h-dvh">
         <Outlet />
         <NavLinks />
       </div>

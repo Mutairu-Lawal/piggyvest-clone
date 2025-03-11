@@ -13,9 +13,11 @@ import AccountBalance from '../components/AccountBalance';
 import { getSessionStorage } from '../utils/sessionStorage';
 import { UserProps } from '../data/users';
 import { getTheDayTime } from '../utils/fun';
+import QuickSave from '../components/homepage/QuickSave';
 
 export default function HomePage() {
   const [user, setUser] = useState<UserProps | null>(null);
+  const [showQuickSave, setShowQuickSave] = useState(false);
 
   useEffect(() => {
     setUser(() => {
@@ -25,13 +27,14 @@ export default function HomePage() {
   }, []);
 
   return (
-    user && (
+    user &&
+    (!showQuickSave ? (
       <main>
         <Header
           title={`${user.fullName.slice(0, user.fullName.indexOf(' '))},`}
           subtitle={getTheDayTime()}
         />
-        <HomeShortcut />
+        <HomeShortcut setStateAction={setShowQuickSave} />
         <AccountBalance title="Total Savings" isHome balance={user.balance} />
         <GetStarted title="get started with piggyvest" isHome>
           <h1 className="font-semibold capitalize text-2xl">get started</h1>
@@ -49,6 +52,8 @@ export default function HomePage() {
         <BestClient />
         <Transactions />
       </main>
-    )
+    ) : (
+      <QuickSave setStateAction={setShowQuickSave} user={user} />
+    ))
   );
 }
