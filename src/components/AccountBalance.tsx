@@ -1,6 +1,7 @@
 import { FiShield } from 'react-icons/fi';
 
 import * as hooks from '../app/hooks';
+import { formatCurrency } from '../utils/fun';
 
 interface AccountBalanceProps {
   title: string;
@@ -17,7 +18,7 @@ const AccountBalance = ({
   return (
     <div className="py-2">
       <div
-        className={`rounded-xl rounded-bl-none p-6 flex items-center gap-4 ${
+        className={`rounded-xl rounded-bl-none p-6 flex items-center gap-3 ${
           isHome ? 'bg-primary text-white' : 'border'
         }  `}
       >
@@ -37,12 +38,10 @@ const AccountBalance = ({
           <p
             className={`text-3xl font-extrabold ${!isHome && 'text-blue-900'}`}
           >
-            {user.showBalance
-              ? balance.toLocaleString('en-NG', {
-                  style: 'currency',
-                  currency: 'NGN',
-                })
-              : '****'}
+            {user.showBalance && (
+              <span className="font-sans font-bold mr-1">₦</span>
+            )}
+            {user.showBalance ? formatCurrency(balance) : '****'}
           </p>
         </div>
       </div>

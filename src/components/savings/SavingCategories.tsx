@@ -4,6 +4,7 @@ import { IoLockClosedOutline } from 'react-icons/io5';
 import { LuTarget } from 'react-icons/lu';
 import { BsCurrencyDollar } from 'react-icons/bs';
 import { FiAtSign } from 'react-icons/fi';
+import { formatCurrency } from '../../utils/fun';
 
 export const SavingCategories = () => {
   const savings = [
@@ -84,12 +85,10 @@ export const SavingCategories = () => {
             <p className="capitalize font-bold">{name}</p>
             <p className="text-gray-700 text-xs">{description}</p>
             <p className="font-bold text-sm">
-              {id != '5' &&
-                id != '6' &&
-                balance.toLocaleString('en-NG', {
-                  style: 'currency',
-                  currency: 'NGN',
-                })}
+              {id != '5' && id != '6' && (
+                <span className="font-sans font-bold mr-1">₦</span>
+              )}
+              {id != '5' && id != '6' && formatCurrency(balance)}
               {id === '5' &&
                 balance.toLocaleString('en-US', {
                   style: 'currency',

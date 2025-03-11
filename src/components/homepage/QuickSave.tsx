@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { UserProps } from '../../data/users';
 import { setSessionStorage } from '../../utils/sessionStorage';
+import { formatCurrency } from '../../utils/fun';
 
 type QuickSaveProps = {
   setStateAction: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,14 +16,23 @@ type QuickSaveProps = {
 const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const userSchema = z.object({
-    amount: z.number().positive(),
-    accountType: z.enum(['piggybank']).optional(),
-  });
+  const userSchema = z
+    .object({
+      amount: z.number({ message: '' }).positive(),
+      accountType: z.enum(['piggybank']).optional(),
+    })
+    .refine((data) => data.amount <= 100000, {
+      message: 'Amount must be less than or equal to ₦ 100,000 per Tranaction',
+      path: ['amount'],
+    });
 
   type UserSchema = z.infer<typeof userSchema>;
 
-  const { register, handleSubmit } = useForm<UserSchema>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserSchema>({
     resolver: zodResolver(userSchema),
   });
 
@@ -70,13 +80,22 @@ const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
               type="number"
               id="amount"
               className="font-medium"
-              placeholder="Tap here & enter .. (e.g 5000)"
+              placeholder="Tap here & enter ...(e.g 5000)"
             />
+            {errors.amount && (
+              <p className="text-red-500 text-xs font-sans">
+                {errors.amount.message}
+              </p>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="accoutType">Choose a Destination</label>
             <select id="accountType" {...register('accountType')}>
-              <option value="piggybank">My PiggyBank - 0.00</option>
+              <option value="piggybank">
+                My PiggyBank -{' '}
+                <span className="font-sans font-bold mr-1">₦</span>{' '}
+                {formatCurrency(user.balance)}
+              </option>
             </select>
           </div>
         </div>

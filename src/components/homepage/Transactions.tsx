@@ -16,7 +16,12 @@ const Transactions = () => {
         <div className="content text-sm w-full">
           <div className="flex justify-between">
             <p className="">flex account credit</p>
-            <p>{user.showBalance ? '₦1.50' : '****'}</p>
+            <p>
+              {user.showBalance && (
+                <span className="font-sans font-medium mr-1">₦</span>
+              )}
+              {user.showBalance ? '1.50' : '****'}
+            </p>
           </div>
           <p className="text-gray-400 text-[12px]">6 days ago</p>
         </div>

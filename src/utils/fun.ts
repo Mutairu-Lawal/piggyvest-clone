@@ -16,3 +16,7 @@ export const getTheDayTime = () => {
     return 'Good evening, Have a great rest of your day 🌆';
   }
 };
+
+export const formatCurrency = (amount: number) => {
+  return `${amount.toLocaleString()}`;
+};
