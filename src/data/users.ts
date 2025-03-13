@@ -12,6 +12,7 @@ export interface UserProps {
   password: string;
   referrerCode?: string;
   referrerName?: string;
+  referrerPoints: number;
   userName: string;
   piggyPoints: number;
   transactions: Array<TransactionProps> | [];
@@ -34,6 +35,7 @@ export const users: Array<UserProps> = [
     phoneNumber: '07037686956',
     fullName: 'lawal Mutairu',
     userName: 'mtlaw',
+    referrerPoints: 1000,
     piggyPoints: 40,
     showBalance: false,
     accounts: [{ savings: 100, flexNaira: 200, safeLock: 800, target: 900 }],
@@ -48,6 +50,7 @@ export const users: Array<UserProps> = [
     phoneNumber: '07046086074',
     fullName: 'mutairu oluwaseun',
     userName: 'mtlaw11',
+    referrerPoints: 10000,
     piggyPoints: 40,
     showBalance: false,
     transactions: [],

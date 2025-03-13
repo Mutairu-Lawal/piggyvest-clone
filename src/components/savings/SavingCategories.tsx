@@ -85,18 +85,24 @@ const SavingCategories = ({ user }: { user: UserProps }) => {
             <div className="icon text-3xl">{icon}</div>
             <p className="capitalize font-bold">{name}</p>
             <p className="text-gray-700 text-xs">{description}</p>
-            <p className="font-bold text-sm">
-              {id != '5' && id != '6' && (
-                <span className="font-sans font-bold mr-1">₦</span>
-              )}
-              {id != '5' && id != '6' && formatCurrency(balance)}
-              {id === '5' &&
-                balance.toLocaleString('en-US', {
-                  style: 'currency',
-                  currency: 'USD',
-                })}
-              {id === '6' && <span className="text-sm">Connect Account</span>}
-            </p>
+
+            {/* control the balance display */}
+            {user.showBalance ? (
+              <p className="font-bold text-sm">
+                {id != '5' && id != '6' && (
+                  <span className="font-sans font-bold mr-1">₦</span>
+                )}
+                {id != '5' && id != '6' && formatCurrency(balance)}
+                {id === '5' &&
+                  balance.toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                  })}
+                {id === '6' && <span className="text-sm">Connect Account</span>}
+              </p>
+            ) : (
+              '****'
+            )}
           </div>
         )
       )}

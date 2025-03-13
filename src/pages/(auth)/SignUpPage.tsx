@@ -99,6 +99,7 @@ export default function SignUpPage() {
       piggyPoints: 0,
       transactions: [],
       authPin: undefined,
+      referrerPoints: 0,
       showBalance: false,
       accounts: [
         {
@@ -138,7 +139,6 @@ export default function SignUpPage() {
         if (err instanceof Error) setPostError(err.message);
       } finally {
         setIsLoading(false);
-
         // navigate to homepage
         setTimeout(() => {
           if (!postError) {

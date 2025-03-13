@@ -1,11 +1,12 @@
 import { useAppSelector } from '../../app/hooks';
+import { formatCurrency } from '../../utils/fun';
 
 const AccountDetails = () => {
   const userData = useAppSelector((state) => state.currentUserData.user);
   const accountDetails = [
     {
       id: 1,
-      headingValue: userData?.accountNumber,
+      headingValue: userData.accountNumber,
       heading: 'Flex Number by Mt Enterprises',
     },
     {
@@ -20,7 +21,7 @@ const AccountDetails = () => {
     },
     {
       id: 4,
-      headingValue: '#3,000',
+      headingValue: 3000,
       heading: 'Refarral Earnings',
     },
   ];
@@ -29,7 +30,14 @@ const AccountDetails = () => {
     <section className="mt-3 space-y-3">
       {accountDetails.map(({ id, heading, headingValue }) => (
         <div key={id} className="rounded-bl-none border p-3 rounded-xl">
-          <p className="font-bold text-lg">{headingValue}</p>
+          {id !== 4 ? (
+            <p className="font-bold text-lg">{headingValue}</p>
+          ) : (
+            <div className="font-bold text-lg">
+              <span className="font-sans">₦</span>{' '}
+              <span>{formatCurrency(headingValue)}</span>
+            </div>
+          )}
           <p className="font-medium text-xs text-gray-400">{heading}</p>
         </div>
       ))}
