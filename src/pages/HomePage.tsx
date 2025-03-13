@@ -20,6 +20,7 @@ export default function HomePage() {
   const [showQuickSave, setShowQuickSave] = useState(false);
 
   useEffect(() => {
+    // set the user state from the session storage
     setUser(() => {
       const user = getSessionStorage('user');
       return user ? user : null;
@@ -27,6 +28,7 @@ export default function HomePage() {
   }, []);
 
   return (
+    // returns the user if user is truthy
     user &&
     (!showQuickSave ? (
       <main>

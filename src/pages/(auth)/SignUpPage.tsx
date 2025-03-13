@@ -9,7 +9,9 @@ import { generateAccountNumber } from '../../utils/fun';
 
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
-import { users } from '../../data/users';
+import { UserProps } from '../../data/users';
+import { setSessionStorage } from '../../utils/sessionStorage';
+// import { useAppDispatch } from '../../app/hooks';
 
 // create footer links for signup page
 const FooterLink = () => {
@@ -44,9 +46,13 @@ const FooterLink = () => {
 
 // create signup page
 export default function SignUpPage() {
+  let emails = [];
   const [isLoading, setIsLoading] = useState(false);
   const [postError, setPostError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+
   const navigate = useNavigate();
+  // const dispatch = useAppDispatch();
 
   const referrerNames = [
     '',
@@ -92,6 +98,7 @@ export default function SignUpPage() {
     // const API_URL = 'http://localhost:3000/users';
     // const API_KEY = import.meta.env.VITE_SOME_KEY;
 
+    // create new user object
     const newClient = {
       id: uuidv4(),
       accountNumber: generateAccountNumber(),
@@ -112,17 +119,29 @@ export default function SignUpPage() {
       ...data,
     };
 
-    const postData = async () => {
+    const getAndPostData = async () => {
       try {
         setIsLoading(true);
         setPostError(null);
+        setEmailError(null);
 
+        // simulate a delay
         await new Promise((resolve) => {
           setTimeout(() => {
             resolve('done');
           }, 1000);
         });
 
+        // get all users emails
+        const users = await fetch('/api/users');
+        const data = await users.json();
+        emails = data.map((user: UserProps) => user.email);
+
+        // check if email already exists
+        if (emails.includes(newClient.email))
+          throw new Error('Email already exists');
+
+        // post new user to database
         const res = await fetch('/api/users', {
           method: 'POST',
           headers: {
@@ -134,21 +153,28 @@ export default function SignUpPage() {
 
         if (!res.ok) throw new Error('Error creating an account');
 
-        users.push(newClient);
+        // save data to web storage
+        setSessionStorage('user', newClient);
       } catch (err: unknown) {
-        if (err instanceof Error) setPostError(err.message);
+        // if (err instanceof Error) setPostError(err.message);
+        if (err instanceof Error) {
+          if (err.message === 'Email already exists') {
+            setEmailError(err.message);
+          } else {
+            setPostError(err.message);
+          }
+        }
       } finally {
-        setIsLoading(false);
-        // navigate to homepage
         setTimeout(() => {
-          if (!postError) {
+          if (!postError && !emailError) {
             navigate('/');
           }
         }, 2000);
+        setIsLoading(false);
       }
     };
 
-    postData();
+    getAndPostData();
   };
 
   return (
@@ -157,6 +183,7 @@ export default function SignUpPage() {
         title="Login to your account"
         subtitle="Securely login to your PiggyVest"
       >
+        {/* signup form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="pb-3 px-1 mt-5 text-left space-y-7"
@@ -189,9 +216,9 @@ export default function SignUpPage() {
             {errors.email && (
               <span className="text-red-500">{errors.email.message}</span>
             )}
-            {/* {emailError && (
+            {emailError && (
               <span className="text-red-500">Email is available</span>
-            )} */}
+            )}
           </div>
 
           {/* phone  number */}

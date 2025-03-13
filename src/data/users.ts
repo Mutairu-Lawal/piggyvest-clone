@@ -40,7 +40,7 @@ export const users: Array<UserProps> = [
     showBalance: false,
     accounts: [{ savings: 100, flexNaira: 200, safeLock: 800, target: 900 }],
     transactions: [],
-    authPin: undefined,
+    authPin: '1234',
   },
   {
     accountNumber: '5005634616',
@@ -54,7 +54,7 @@ export const users: Array<UserProps> = [
     piggyPoints: 40,
     showBalance: false,
     transactions: [],
-    authPin: undefined,
+    authPin: '0000',
     accounts: [
       { savings: 3000, flexNaira: 4000, safeLock: 6000, target: 7000 },
     ],

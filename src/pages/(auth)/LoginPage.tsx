@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 
-import { users } from '../../data/users';
+// import { users } from '../../data/users';
+import users from '../../data/db.json';
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
 import { setSessionStorage } from '../../utils/sessionStorage';
@@ -49,10 +50,10 @@ export default function LoginPage() {
 
     setTimeout(() => {
       const userData = emailOrPhoneNumber.includes('@')
-        ? users.filter(
+        ? users.users.filter(
             (user) => user.email === emailOrPhoneNumber.trim().toLowerCase()
           )
-        : users.filter(
+        : users.users.filter(
             (user) => user.phoneNumber === emailOrPhoneNumber.trim()
           );
 
@@ -74,8 +75,8 @@ export default function LoginPage() {
 
       if (userData[0].password === password) {
         setSessionStorage('user', userData[0]);
+        dispatch(updateUserState(userData[0]));
         setIsLoading(false);
-        dispatch(updateUserState(userData[0]))
         navigate('/');
       } else {
         toast.error('Incorrect email or password', {

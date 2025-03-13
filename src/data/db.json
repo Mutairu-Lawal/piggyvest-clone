@@ -3,54 +3,66 @@
     {
       "accountNumber": "0163810053",
       "email": "lawalmuktair@gmail.com",
-      "id": "b0b75173-350f-4a7c-8115-7f3c85910e04",
+      "id": "001",
       "password": "none",
       "phoneNumber": "07037686956",
-      "fullName": "lawal mutairu",
+      "fullName": "lawal Mutairu",
       "userName": "mtlaw",
-      "piggyPoints": 40,
-      "showBalance": false,
-      "balance": 50000
+      "referrerPoints": 1000,
+      "piggyPoints": 20,
+      "showBalance": true,
+      "authPin": 1234,
+      "accounts": [
+        {
+          "savings": 1000,
+          "flexNaira": 2000,
+          "safeLock": 8000,
+          "target": 9000
+        }
+      ],
+      "transactions": []
     },
     {
       "accountNumber": "5005634616",
-      "balance": 107000,
       "email": "mtlaw@gmail.com",
-      "id": "41440d4d-d3a4-46e8-a572-2e823b6df5a9",
+      "id": "002",
       "password": "null",
       "phoneNumber": "07046086074",
       "fullName": "mutairu oluwaseun",
       "userName": "mtlaw11",
+      "referrerPoints": 10000,
       "piggyPoints": 40,
-      "showBalance": false
+      "showBalance": false,
+      "transactions": [],
+      "accounts": [
+        {
+          "savings": 3000,
+          "flexNaira": 4000,
+          "safeLock": 6000,
+          "target": 7000
+        }
+      ]
     },
     {
-      "id": "2334ebc7-128e-4e4b-a6b9-12c599962778",
-      "accountNumber": "",
+      "id": "df1fdb90-d799-4dcc-b874-b01e70bdcca5",
+      "accountNumber": "1888912740",
       "userName": "",
-      "balance": 0,
       "piggyPoints": 0,
       "transactions": [],
+      "referrerPoints": 0,
       "showBalance": false,
-      "fullName": "lawaa",
-      "email": "lawalmuktair@gmail.com",
-      "phoneNumber": 990987077008,
-      "password": "okayasas",
-      "referrerCode": "",
-      "referrerName": ""
-    },
-    {
-      "id": "7cf2edea-14ce-4b17-b828-1c0ad519a4d3",
-      "accountNumber": "",
-      "userName": "",
-      "balance": 0,
-      "piggyPoints": 0,
-      "transactions": [],
-      "showBalance": false,
-      "fullName": "lawal",
-      "email": "thebillionnairadream@outlook.com",
-      "phoneNumber": 11111,
-      "password": "111111111",
+      "accounts": [
+        {
+          "savings": 0,
+          "flexNaira": 0,
+          "safeLock": 0,
+          "target": 0
+        }
+      ],
+      "fullName": "lawal muktair",
+      "email": "lawalmuir@gmail.com",
+      "phoneNumber": 8033981075,
+      "password": "sssssss",
       "referrerCode": "",
       "referrerName": ""
     }

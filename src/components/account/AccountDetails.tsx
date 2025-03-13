@@ -21,7 +21,7 @@ const AccountDetails = () => {
     },
     {
       id: 4,
-      headingValue: 3000,
+      headingValue: userData.referrerPoints,
       heading: 'Refarral Earnings',
     },
   ];

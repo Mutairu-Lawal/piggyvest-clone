@@ -7,7 +7,9 @@ import GetStarted from '../components/GetStarted';
 import SavingCategories from '../components/savings/SavingCategories';
 
 const Savings = () => {
+  // get user from session storage
   const user = getSessionStorage('user');
+
   return (
     <main className="min-h-screen">
       <Header title="Savings" subtitle={`let's see how well you're doing.`} />
