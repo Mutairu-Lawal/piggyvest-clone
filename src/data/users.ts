@@ -13,11 +13,16 @@ export interface UserProps {
   referrerCode?: string;
   referrerName?: string;
   userName: string;
-  balance: number;
   piggyPoints: number;
   transactions: Array<TransactionProps> | [];
   authPin: string | undefined;
   showBalance: boolean;
+  accounts: Array<{
+    savings: number;
+    flexNaira: number;
+    safeLock: number;
+    target: number;
+  }>;
 }
 
 export const users: Array<UserProps> = [
@@ -31,13 +36,12 @@ export const users: Array<UserProps> = [
     userName: 'mtlaw',
     piggyPoints: 40,
     showBalance: false,
-    balance: 50000,
+    accounts: [{ savings: 100, flexNaira: 200, safeLock: 800, target: 900 }],
     transactions: [],
     authPin: undefined,
   },
   {
     accountNumber: '5005634616',
-    balance: 107000.2,
     email: 'mtlaw@gmail.com',
     id: '002',
     password: 'null',
@@ -48,5 +52,8 @@ export const users: Array<UserProps> = [
     showBalance: false,
     transactions: [],
     authPin: undefined,
+    accounts: [
+      { savings: 3000, flexNaira: 4000, safeLock: 6000, target: 7000 },
+    ],
   },
 ];

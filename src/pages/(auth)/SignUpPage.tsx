@@ -5,11 +5,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 
+import { generateAccountNumber } from '../../utils/fun';
+
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
 import { users } from '../../data/users';
-import { generateAccountNumber } from '../../utils/fun';
 
+// create footer links for signup page
 const FooterLink = () => {
   const footerLinks = [
     {
@@ -40,10 +42,10 @@ const FooterLink = () => {
   ));
 };
 
+// create signup page
 export default function SignUpPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [postError, setPostError] = useState<string | null>(null);
-
   const navigate = useNavigate();
 
   const referrerNames = [
@@ -94,11 +96,18 @@ export default function SignUpPage() {
       id: uuidv4(),
       accountNumber: generateAccountNumber(),
       userName: '',
-      balance: 0,
       piggyPoints: 0,
       transactions: [],
       authPin: undefined,
       showBalance: false,
+      accounts: [
+        {
+          savings: 0,
+          flexNaira: 0,
+          safeLock: 0,
+          target: 0,
+        },
+      ],
       ...data,
     };
 

@@ -1,3 +1,5 @@
+import { UserProps } from '../data/users';
+
 export const generateAccountNumber = () => {
   const date = Date.now();
   const accountNumber = date.toString().slice(-10);
@@ -19,4 +21,16 @@ export const getTheDayTime = () => {
 
 export const formatCurrency = (amount: number) => {
   return `${amount.toLocaleString()}`;
+};
+
+export const getTotalBalance = (user: UserProps) => {
+  return user.accounts.reduce((acc, account) => {
+    return (
+      acc +
+      account.savings +
+      account.flexNaira +
+      account.safeLock +
+      account.target
+    );
+  }, 0);
 };

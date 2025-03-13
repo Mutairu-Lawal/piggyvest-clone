@@ -5,15 +5,16 @@ import { LuTarget } from 'react-icons/lu';
 import { BsCurrencyDollar } from 'react-icons/bs';
 import { FiAtSign } from 'react-icons/fi';
 import { formatCurrency } from '../../utils/fun';
+import { UserProps } from '../../data/users';
 
-export const SavingCategories = () => {
+const SavingCategories = ({ user }: { user: UserProps }) => {
   const savings = [
     {
       id: '1',
       name: 'Savings',
       description:
         'Strict savings automatically. Daily, weekly or Monthly. 14% p.a',
-      balance: 1000,
+      balance: user.accounts[0].savings,
       icon: <FiShield />,
       bgColor: '#CCF0FE',
       accentColor: '#0D60D6',
@@ -23,7 +24,7 @@ export const SavingCategories = () => {
       name: 'flex Naira',
       description:
         'Flexible savings for emergencies. Free transfer, withdrawals etc. 12% p.a',
-      balance: 0,
+      balance: user.accounts[0].flexNaira,
       icon: <TbMovie />,
       bgColor: '#FFEAF6',
       accentColor: '#DA4999',
@@ -33,7 +34,7 @@ export const SavingCategories = () => {
       name: 'safelock',
       description:
         'Lock funds to avoid temptations. Upfront interest. up to 20% p.a',
-      balance: 2000,
+      balance: user.accounts[0].safeLock,
       icon: <IoLockClosedOutline />,
       bgColor: '#F0F8FF',
       accentColor: '#6495ED',
@@ -43,7 +44,7 @@ export const SavingCategories = () => {
       name: 'targets',
       description:
         'Reach your unique individual saving goals. \u00A0  up to 12% p.a',
-      balance: 200000,
+      balance: user.accounts[0].target,
       icon: <LuTarget />,
       bgColor: '#DCFFEB',
       accentColor: '#51B77D',
@@ -102,3 +103,5 @@ export const SavingCategories = () => {
     </section>
   );
 };
+
+export default SavingCategories;

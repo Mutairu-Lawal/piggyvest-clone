@@ -9,11 +9,11 @@ import BestClient from '../components/homepage/BestClient';
 import Transactions from '../components/homepage/Transactions';
 import HomeShortcut from '../components/homepage/HomeShortcut';
 import AccountBalance from '../components/AccountBalance';
+import QuickSave from '../components/homepage/QuickSave';
 
 import { getSessionStorage } from '../utils/sessionStorage';
 import { UserProps } from '../data/users';
-import { getTheDayTime } from '../utils/fun';
-import QuickSave from '../components/homepage/QuickSave';
+import { getTheDayTime, getTotalBalance } from '../utils/fun';
 
 export default function HomePage() {
   const [user, setUser] = useState<UserProps | null>(null);
@@ -35,7 +35,11 @@ export default function HomePage() {
           subtitle={getTheDayTime()}
         />
         <HomeShortcut setStateAction={setShowQuickSave} />
-        <AccountBalance title="Total Savings" isHome balance={user.balance} />
+        <AccountBalance
+          title="Total Savings"
+          isHome
+          balance={getTotalBalance(user)}
+        />
         <GetStarted title="get started with piggyvest" isHome>
           <h1 className="font-semibold capitalize text-2xl">get started</h1>
           <div className="img">

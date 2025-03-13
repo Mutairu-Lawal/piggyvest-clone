@@ -16,10 +16,13 @@ type QuickSaveProps = {
 const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
+  const accoutTypes = ['savings', 'flexNaira', 'safeLock', 'target'] as const;
+
+  // schema for form validation
   const userSchema = z
     .object({
       amount: z.number({ message: '' }).positive(),
-      accountType: z.enum(['piggybank']).optional(),
+      accountType: z.enum(accoutTypes).optional(),
     })
     .refine((data) => data.amount <= 100000, {
       message: 'Amount must be less than or equal to ₦ 100,000 per Tranaction',
@@ -28,6 +31,7 @@ const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
 
   type UserSchema = z.infer<typeof userSchema>;
 
+  // react-hook-form
   const {
     register,
     handleSubmit,
@@ -36,16 +40,39 @@ const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
     resolver: zodResolver(userSchema),
   });
 
+  // handle the submission
   const handleOnSubmit = (data: UserSchema) => {
-    const { amount } = data;
+    const { amount, accountType } = data;
+
+    const accountName =
+      accountType === 'savings'
+        ? 'savings'
+        : accountType === 'flexNaira'
+        ? 'flexNaira'
+        : accountType === 'safeLock'
+        ? 'safeLock'
+        : 'target';
 
     setTimeout(() => {
-      const updatedState = { ...user, balance: (user.balance += amount) };
+      const updatedState = {
+        ...user,
+        accounts: [
+          {
+            ...user.accounts[0],
+            [accountName]: (user.accounts[0][accountName] += amount),
+          },
+        ],
+      };
+
+      // the update the user state in the web storage
       setSessionStorage('user', updatedState);
+
+      // set all state to false
       setIsLoading(false);
       setStateAction(false);
     }, 2000);
 
+    // set loadinng to true
     setIsLoading(true);
   };
 
@@ -91,15 +118,22 @@ const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
           <div className="form-group">
             <label htmlFor="accoutType">Choose a Destination</label>
             <select id="accountType" {...register('accountType')}>
-              <option value="piggybank">
-                My PiggyBank -{' '}
-                <span className="font-sans font-bold mr-1">₦</span>{' '}
-                {formatCurrency(user.balance)}
+              <option value="savings">
+                My PiggyBank - {formatCurrency(user.accounts[0].savings)}
+              </option>
+              <option value="flexNaira">
+                My FlexNaira - {formatCurrency(user.accounts[0].flexNaira)}
+              </option>
+              <option value="safeLock">
+                My SafeLock - {formatCurrency(user.accounts[0].safeLock)}
+              </option>
+              <option value="target">
+                My Target - {formatCurrency(user.accounts[0].target)}
               </option>
             </select>
           </div>
         </div>
-
+        {/* form submit button */}
         <button
           type="submit"
           className="uppercase bg-[#0d60d8] hover:bg-[#0d4dd8] text-white px-5 py-3 rounded-lg w-full font-extrabold rounded-bl-none"
