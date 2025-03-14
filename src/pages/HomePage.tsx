@@ -14,7 +14,6 @@ import QuickSave from '../components/homepage/QuickSave';
 import { UserProps } from '../data/users';
 import { getTheDayTime, getTotalBalance } from '../utils/fun';
 import { useAppSelector } from '../app/hooks';
-// import { ToastContainer } from 'react-toastify';
 
 export default function HomePage() {
   const [user, setUser] = useState<UserProps | null>(
@@ -38,12 +37,6 @@ export default function HomePage() {
     };
 
     fectchUser();
-
-    // set the user state from the session storage
-    // setUser(() => {
-    //   const user = getSessionStorage('user');
-    //   return user ? user : null;
-    // });
   });
 
   return (
