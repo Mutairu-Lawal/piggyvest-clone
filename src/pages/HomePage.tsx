@@ -14,9 +14,12 @@ import QuickSave from '../components/homepage/QuickSave';
 import { getSessionStorage } from '../utils/sessionStorage';
 import { UserProps } from '../data/users';
 import { getTheDayTime, getTotalBalance } from '../utils/fun';
+import { useAppSelector } from '../app/hooks';
 
 export default function HomePage() {
-  const [user, setUser] = useState<UserProps | null>(null);
+  const [user, setUser] = useState<UserProps | null>(
+    useAppSelector((state) => state.currentUserData.user)
+  );
   const [showQuickSave, setShowQuickSave] = useState(false);
 
   useEffect(() => {

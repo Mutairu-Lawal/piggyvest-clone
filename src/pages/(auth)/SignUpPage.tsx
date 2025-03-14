@@ -10,8 +10,7 @@ import { generateAccountNumber } from '../../utils/fun';
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
 import { UserProps } from '../../data/users';
-import { setSessionStorage } from '../../utils/sessionStorage';
-// import { useAppDispatch } from '../../app/hooks';
+// import { setSessionStorage } from '../../utils/sessionStorage';
 
 // create footer links for signup page
 const FooterLink = () => {
@@ -52,7 +51,6 @@ export default function SignUpPage() {
   const [emailError, setEmailError] = useState<string | null>(null);
 
   const navigate = useNavigate();
-  // const dispatch = useAppDispatch();
 
   const referrerNames = [
     '',
@@ -75,7 +73,7 @@ export default function SignUpPage() {
       .trim()
       .toLowerCase(),
     email: z.string().email().trim().toLowerCase(),
-    phoneNumber: z.number({ message: 'Please input your phone Number' }),
+    phoneNumber: z.string({ message: 'Please input your phone Number' }),
     password: z
       .string()
       .trim()
@@ -119,6 +117,8 @@ export default function SignUpPage() {
       ...data,
     };
 
+    // console.log(newClient);
+
     const getAndPostData = async () => {
       try {
         setIsLoading(true);
@@ -137,11 +137,10 @@ export default function SignUpPage() {
         const data = await users.json();
         emails = data.map((user: UserProps) => user.email);
 
-        // check if email already exists
         if (emails.includes(newClient.email))
           throw new Error('Email already exists');
 
-        // post new user to database
+        // // post new user to database
         const res = await fetch('/api/users', {
           method: 'POST',
           headers: {
@@ -154,9 +153,9 @@ export default function SignUpPage() {
         if (!res.ok) throw new Error('Error creating an account');
 
         // save data to web storage
-        setSessionStorage('user', newClient);
+        // setSessionStorage('user', newClient);
+        navigate('/login');
       } catch (err: unknown) {
-        // if (err instanceof Error) setPostError(err.message);
         if (err instanceof Error) {
           if (err.message === 'Email already exists') {
             setEmailError(err.message);
@@ -165,11 +164,6 @@ export default function SignUpPage() {
           }
         }
       } finally {
-        setTimeout(() => {
-          if (!postError && !emailError) {
-            navigate('/');
-          }
-        }, 2000);
         setIsLoading(false);
       }
     };
@@ -212,21 +206,22 @@ export default function SignUpPage() {
               id="email"
               name="email"
               placeholder="Email Address"
+              onChange={() => {
+                setEmailError(null);
+              }}
             />
             {errors.email && (
               <span className="text-red-500">{errors.email.message}</span>
             )}
-            {emailError && (
-              <span className="text-red-500">Email is available</span>
-            )}
+            {emailError && <p className="text-red-500">{emailError}</p>}
           </div>
 
           {/* phone  number */}
           <div className="form-group">
             <label htmlFor="phoneNumber">Phone Number</label>
             <input
-              {...register('phoneNumber', { valueAsNumber: true })}
-              type="number"
+              {...register('phoneNumber')}
+              type="text"
               id="phoneNumber"
               name="phoneNumber"
               placeholder="Phone Number"

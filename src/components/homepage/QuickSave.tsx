@@ -119,16 +119,16 @@ const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
             <label htmlFor="accoutType">Choose a Destination</label>
             <select id="accountType" {...register('accountType')}>
               <option value="savings">
-                My PiggyBank - {formatCurrency(user.accounts[0].savings)}
+                My PiggyBank -{formatCurrency(user.accounts[0].savings)}
               </option>
               <option value="flexNaira">
-                My FlexNaira - {formatCurrency(user.accounts[0].flexNaira)}
+                My FlexNaira -{formatCurrency(user.accounts[0].flexNaira)}
               </option>
               <option value="safeLock">
                 My SafeLock - {formatCurrency(user.accounts[0].safeLock)}
               </option>
               <option value="target">
-                My Target - {formatCurrency(user.accounts[0].target)}
+                My Target -{formatCurrency(user.accounts[0].target)}
               </option>
             </select>
           </div>

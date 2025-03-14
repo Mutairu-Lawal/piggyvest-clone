@@ -42,29 +42,6 @@
           "target": 7000
         }
       ]
-    },
-    {
-      "id": "df1fdb90-d799-4dcc-b874-b01e70bdcca5",
-      "accountNumber": "1888912740",
-      "userName": "",
-      "piggyPoints": 0,
-      "transactions": [],
-      "referrerPoints": 0,
-      "showBalance": false,
-      "accounts": [
-        {
-          "savings": 0,
-          "flexNaira": 0,
-          "safeLock": 0,
-          "target": 0
-        }
-      ],
-      "fullName": "lawal muktair",
-      "email": "lawalmuir@gmail.com",
-      "phoneNumber": 8033981075,
-      "password": "sssssss",
-      "referrerCode": "",
-      "referrerName": ""
     }
   ]
 }
