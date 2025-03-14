@@ -10,7 +10,10 @@ import { generateAccountNumber } from '../../utils/fun';
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
 import { UserProps } from '../../data/users';
-// import { setSessionStorage } from '../../utils/sessionStorage';
+import { useAppDispatch } from '../../app/hooks';
+import { updateUserState } from '../../app/features/currentUserData';
+import { setSessionStorage } from '../../utils/sessionStorage';
+import { Bounce, toast, ToastContainer } from 'react-toastify';
 
 // create footer links for signup page
 const FooterLink = () => {
@@ -51,7 +54,7 @@ export default function SignUpPage() {
   const [emailError, setEmailError] = useState<string | null>(null);
 
   const navigate = useNavigate();
-
+  const dispatch = useAppDispatch();
   const referrerNames = [
     '',
     'Facebook',
@@ -141,7 +144,7 @@ export default function SignUpPage() {
           throw new Error('Email already exists');
 
         // // post new user to database
-        const res = await fetch('/api/users', {
+        const res = await fetch('/api/userss', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -150,17 +153,31 @@ export default function SignUpPage() {
           body: JSON.stringify(newClient),
         });
 
-        if (!res.ok) throw new Error('Error creating an account');
+        if (!res.ok)
+          throw new Error('Error creating an account. Try Again Later');
 
         // save data to web storage
-        // setSessionStorage('user', newClient);
-        navigate('/login');
+        setSessionStorage('user', newClient);
+        dispatch(updateUserState(newClient));
+
+        navigate('/');
       } catch (err: unknown) {
         if (err instanceof Error) {
           if (err.message === 'Email already exists') {
             setEmailError(err.message);
           } else {
             setPostError(err.message);
+            toast.error(postError, {
+              position: 'top-right',
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'light',
+              transition: Bounce,
+            });
           }
         }
       } finally {
@@ -288,9 +305,7 @@ export default function SignUpPage() {
             )}
           </button>
 
-          {postError && (
-            <div className="text-center text-red-600">{postError}</div>
-          )}
+          <ToastContainer />
         </form>
       </Box>
       <FooterLink />

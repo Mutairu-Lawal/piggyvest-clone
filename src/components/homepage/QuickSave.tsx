@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { UserProps } from '../../data/users';
 import { setSessionStorage } from '../../utils/sessionStorage';
 import { formatCurrency } from '../../utils/fun';
+import { syncData } from '../../api/apiRequest';
 
 type QuickSaveProps = {
   setStateAction: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,6 +16,7 @@ type QuickSaveProps = {
 
 const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
   const [isLoading, setIsLoading] = useState(false);
+  // const [serverResponse, setServerResponse] = useState('');
 
   const accoutTypes = ['savings', 'flexNaira', 'safeLock', 'target'] as const;
 
@@ -42,6 +44,7 @@ const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
 
   // handle the submission
   const handleOnSubmit = (data: UserSchema) => {
+    // destructure the data
     const { amount, accountType } = data;
 
     const accountName =
@@ -53,7 +56,7 @@ const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
         ? 'safeLock'
         : 'target';
 
-    setTimeout(() => {
+    setTimeout(async () => {
       const updatedState = {
         ...user,
         accounts: [
@@ -64,12 +67,23 @@ const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
         ],
       };
 
-      // the update the user state in the web storage
-      setSessionStorage('user', updatedState);
+      // upadte on the server
+      try {
+        const response = await syncData(updatedState);
 
-      // set all state to false
-      setIsLoading(false);
-      setStateAction(false);
+        if (response) throw new Error(response);
+
+        // the update the user state in the web storage
+        setSessionStorage('user', updatedState);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          // setServerResponse(error.message);
+        }
+      } finally {
+        // set all state to false
+        setIsLoading(false);
+        setStateAction(false);
+      }
     }, 2000);
 
     // set loadinng to true
@@ -119,16 +133,16 @@ const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
             <label htmlFor="accoutType">Choose a Destination</label>
             <select id="accountType" {...register('accountType')}>
               <option value="savings">
-                My PiggyBank -{formatCurrency(user.accounts[0].savings)}
+                My PiggyBank - ₦{formatCurrency(user.accounts[0].savings)}
               </option>
               <option value="flexNaira">
-                My FlexNaira -{formatCurrency(user.accounts[0].flexNaira)}
+                My FlexNaira - ₦{formatCurrency(user.accounts[0].flexNaira)}
               </option>
               <option value="safeLock">
-                My SafeLock - {formatCurrency(user.accounts[0].safeLock)}
+                My SafeLock - ₦{formatCurrency(user.accounts[0].safeLock)}
               </option>
               <option value="target">
-                My Target -{formatCurrency(user.accounts[0].target)}
+                My Target - ₦{formatCurrency(user.accounts[0].target)}
               </option>
             </select>
           </div>

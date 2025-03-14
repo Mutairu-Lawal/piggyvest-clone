@@ -11,10 +11,10 @@ import HomeShortcut from '../components/homepage/HomeShortcut';
 import AccountBalance from '../components/AccountBalance';
 import QuickSave from '../components/homepage/QuickSave';
 
-import { getSessionStorage } from '../utils/sessionStorage';
 import { UserProps } from '../data/users';
 import { getTheDayTime, getTotalBalance } from '../utils/fun';
 import { useAppSelector } from '../app/hooks';
+// import { ToastContainer } from 'react-toastify';
 
 export default function HomePage() {
   const [user, setUser] = useState<UserProps | null>(
@@ -23,12 +23,28 @@ export default function HomePage() {
   const [showQuickSave, setShowQuickSave] = useState(false);
 
   useEffect(() => {
+    const userId = user?.id;
+
+    const fectchUser = async () => {
+      try {
+        const res = await fetch(`/api/users/${userId}`);
+        const data = await res.json();
+        setUser(data);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          console.log(error.message);
+        }
+      }
+    };
+
+    fectchUser();
+
     // set the user state from the session storage
-    setUser(() => {
-      const user = getSessionStorage('user');
-      return user ? user : null;
-    });
-  }, []);
+    // setUser(() => {
+    //   const user = getSessionStorage('user');
+    //   return user ? user : null;
+    // });
+  });
 
   return (
     // returns the user if user is truthy
