@@ -4,38 +4,37 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 
-// import { users } from '../../data/users';
-import users from '../../data/db.json';
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
 import { setSessionStorage } from '../../utils/sessionStorage';
-import * as hooks from '../../app/hooks';
+import { useAppDispatch } from '../../app/hooks';
 import { updateUserState } from '../../app/features/currentUserData';
+import { UserProps } from '../../data/users';
 
 type CurrentUser = {
   emailOrPhoneNumber: string;
   password: string;
 };
 
+const footerLinks = [
+  {
+    id: 'footer_link_id_01',
+    href: '/register',
+    linkName: 'register',
+    label: `Don't have an account? Register`,
+  },
+  {
+    id: 'footer_link_id_02',
+    href: '/forgot-password',
+    label: `Forgot Password`,
+    linkName: 'forgot password',
+  },
+];
+
 export default function LoginPage() {
-  const dispatch = hooks.useAppDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-
-  const footerLinks = [
-    {
-      id: 'footer_link_id_01',
-      href: '/register',
-      linkName: 'register',
-      label: `Don't have an account? Register`,
-    },
-    {
-      id: 'footer_link_id_02',
-      href: '/forgot-password',
-      label: `Forgot Password`,
-      linkName: 'forgot password',
-    },
-  ];
 
   const {
     register,
@@ -43,21 +42,36 @@ export default function LoginPage() {
     formState: { errors },
   } = useForm<CurrentUser>();
 
-  const handleOnSubmit: SubmitHandler<CurrentUser> = (currentUser) => {
-    setIsLoading(true);
+  const handleOnSubmit: SubmitHandler<CurrentUser> = async (currentUser) => {
+    try {
+      setIsLoading(true);
+      const { emailOrPhoneNumber, password } = currentUser;
+      let users: UserProps[] | [] = [];
 
-    const { emailOrPhoneNumber, password } = currentUser;
+      //  simulate a delay
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve('done');
+        }, 1000);
+      });
 
-    setTimeout(() => {
-      const userData = emailOrPhoneNumber.includes('@')
-        ? users.users.filter(
+      // fectch data
+      const res = await fetch('api/users');
+      if (!res.ok) throw new Error(res.statusText);
+      const data = await res.json();
+      users = [...data];
+
+      // check for coresponding data
+      const currentUserData = emailOrPhoneNumber.includes('@')
+        ? users.filter(
             (user) => user.email === emailOrPhoneNumber.trim().toLowerCase()
           )
-        : users.users.filter(
+        : users.filter(
             (user) => user.phoneNumber === emailOrPhoneNumber.trim()
           );
 
-      if (userData.length === 0) {
+      // check for empty data
+      if (currentUserData.length === 0) {
         toast.error('Incorrect email or password', {
           position: 'top-right',
           autoClose: 3000,
@@ -73,10 +87,10 @@ export default function LoginPage() {
         return;
       }
 
-      if (userData[0].password === password) {
-        setSessionStorage('user', userData[0]);
-        dispatch(updateUserState(userData[0]));
-        setIsLoading(false);
+      //verify the user password
+      if (currentUserData[0].password === password) {
+        setSessionStorage('user', currentUserData[0]);
+        dispatch(updateUserState(currentUserData[0]));
         navigate('/');
       } else {
         toast.error('Incorrect email or password', {
@@ -90,9 +104,25 @@ export default function LoginPage() {
           theme: 'light',
           transition: Bounce,
         });
-        setIsLoading(false);
       }
-    }, 1000);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        // this a custom error message... kindly when deloying
+        toast.error(`Sorry we couldn't reach our server, Try again later`, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+          transition: Bounce,
+        });
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (

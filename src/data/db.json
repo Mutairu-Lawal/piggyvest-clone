@@ -42,29 +42,6 @@
           "target": 7000
         }
       ]
-    },
-    {
-      "id": "5ebe8476-b276-4663-b2cb-c1657d902b30",
-      "accountNumber": "1969090826",
-      "userName": "",
-      "piggyPoints": 0,
-      "transactions": [],
-      "referrerPoints": 0,
-      "showBalance": false,
-      "accounts": [
-        {
-          "savings": 0,
-          "flexNaira": 0,
-          "safeLock": 0,
-          "target": 0
-        }
-      ],
-      "fullName": "odejobi usman",
-      "email": "lawalmuktair@gmail.hn",
-      "phoneNumber": "08033981075",
-      "password": "asdfghjkl",
-      "referrerCode": "11111",
-      "referrerName": "Twitter"
     }
   ]
 }

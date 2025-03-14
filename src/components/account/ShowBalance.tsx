@@ -23,7 +23,6 @@ const ShowBalance = () => {
         className="text-6xl cursor-pointer"
         onClick={async () => {
           const currentState = getSessionStorage('user');
-
           try {
             if (currentState) {
               const updatedState = {
@@ -34,6 +33,8 @@ const ShowBalance = () => {
               const response = await syncData(updatedState);
 
               if (response) throw new Error(response);
+
+              // update the user on the client
               setSessionStorage('user', updatedState);
               dispatch(updateUserState(updatedState));
             }

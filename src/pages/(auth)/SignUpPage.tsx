@@ -4,16 +4,15 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
-
-import { generateAccountNumber } from '../../utils/fun';
+import { Bounce, toast, ToastContainer } from 'react-toastify';
 
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
+import { generateAccountNumber } from '../../utils/fun';
 import { UserProps } from '../../data/users';
 import { useAppDispatch } from '../../app/hooks';
 import { updateUserState } from '../../app/features/currentUserData';
 import { setSessionStorage } from '../../utils/sessionStorage';
-import { Bounce, toast, ToastContainer } from 'react-toastify';
 
 // create footer links for signup page
 const FooterLink = () => {
@@ -76,7 +75,10 @@ export default function SignUpPage() {
       .trim()
       .toLowerCase(),
     email: z.string().email().trim().toLowerCase(),
-    phoneNumber: z.string({ message: 'Please input your phone Number' }),
+    phoneNumber: z
+      .string()
+      .min(10, { message: 'Please enter a valid phone number' })
+      .trim(),
     password: z
       .string()
       .trim()
@@ -136,15 +138,19 @@ export default function SignUpPage() {
         });
 
         // get all users emails
-        const users = await fetch('/api/users');
-        const data = await users.json();
+        const response = await fetch('/api/users');
+
+        if (!response.ok) throw new Error(response.statusText);
+
+        const data = await response.json();
         emails = data.map((user: UserProps) => user.email);
 
+        // checking of the new client email exist
         if (emails.includes(newClient.email))
           throw new Error('Email already exists');
 
-        // // post new user to database
-        const res = await fetch('/api/userss', {
+        //  posting new user to database
+        const res = await fetch('/api/users', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -160,6 +166,7 @@ export default function SignUpPage() {
         setSessionStorage('user', newClient);
         dispatch(updateUserState(newClient));
 
+        // navigate to homepage
         navigate('/');
       } catch (err: unknown) {
         if (err instanceof Error) {
