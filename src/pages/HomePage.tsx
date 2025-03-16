@@ -17,16 +17,14 @@ import { useAppSelector } from '../app/hooks';
 import ShowModal from '../components/homepage/ShowModal';
 
 export default function HomePage() {
-  const [user, setUser] = useState<UserProps>(
-    useAppSelector((state) => state.currentUserData.user)
-  );
+  const [user, setUser] = useState<UserProps | null>(null);
   const [showQuickSave, setShowQuickSave] = useState(false);
   const [toastModal, setToastModal] = useState(false);
   const [serverResponse, setServerResponse] = useState<string | null>(null);
+  const currentUser = useAppSelector((state) => state.currentUserData.user);
 
   useEffect(() => {
-    const userId = user.id;
-
+    const userId = currentUser.id;
     const fectchUser = async () => {
       try {
         const res = await fetch(`/api/users/${userId}`);
@@ -47,15 +45,18 @@ export default function HomePage() {
       {!showQuickSave && (
         <main>
           <Header
-            title={`${user.fullName.slice(0, user.fullName.indexOf(' '))},`}
+            title={`${user?.fullName.slice(0, user.fullName.indexOf(' '))},`}
             subtitle={getTheDayTime()}
           />
           <HomeShortcut setStateAction={setShowQuickSave} />
-          <AccountBalance
-            title="Total Savings"
-            isHome
-            balance={getTotalBalance(user)}
-          />
+          {user && (
+            <AccountBalance
+              title="Total Savings"
+              isHome
+              balance={getTotalBalance(user)}
+            />
+          )}
+
           <GetStarted title="get started with piggyvest" isHome>
             <h1 className="font-semibold capitalize text-2xl">get started</h1>
             <div className="img">
@@ -73,7 +74,7 @@ export default function HomePage() {
           <Transactions />
         </main>
       )}
-      {showQuickSave && (
+      {showQuickSave && user && (
         <QuickSave
           setShowQuickSave={setShowQuickSave}
           setToastModal={setToastModal}

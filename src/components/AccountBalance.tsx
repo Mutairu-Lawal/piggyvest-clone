@@ -1,6 +1,6 @@
 import { FiShield } from 'react-icons/fi';
 
-import * as hooks from '../app/hooks';
+import { useAppSelector } from '../app/hooks';
 import { formatCurrency } from '../utils/fun';
 
 interface AccountBalanceProps {
@@ -14,7 +14,7 @@ const AccountBalance = ({
   balance,
   isHome = false,
 }: AccountBalanceProps) => {
-  const user = hooks.useAppSelector((state) => state.currentUserData.user);
+  const user = useAppSelector((state) => state.currentUserData.user);
   return (
     <div className="py-2">
       <div
