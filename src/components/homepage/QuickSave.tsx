@@ -10,13 +10,19 @@ import { formatCurrency } from '../../utils/fun';
 import { syncData } from '../../api/apiRequest';
 
 type QuickSaveProps = {
-  setStateAction: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowQuickSave: React.Dispatch<React.SetStateAction<boolean>>;
+  setToastModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setServerResponse: React.Dispatch<React.SetStateAction<string | null>>;
   user: UserProps;
 };
 
-const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
+const QuickSave = ({
+  setShowQuickSave,
+  user,
+  setToastModal,
+  setServerResponse,
+}: QuickSaveProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  // const [serverResponse, setServerResponse] = useState('');
 
   const accoutTypes = ['savings', 'flexNaira', 'safeLock', 'target'] as const;
 
@@ -77,12 +83,15 @@ const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
         setSessionStorage('user', updatedState);
       } catch (error: unknown) {
         if (error instanceof Error) {
-          // setServerResponse(error.message);
+          setServerResponse(error.message);
         }
       } finally {
-        // set all state to false
+        // set state to false
         setIsLoading(false);
-        setStateAction(false);
+        setShowQuickSave(false);
+
+        // show the modal
+        setToastModal(true);
       }
     }, 2000);
 
@@ -96,7 +105,7 @@ const QuickSave = ({ setStateAction, user }: QuickSaveProps) => {
         <div
           className="icon cursor-pointer text-4xl"
           onClick={() => {
-            setStateAction(false);
+            setShowQuickSave(false);
           }}
         >
           <IoClose />
