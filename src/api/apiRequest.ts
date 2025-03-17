@@ -15,9 +15,11 @@ export const syncData = async (newState: UserProps) => {
     });
 
     if (!res.ok) throw new Error(res.statusText);
+    return null;
   } catch (error: unknown) {
     if (error instanceof Error) {
       return error.message;
     }
+    return 'Something went wrong!';
   }
 };

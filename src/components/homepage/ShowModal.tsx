@@ -9,11 +9,9 @@ type ShowModalProps = {
 
 const ShowModal = ({ setToastModal, serverResponse }: ShowModalProps) => {
   useEffect(() => {
-    // document.body.classList.add('body-no-scroll');
     document.body.style.overflow = 'hidden';
 
     return () => {
-      // document.body.classList.remove('body-no-scroll');
       document.body.style.overflow = 'auto';
     };
   }, []);
@@ -33,7 +31,7 @@ const ShowModal = ({ setToastModal, serverResponse }: ShowModalProps) => {
         <p className="modal-message text-xl font-extrabold">
           {!serverResponse ? 'Payment Successfull' : 'Error Occurred'}
         </p>
-        <p className="modal-sub-message font-medium">
+        <p className="modal-sub-message font-medium text-center">
           {!serverResponse ? 'Transaction Approved' : serverResponse}
         </p>
 

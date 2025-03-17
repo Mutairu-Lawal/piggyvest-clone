@@ -1,4 +1,7 @@
 import { UserProps } from '../data/users';
+import days from 'dayjs';
+import { nanoid } from 'nanoid';
+import { customAlphabet } from 'nanoid';
 
 export const generateAccountNumber = () => {
   const date = Date.now();
@@ -33,4 +36,35 @@ export const getTotalBalance = (user: UserProps) => {
       account.target
     );
   }, 0);
+};
+
+// export const getdays = () => {
+//   const now = days().format('DD/MM/YYYY');
+//   const id = nanoid();
+//   const customNumbers = customAlphabet('1234567890', 30);
+//   //
+//   console.log(typeof now);
+//   console.log(now);
+//   console.log(id);
+//   console.log(customNumbers());
+//   console.log(typeof customNumbers());
+// };
+
+export const generatedReceipt = (
+  type: string,
+  amount: number,
+  status: string
+) => {
+  const transaction_Number = customAlphabet('1234567890', 30);
+  const sessionId = customAlphabet('1234567890', 24);
+
+  return {
+    id: nanoid(),
+    type,
+    amount,
+    status,
+    date: days().format('DD/MM/YYYY'),
+    transaction_Number: transaction_Number(),
+    sessionId: sessionId(),
+  };
 };

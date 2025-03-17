@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { UserProps } from '../../data/users';
 import { setSessionStorage } from '../../utils/sessionStorage';
-import { formatCurrency } from '../../utils/fun';
+import { formatCurrency, generatedReceipt } from '../../utils/fun';
 import { syncData } from '../../api/apiRequest';
 
 type QuickSaveProps = {
@@ -27,15 +27,10 @@ const QuickSave = ({
   const accoutTypes = ['savings', 'flexNaira', 'safeLock', 'target'] as const;
 
   // schema for form validation
-  const userSchema = z
-    .object({
-      amount: z.number({ message: '' }).positive(),
-      accountType: z.enum(accoutTypes).optional(),
-    })
-    .refine((data) => data.amount <= 100000, {
-      message: 'Amount must be less than or equal to ₦ 100,000 per Tranaction',
-      path: ['amount'],
-    });
+  const userSchema = z.object({
+    amount: z.number({ message: '' }).positive(),
+    accountType: z.enum(accoutTypes).optional(),
+  });
 
   type UserSchema = z.infer<typeof userSchema>;
 
@@ -62,8 +57,16 @@ const QuickSave = ({
         ? 'safeLock'
         : 'target';
 
+    const transactionStatus = amount > 100000 ? 'failed' : 'successful';
+
     setTimeout(async () => {
-      const updatedState = {
+      // generate the receipt
+      const receipt = generatedReceipt(accountName, amount, transactionStatus);
+
+      console.log(receipt);
+
+      // upadte the user new state
+      const updatedState: UserProps = {
         ...user,
         accounts: [
           {
@@ -73,11 +76,15 @@ const QuickSave = ({
         ],
       };
 
-      // upadte on the server
       try {
+        // upadte on the server
         const response = await syncData(updatedState);
 
         if (response) throw new Error(response);
+        if (transactionStatus === 'failed')
+          throw new Error(
+            'Transaction failed! maximum of  ₦ 100,000 per transaction.'
+          );
 
         // the update the user state in the web storage
         setSessionStorage('user', updatedState);

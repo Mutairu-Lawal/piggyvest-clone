@@ -1,6 +1,11 @@
 type TransactionProps = {
   id: string;
-  name: string;
+  type: string;
+  amount: number;
+  date: string;
+  status: 'sucessful' | 'failed' | 'pending';
+  transaction_number: string;
+  sessionId: string;
 };
 
 export interface UserProps {
@@ -39,7 +44,17 @@ export const users: Array<UserProps> = [
     piggyPoints: 40,
     showBalance: false,
     accounts: [{ savings: 100, flexNaira: 200, safeLock: 800, target: 900 }],
-    transactions: [],
+    transactions: [
+      {
+        id: '2233',
+        type: 'flexNaira',
+        amount: 1200,
+        status: 'sucessful',
+        transaction_number: '344421479408461230441571659526',
+        sessionId: '34442147940846123044526',
+        date: '2025/03/17',
+      },
+    ],
     authPin: '1234',
   },
   {
