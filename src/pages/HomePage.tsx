@@ -62,7 +62,6 @@ export default function HomePage() {
         <QuickSave
           setShowQuickSave={setShowQuickSave}
           setToastModal={setToastModal}
-          user={currentUser}
           setServerResponse={setServerResponse}
         />
       )}

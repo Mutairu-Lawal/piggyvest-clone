@@ -11,10 +11,12 @@ const ShowModal = ({ setToastModal, serverResponse }: ShowModalProps) => {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
+    //clean up
     return () => {
       document.body.style.overflow = 'auto';
     };
   }, []);
+
   return (
     <div className="modal-container absolute z-10 w-full h-screen border top-0 left-0 flex flex-col justify-center items-center bg-black bg-opacity-50 backdrop-blur-md">
       <div className="modal-box bg-white w-full max-w-[400px] flex flex-col justify-center gap-2 items-center">

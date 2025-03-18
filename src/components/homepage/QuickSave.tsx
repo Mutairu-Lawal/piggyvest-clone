@@ -5,32 +5,38 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { UserProps } from '../../data/users';
-import { setSessionStorage } from '../../utils/sessionStorage';
+import {
+  getSessionStorage,
+  setSessionStorage,
+} from '../../utils/sessionStorage';
 import { formatCurrency, generatedReceipt } from '../../utils/fun';
 import { syncData } from '../../api/apiRequest';
+import { useAppDispatch } from '../../app/hooks';
+import { updateUserState } from '../../app/features/currentUserData';
 
 type QuickSaveProps = {
   setShowQuickSave: React.Dispatch<React.SetStateAction<boolean>>;
   setToastModal: React.Dispatch<React.SetStateAction<boolean>>;
   setServerResponse: React.Dispatch<React.SetStateAction<string | null>>;
-  user: UserProps;
 };
 
 const QuickSave = ({
   setShowQuickSave,
-  user,
+
   setToastModal,
   setServerResponse,
 }: QuickSaveProps) => {
   const [isLoading, setIsLoading] = useState(false);
-
   const accoutTypes = ['savings', 'flexNaira', 'safeLock', 'target'] as const;
+  const user = getSessionStorage('user');
 
   // schema for form validation
   const userSchema = z.object({
     amount: z.number({ message: '' }).positive(),
     accountType: z.enum(accoutTypes).optional(),
   });
+
+  const dipatch = useAppDispatch();
 
   type UserSchema = z.infer<typeof userSchema>;
 
@@ -74,6 +80,7 @@ const QuickSave = ({
             [accountName]: (user.accounts[0][accountName] += amount),
           },
         ],
+        transactions: [...user.transactions, receipt],
       };
 
       try {
@@ -88,6 +95,7 @@ const QuickSave = ({
 
         // the update the user state in the web storage
         setSessionStorage('user', updatedState);
+        dipatch(updateUserState(updatedState));
       } catch (error: unknown) {
         if (error instanceof Error) {
           setServerResponse(error.message);
