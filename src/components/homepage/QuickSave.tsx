@@ -51,7 +51,6 @@ const QuickSave = ({
 
   // handle the submission
   const handleOnSubmit = (data: UserSchema) => {
-    // destructure the data
     const { amount, accountType } = data;
 
     const accountName =
@@ -69,38 +68,46 @@ const QuickSave = ({
       // generate the receipt
       const receipt = generatedReceipt(accountName, amount, transactionStatus);
 
-      console.log(receipt);
-
       // upadte the user new state
-      const updatedState: UserProps = {
-        ...user,
-        accounts: [
-          {
-            ...user.accounts[0],
-            [accountName]: (user.accounts[0][accountName] += amount),
-          },
-        ],
-        transactions: [...user.transactions, receipt],
-      };
+      const updatedState: UserProps =
+        transactionStatus === 'successful'
+          ? {
+              ...user,
+              accounts: [
+                {
+                  ...user.accounts[0],
+                  [accountName]: (user.accounts[0][accountName] += amount),
+                },
+              ],
+              transactions: [...user.transactions, receipt],
+            }
+          : {
+              ...user,
+              transactions: [...user.transactions, receipt],
+            };
 
       try {
         // upadte on the server
         const response = await syncData(updatedState);
 
         if (response) throw new Error(response);
-        if (transactionStatus === 'failed')
-          throw new Error(
-            'Transaction failed! maximum of  ₦ 100,000 per transaction.'
-          );
 
-        // the update the user state in the web storage
-        setSessionStorage('user', updatedState);
-        dipatch(updateUserState(updatedState));
+        if (transactionStatus === 'failed') {
+          throw new Error(
+            'Transaction failed! maximum of ₦100,000 per transaction.'
+          );
+        } else {
+          setServerResponse(null);
+        }
       } catch (error: unknown) {
         if (error instanceof Error) {
           setServerResponse(error.message);
         }
       } finally {
+        // the update the user state in the web storage
+        setSessionStorage('user', updatedState);
+        dipatch(updateUserState(updatedState));
+
         // set state to false
         setIsLoading(false);
         setShowQuickSave(false);
