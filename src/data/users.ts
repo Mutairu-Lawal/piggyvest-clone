@@ -1,4 +1,4 @@
-type TransactionProps = {
+export type TransactionProps = {
   id: string;
   type: string;
   amount: number;

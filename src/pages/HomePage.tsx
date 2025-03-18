@@ -6,7 +6,6 @@ import Todos from '../components/homepage/Todos';
 import Navigations from '../components/homepage/Navigations';
 import Stores from '../components/homepage/Stores';
 import BestClient from '../components/homepage/BestClient';
-import Transactions from '../components/homepage/Transactions';
 import HomeShortcut from '../components/homepage/HomeShortcut';
 import AccountBalance from '../components/AccountBalance';
 import QuickSave from '../components/homepage/QuickSave';
@@ -14,6 +13,7 @@ import QuickSave from '../components/homepage/QuickSave';
 import { getTheDayTime, getTotalBalance } from '../utils/fun';
 import { useAppSelector } from '../app/hooks';
 import ShowModal from '../components/homepage/ShowModal';
+import RecentTransactions from '../components/homepage/RecentTransactions';
 
 export default function HomePage() {
   const [showQuickSave, setShowQuickSave] = useState(false);
@@ -55,7 +55,7 @@ export default function HomePage() {
           <Navigations />
           <Stores />
           <BestClient />
-          <Transactions />
+          <RecentTransactions />
         </main>
       )}
       {showQuickSave && currentUser && (
