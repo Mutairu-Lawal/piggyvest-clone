@@ -1,7 +1,6 @@
 import { IoWalletSharp } from 'react-icons/io5';
-import { BsSafe2 } from 'react-icons/bs';
+import { BsSafe2, BsShieldLock } from 'react-icons/bs';
 import { BiTargetLock } from 'react-icons/bi';
-import { BsShieldLock } from 'react-icons/bs';
 
 import { formatCurrency, timeFromNow } from '../utils/fun';
 import { TransactionProps } from '../data/users';
@@ -13,6 +12,46 @@ type TransactionsProps = {
 
 const Transactions = ({ transactions }: TransactionsProps) => {
   const user = useAppSelector((state) => state.currentUserData.user);
+
+  const getTypeIcon = (type: string) => {
+    switch (type) {
+      case 'flexNaira':
+        return <IoWalletSharp />;
+      case 'target':
+        return <BiTargetLock />;
+      case 'savings':
+        return <BsSafe2 />;
+      default:
+        return <BsShieldLock />;
+    }
+  };
+
+  const getTypeColor = (type: string) => {
+    switch (type) {
+      case 'flexNaira':
+        return 'bg-pink-600';
+      case 'target':
+        return 'bg-green-700';
+      case 'savings':
+        return 'bg-primary';
+      default:
+        return 'bg-[#f7dc6f]';
+    }
+  };
+
+  const getTypeDescription = (type: string) => {
+    switch (type) {
+      case 'flexNaira':
+        return 'Flex account credited.';
+      case 'target':
+        return 'Credited to Target.';
+      case 'savings':
+        return 'Core savings credited.';
+      default:
+        return 'Safe lock credited.';
+    }
+  };
+
   return (
     <>
       {transactions.map(({ id, type, amount, date }) => (
@@ -21,37 +60,15 @@ const Transactions = ({ transactions }: TransactionsProps) => {
           className="box rounded-bl-none border py-3 px-4 rounded-lg grid grid-cols-[70px_1fr] items-center"
         >
           <div
-            className={`w-[50px] h-[50px] rounded-[100%] text-white text-lg  overflow-hidden flex justify-center items-center ${
-              type === 'flexNaira'
-                ? 'bg-pink-600 '
-                : type === 'target'
-                ? 'bg-green-700'
-                : type === 'savings'
-                ? 'bg-primary'
-                : 'bg-[#f7dc6f]'
-            }`}
+            className={`w-[50px] h-[50px] rounded-[100%] text-white text-lg overflow-hidden flex justify-center items-center ${getTypeColor(
+              type
+            )}`}
           >
-            {type === 'flexNaira' ? (
-              <IoWalletSharp />
-            ) : type === 'target' ? (
-              <BiTargetLock />
-            ) : type === 'savings' ? (
-              <BsSafe2 />
-            ) : (
-              <BsShieldLock />
-            )}
+            {getTypeIcon(type)}
           </div>
           <div className="content text-sm w-full">
             <div className="flex justify-between">
-              <p>
-                {type === 'flexNaira'
-                  ? 'Flex account credited.'
-                  : type === 'target'
-                  ? 'Credited to Target.'
-                  : type === 'savings'
-                  ? 'Core savings credited.'
-                  : 'safe lock credited.'}
-              </p>
+              <p>{getTypeDescription(type)}</p>
               <p>
                 {user.showBalance && (
                   <span className="font-sans font-medium mr-1">₦</span>

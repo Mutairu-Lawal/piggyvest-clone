@@ -30,7 +30,7 @@ const AccountDetails = () => {
           <span className="font-sans">₦</span>{' '}
           <span>{formatCurrency(userData.referrerPoints)}</span>
         </div>
-        <p className="font-medium text-xs text-gray-400">Refarral Earnings</p>
+        <p className="font-medium text-xs text-gray-400">Referral Earnings</p>
       </div>
     </section>
   );

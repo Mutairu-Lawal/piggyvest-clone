@@ -1,8 +1,13 @@
 import { FaUserCircle } from 'react-icons/fa';
+
 import { useAppSelector } from '../../app/hooks';
+import { UserProps } from '../../data/users';
 
 const Profile = () => {
-  const userData = useAppSelector((state) => state.currentUserData.user);
+  const userData: UserProps = useAppSelector(
+    (state) => state.currentUserData.user
+  );
+
   return (
     <section className="flex flex-col justify-center items-center mt-10">
       <div className="icon">

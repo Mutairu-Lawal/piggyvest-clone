@@ -1,18 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-
-import { LuPercent } from 'react-icons/lu';
-import { FiUser } from 'react-icons/fi';
-import { FiPaperclip } from 'react-icons/fi';
+import { LuPercent, LuLogOut } from 'react-icons/lu';
+import { FiUser, FiPaperclip, FiCreditCard, FiBook } from 'react-icons/fi';
 import { HiOutlineArchiveBox } from 'react-icons/hi2';
-import { IoShareSocialOutline } from 'react-icons/io5';
+import { IoShareSocialOutline, IoCallOutline } from 'react-icons/io5';
 import { BsCurrencyDollar } from 'react-icons/bs';
-import { FiCreditCard } from 'react-icons/fi';
-import { FiBook } from 'react-icons/fi';
-import { IoCallOutline } from 'react-icons/io5';
-import { LuLogOut } from 'react-icons/lu';
 import { removeSessionStorage } from '../../utils/sessionStorage';
+import { formatCurrency } from '../../utils/fun';
 
 const AccountSettings = () => {
+  const navigate = useNavigate();
+
   const accountSettings = [
     {
       icon: <LuPercent />,
@@ -21,7 +18,7 @@ const AccountSettings = () => {
     },
     {
       icon: <FiUser />,
-      heading: 'My Account setting',
+      heading: 'My Account Setting',
       url: '#',
     },
     {
@@ -36,12 +33,12 @@ const AccountSettings = () => {
     },
     {
       icon: <IoShareSocialOutline />,
-      heading: 'Refer & Earn #1,000.00',
+      heading: `Refer & Earn ${formatCurrency(1000)}.00`,
       url: '#',
     },
     {
       icon: <BsCurrencyDollar />,
-      heading: 'withdraw funds',
+      heading: 'Withdraw Funds',
       url: '#',
     },
     {
@@ -54,7 +51,6 @@ const AccountSettings = () => {
       heading: 'View PiggyVest Library',
       url: '#',
     },
-
     {
       icon: <IoCallOutline />,
       heading: 'Contact Us',
@@ -66,8 +62,6 @@ const AccountSettings = () => {
       url: '/login',
     },
   ];
-
-  const navigate = useNavigate();
 
   return (
     <section className="mt-3 space-y-3">
@@ -81,7 +75,7 @@ const AccountSettings = () => {
             navigate(url);
           }}
           className={`rounded-bl-none border p-4 cursor-pointer rounded-xl flex items-center gap-1 ${
-            heading === 'Log Out' && 'text-red-700'
+            heading === 'Log Out' ? 'text-red-700' : ''
           }`}
         >
           <div className="icons text-2xl">{icon}</div>
