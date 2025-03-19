@@ -3,7 +3,7 @@ import { BsSafe2 } from 'react-icons/bs';
 import { BiTargetLock } from 'react-icons/bi';
 import { BsShieldLock } from 'react-icons/bs';
 
-import { formatCurrency } from '../utils/fun';
+import { formatCurrency, timeFromNow } from '../utils/fun';
 import { TransactionProps } from '../data/users';
 import { useAppSelector } from '../app/hooks';
 
@@ -15,7 +15,7 @@ const Transactions = ({ transactions }: TransactionsProps) => {
   const user = useAppSelector((state) => state.currentUserData.user);
   return (
     <>
-      {transactions.map(({ id, type, amount }) => (
+      {transactions.map(({ id, type, amount, date }) => (
         <div
           key={id}
           className="box rounded-bl-none border py-3 px-4 rounded-lg grid grid-cols-[70px_1fr] items-center"
@@ -59,7 +59,7 @@ const Transactions = ({ transactions }: TransactionsProps) => {
                 {user.showBalance ? formatCurrency(amount) : '****'}
               </p>
             </div>
-            <p className="text-gray-400 text-[12px]">6 days ago</p>
+            <p className="text-gray-400 text-[12px]">{timeFromNow(date)}</p>
           </div>
         </div>
       ))}

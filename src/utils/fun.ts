@@ -1,15 +1,20 @@
 import { UserProps } from '../data/users';
-import days from 'dayjs';
-import { nanoid } from 'nanoid';
-import { customAlphabet } from 'nanoid';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import { nanoid, customAlphabet } from 'nanoid';
 
-export const generateAccountNumber = () => {
+/**
+ * Generates a 10-digit account number based on current timestamp
+ */
+export const generateAccountNumber = (): string => {
   const date = Date.now();
-  const accountNumber = date.toString().slice(-10);
-  return accountNumber;
+  return date.toString().slice(-10);
 };
 
-export const getTheDayTime = () => {
+/**
+ * Returns a greeting message based on the time of day
+ */
+export const getTheDayTime = (): string => {
   const date = new Date();
   const hours = date.getHours();
 
@@ -22,11 +27,17 @@ export const getTheDayTime = () => {
   }
 };
 
-export const formatCurrency = (amount: number) => {
+/**
+ * Formats a number as a currency string
+ */
+export const formatCurrency = (amount: number): string => {
   return `${amount.toLocaleString()}`;
 };
 
-export const getTotalBalance = (user: UserProps) => {
+/**
+ * Calculates the total balance across all account types for a user
+ */
+export const getTotalBalance = (user: UserProps): number => {
   return user.accounts.reduce((acc, account) => {
     return (
       acc +
@@ -38,18 +49,17 @@ export const getTotalBalance = (user: UserProps) => {
   }, 0);
 };
 
-// export const getdays = () => {
-//   const now = days().format('DD/MM/YYYY');
-//   const id = nanoid();
-//   const customNumbers = customAlphabet('1234567890', 30);
-//   //
-//   console.log(typeof now);
-//   console.log(now);
-//   console.log(id);
-//   console.log(customNumbers());
-//   console.log(typeof customNumbers());
-// };
-
+/**
+ * Calculates relative time from a given date
+ */
+export const timeFromNow = (date: string): string => {
+  dayjs.extend(relativeTime);
+  return dayjs(date).fromNow();
+};
+console.log(timeFromNow('2025-03-19T11:15:51+01:00'));
+/**
+ * Generates a receipt object for a transaction
+ */
 export const generatedReceipt = (
   type: string,
   amount: number,
@@ -63,7 +73,7 @@ export const generatedReceipt = (
     type,
     amount,
     status,
-    date: days().format('DD/MM/YYYY'),
+    date: dayjs().format(),
     transaction_Number: transaction_Number(),
     sessionId: sessionId(),
   };
