@@ -10,6 +10,7 @@ const TransactionsHistory = ({
   setShowTransactionHistory: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const currentUser = getSessionStorage('user');
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
@@ -35,7 +36,7 @@ const TransactionsHistory = ({
         </p>
       </div>
 
-      <div className=" space-y-3 mt-3 overflow-x-hidden flex-1 overflow-auto pb-5">
+      <div className="space-y-3 mt-3 overflow-x-hidden flex-1 overflow-auto pb-5">
         <Transactions transactions={currentUser.transactions.reverse()} />
       </div>
     </section>

@@ -2,8 +2,8 @@ import { UserProps } from '../data/users';
 
 export const syncData = async (newState: UserProps) => {
   // const API_KEY = import.meta.env.VITE_SOME_KEY;
-
   const id = newState.id;
+
   try {
     const res = await fetch(`api/users/${id}`, {
       method: 'PUT',
@@ -14,7 +14,10 @@ export const syncData = async (newState: UserProps) => {
       body: JSON.stringify(newState),
     });
 
-    if (!res.ok) throw new Error(res.statusText);
+    if (!res.ok) {
+      throw new Error(res.statusText);
+    }
+
     return null;
   } catch (error: unknown) {
     if (error instanceof Error) {

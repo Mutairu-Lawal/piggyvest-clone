@@ -11,7 +11,7 @@ const ShowModal = ({ setToastModal, serverResponse }: ShowModalProps) => {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
 
-    //clean up
+    // Clean up
     return () => {
       document.body.style.overflow = 'auto';
     };
@@ -26,12 +26,12 @@ const ShowModal = ({ setToastModal, serverResponse }: ShowModalProps) => {
           </div>
         ) : (
           <div className="icon w-[100px] h-[100px] mb-4">
-            <img src={cancel} alt="checked or mark image" />
+            <img src={cancel} alt="error image" />
           </div>
         )}
 
         <p className="modal-message text-xl font-extrabold">
-          {!serverResponse ? 'Payment Successfull' : 'Error Occurred'}
+          {!serverResponse ? 'Payment Successful' : 'Error Occurred'}
         </p>
         <p className="modal-sub-message font-medium text-center">
           {!serverResponse ? 'Transaction Approved' : serverResponse}

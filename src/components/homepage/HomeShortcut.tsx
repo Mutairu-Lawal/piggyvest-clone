@@ -6,9 +6,7 @@ export const HomeShortcut = ({ setStateAction }: ToggleStateProps) => {
     <div className="flex justify-between items-center">
       <div
         className="icon font-extrabold text-2xl cursor-pointer"
-        onClick={() => {
-          window.location.reload();
-        }}
+        onClick={() => window.location.reload()}
       >
         <BsArrowRepeat strokeWidth={1} />
       </div>

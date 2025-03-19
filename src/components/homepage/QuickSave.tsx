@@ -22,7 +22,6 @@ type QuickSaveProps = {
 
 const QuickSave = ({
   setShowQuickSave,
-
   setToastModal,
   setServerResponse,
 }: QuickSaveProps) => {
@@ -37,7 +36,6 @@ const QuickSave = ({
   });
 
   const dipatch = useAppDispatch();
-
   type UserSchema = z.infer<typeof userSchema>;
 
   // react-hook-form
@@ -68,7 +66,7 @@ const QuickSave = ({
       // generate the receipt
       const receipt = generatedReceipt(accountName, amount, transactionStatus);
 
-      // upadte the user new state
+      // update the user new state
       const updatedState: UserProps =
         transactionStatus === 'successful'
           ? {
@@ -87,7 +85,7 @@ const QuickSave = ({
             };
 
       try {
-        // upadte on the server
+        // update on the server
         const response = await syncData(updatedState);
 
         if (response) throw new Error(response);
@@ -104,7 +102,7 @@ const QuickSave = ({
           setServerResponse(error.message);
         }
       } finally {
-        // the update the user state in the web storage
+        // update the user state in the web storage
         setSessionStorage('user', updatedState);
         dipatch(updateUserState(updatedState));
 
@@ -117,7 +115,7 @@ const QuickSave = ({
       }
     }, 2000);
 
-    // set loadinng to true
+    // set loading to true
     setIsLoading(true);
   };
 
@@ -161,7 +159,7 @@ const QuickSave = ({
             )}
           </div>
           <div className="form-group">
-            <label htmlFor="accoutType">Choose a Destination</label>
+            <label htmlFor="accountType">Choose a Destination</label>
             <select id="accountType" {...register('accountType')}>
               <option value="savings">
                 My PiggyBank - ₦{formatCurrency(user.accounts[0].savings)}
