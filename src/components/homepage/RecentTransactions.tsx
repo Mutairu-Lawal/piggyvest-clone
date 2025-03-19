@@ -1,8 +1,13 @@
-import { UserProps } from '../../data/users';
-import { getSessionStorage } from '../../utils/sessionStorage';
 import Transactions from '../Transactions';
 
-const RecentTransactions = () => {
+import { UserProps } from '../../data/users';
+import { getSessionStorage } from '../../utils/sessionStorage';
+
+const RecentTransactions = ({
+  setShowTransactionHistory,
+}: {
+  setShowTransactionHistory: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const user: UserProps = getSessionStorage('user');
   const recents = user.transactions.reverse().slice(0, 3);
 
@@ -20,7 +25,10 @@ const RecentTransactions = () => {
         <div className="space-y-2">
           <Transactions transactions={recents} />
           {recents.length === 3 && (
-            <p className="text-center uppercase text-primary my-4">
+            <p
+              className="text-center uppercase text-primary my-4 cursor-pointer"
+              onClick={() => setShowTransactionHistory(true)}
+            >
               view more activities
             </p>
           )}

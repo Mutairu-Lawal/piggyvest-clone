@@ -9,21 +9,23 @@ import BestClient from '../components/homepage/BestClient';
 import HomeShortcut from '../components/homepage/HomeShortcut';
 import AccountBalance from '../components/AccountBalance';
 import QuickSave from '../components/homepage/QuickSave';
+import ShowModal from '../components/homepage/ShowModal';
+import RecentTransactions from '../components/homepage/RecentTransactions';
+import TransactionsHistory from '../components/homepage/TransactionsHistory';
 
 import { getTheDayTime, getTotalBalance } from '../utils/fun';
 import { useAppSelector } from '../app/hooks';
-import ShowModal from '../components/homepage/ShowModal';
-import RecentTransactions from '../components/homepage/RecentTransactions';
 
 export default function HomePage() {
   const [showQuickSave, setShowQuickSave] = useState(false);
+  const [showTransactionHistory, setShowTransactionHistory] = useState(false);
   const [toastModal, setToastModal] = useState(false);
   const [serverResponse, setServerResponse] = useState<string | null>(null);
   const currentUser = useAppSelector((state) => state.currentUserData.user);
 
   return (
     <>
-      {!showQuickSave && (
+      {!showQuickSave && !showTransactionHistory && (
         <main>
           <Header
             title={`${currentUser.fullName.slice(
@@ -55,7 +57,9 @@ export default function HomePage() {
           <Navigations />
           <Stores />
           <BestClient />
-          <RecentTransactions />
+          <RecentTransactions
+            setShowTransactionHistory={setShowTransactionHistory}
+          />
         </main>
       )}
       {showQuickSave && currentUser && (
@@ -69,6 +73,11 @@ export default function HomePage() {
         <ShowModal
           setToastModal={setToastModal}
           serverResponse={serverResponse}
+        />
+      )}
+      {showTransactionHistory && (
+        <TransactionsHistory
+          setShowTransactionHistory={setShowTransactionHistory}
         />
       )}
     </>

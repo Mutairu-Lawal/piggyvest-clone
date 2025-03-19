@@ -122,7 +122,7 @@ const QuickSave = ({
   };
 
   return (
-    <section className="absolute z-10 w-full h-full border top-0 left-0 bg-white  p-4 flex flex-col">
+    <section className="absolute z-10 w-full h-full border top-0 left-0 bg-white p-4 flex flex-col">
       <div className="flex justify-end items-end mb-4">
         <div
           className="icon cursor-pointer text-4xl"

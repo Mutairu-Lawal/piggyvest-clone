@@ -25,7 +25,7 @@ const Transactions = ({ transactions }: TransactionsProps) => {
               type === 'flexNaira'
                 ? 'bg-pink-600 '
                 : type === 'target'
-                ? 'bg-[#87ceeb]'
+                ? 'bg-green-700'
                 : type === 'savings'
                 ? 'bg-primary'
                 : 'bg-[#f7dc6f]'
@@ -34,9 +34,9 @@ const Transactions = ({ transactions }: TransactionsProps) => {
             {type === 'flexNaira' ? (
               <IoWalletSharp />
             ) : type === 'target' ? (
-              <BsSafe2 />
-            ) : type === 'savings' ? (
               <BiTargetLock />
+            ) : type === 'savings' ? (
+              <BsSafe2 />
             ) : (
               <BsShieldLock />
             )}
