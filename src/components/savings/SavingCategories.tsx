@@ -19,6 +19,7 @@ const SavingCategories = ({ user }: { user: UserProps }) => {
       bgColor: '#CCF0FE',
       accentColor: '#0D60D6',
     },
+
     {
       id: '2',
       name: 'flex Naira',
@@ -29,6 +30,7 @@ const SavingCategories = ({ user }: { user: UserProps }) => {
       bgColor: '#FFEAF6',
       accentColor: '#DA4999',
     },
+
     {
       id: '3',
       name: 'safelock',
@@ -39,6 +41,7 @@ const SavingCategories = ({ user }: { user: UserProps }) => {
       bgColor: '#F0F8FF',
       accentColor: '#6495ED',
     },
+
     {
       id: '4',
       name: 'targets',
@@ -49,6 +52,7 @@ const SavingCategories = ({ user }: { user: UserProps }) => {
       bgColor: '#DCFFEB',
       accentColor: '#51B77D',
     },
+
     {
       id: '5',
       name: 'flex dollar',
@@ -59,6 +63,7 @@ const SavingCategories = ({ user }: { user: UserProps }) => {
       bgColor: '#EFF5F5',
       accentColor: '#000000',
     },
+
     {
       id: '6',
       name: 'PocketApp ®',
@@ -87,6 +92,7 @@ const SavingCategories = ({ user }: { user: UserProps }) => {
             <p className="text-gray-700 text-xs">{description}</p>
 
             {/* control the balance display */}
+
             {user.showBalance ? (
               <p className="font-bold text-sm">
                 {id != '5' && id != '6' && (

@@ -16,7 +16,7 @@ const GetStarted = ({ title, children, isHome = false }: GetStartedProps) => {
             isHome
               ? 'bg-primary text-white flex items-center justify-between py-3 px-7 rounded-xl'
               : 'h-[120px] bg-blue-800'
-          } `}
+          }`}
         >
           {children}
         </div>
