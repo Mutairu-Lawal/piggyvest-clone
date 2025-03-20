@@ -82,7 +82,7 @@ const Transactions = ({ transactions }: TransactionsProps) => {
           </div>
           <div className="content text-sm w-full">
             <div className="flex justify-between">
-              <p>{getTypeDescription(type, status)}</p>
+              <p className="pe-2">{getTypeDescription(type, status)}</p>
               <p>
                 {user.showBalance && (
                   <span
