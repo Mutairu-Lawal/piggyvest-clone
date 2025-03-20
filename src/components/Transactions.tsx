@@ -39,25 +39,39 @@ const Transactions = ({ transactions }: TransactionsProps) => {
     }
   };
 
-  const getTypeDescription = (type: string) => {
+  const getFailedTypeMessage = (type: string) => {
     switch (type) {
       case 'flexNaira':
-        return 'Flex account credited.';
-      case 'target':
-        return 'Credited to Target.';
+        return 'Flex account';
       case 'savings':
-        return 'Core savings credited.';
+        return 'Core savings';
+      case 'target':
+        return 'Target';
       default:
-        return 'Safe lock credited.';
+        return 'Safe lock';
+    }
+  };
+
+  const getTypeDescription = (type: string, status: string) => {
+    if (type === 'flexNaira' && status === 'successful') {
+      return 'Flex account credited.';
+    } else if (type === 'savings' && status === 'successful') {
+      return 'Core savings credited.';
+    } else if (type === 'target' && status === 'successful') {
+      return 'Credited to Target';
+    } else if (type === 'safeLock' && status === 'successful') {
+      return 'Safe lock credited.';
+    } else {
+      return `${getFailedTypeMessage(type)} payment failed`;
     }
   };
 
   return (
     <>
-      {transactions.map(({ id, type, amount, date }) => (
+      {transactions.map(({ id, type, amount, date, status }) => (
         <div
           key={id}
-          className="box rounded-bl-none border py-3 px-4 rounded-lg grid grid-cols-[70px_1fr] items-center"
+          className="box rounded-bl-none border py-3 px-4 rounded-lg grid grid-cols-[60px_1fr] items-center"
         >
           <div
             className={`w-[50px] h-[50px] rounded-[100%] text-white text-lg overflow-hidden flex justify-center items-center ${getTypeColor(
@@ -68,13 +82,25 @@ const Transactions = ({ transactions }: TransactionsProps) => {
           </div>
           <div className="content text-sm w-full">
             <div className="flex justify-between">
-              <p>{getTypeDescription(type)}</p>
+              <p>{getTypeDescription(type, status)}</p>
               <p>
                 {user.showBalance && (
-                  <span className="font-sans font-medium mr-1">₦</span>
+                  <span
+                    className={`font-sans font-medium mr-1 ${
+                      status === 'failed' ? 'text-red-600' : ''
+                    }`}
+                  >
+                    ₦
+                  </span>
                 )}
 
-                {user.showBalance && <span>{formatCurrency(amount)}</span>}
+                {user.showBalance && (
+                  <span
+                    className={`${status === 'failed' ? 'text-red-600' : ''}`}
+                  >
+                    {formatCurrency(amount)}
+                  </span>
+                )}
                 {!user.showBalance && '****'}
               </p>
             </div>

@@ -14,13 +14,95 @@
       "authPin": 1234,
       "accounts": [
         {
-          "savings": 10000,
-          "flexNaira": 10000,
-          "safeLock": 20000,
-          "target": 10000
+          "savings": 50000,
+          "flexNaira": 20000,
+          "safeLock": 40000,
+          "target": 12000
         }
       ],
-      "transactions": []
+      "transactions": [
+        {
+          "id": "GcFaAVaLER6lCyiGVmaGM",
+          "type": "savings",
+          "amount": 10000,
+          "status": "successful",
+          "date": "2025-03-20T18:49:27+01:00",
+          "transaction_Number": "127683290147660455958283654312",
+          "sessionId": "115019904003164989810259"
+        },
+        {
+          "id": "2Xw6LrrumwVbZSQgFmomj",
+          "type": "flexNaira",
+          "amount": 10000,
+          "status": "successful",
+          "date": "2025-03-20T18:50:19+01:00",
+          "transaction_Number": "797201093421093570912894370865",
+          "sessionId": "666226591274744641711166"
+        },
+        {
+          "id": "FsYJIcAAtY6B8QMv16hTv",
+          "type": "safeLock",
+          "amount": 20000,
+          "status": "successful",
+          "date": "2025-03-20T18:50:33+01:00",
+          "transaction_Number": "162660152725765868126945213195",
+          "sessionId": "788519693789866930422136"
+        },
+        {
+          "id": "PB6VF969S4kzzjuS7SzM8",
+          "type": "target",
+          "amount": 2000,
+          "status": "successful",
+          "date": "2025-03-20T18:51:16+01:00",
+          "transaction_Number": "773359673293802124058507016925",
+          "sessionId": "906405977459449335244362"
+        },
+        {
+          "id": "aR4D_HCNT6Iy6EwfMjDGa",
+          "type": "savings",
+          "amount": 30000,
+          "status": "successful",
+          "date": "2025-03-20T18:52:05+01:00",
+          "transaction_Number": "634252298950020400976651564377",
+          "sessionId": "710209311438743673863409"
+        },
+        {
+          "id": "bB7BSUhw-UCcQ7KP8TlhB",
+          "type": "savings",
+          "amount": 4000000,
+          "status": "failed",
+          "date": "2025-03-20T18:52:16+01:00",
+          "transaction_Number": "681974601323027599534972420246",
+          "sessionId": "044148561582672582413289"
+        },
+        {
+          "id": "ufM966gSw89WuWauzKcY0",
+          "type": "flexNaira",
+          "amount": 300000,
+          "status": "failed",
+          "date": "2025-03-20T18:52:32+01:00",
+          "transaction_Number": "500080684763713789417182615895",
+          "sessionId": "568495003261640728889428"
+        },
+        {
+          "id": "oZ1UjG-i2ay2ggUOSrpLS",
+          "type": "safeLock",
+          "amount": 400000,
+          "status": "failed",
+          "date": "2025-03-20T18:52:47+01:00",
+          "transaction_Number": "040972448857550520788894666239",
+          "sessionId": "988982527927276054194807"
+        },
+        {
+          "id": "28ScnQoffYgnM8CEjWvbn",
+          "type": "target",
+          "amount": 600000,
+          "status": "failed",
+          "date": "2025-03-20T18:53:02+01:00",
+          "transaction_Number": "021956782314757383805100181825",
+          "sessionId": "153920666095677184121854"
+        }
+      ]
     },
     {
       "accountNumber": "5005634616",
