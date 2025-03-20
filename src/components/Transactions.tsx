@@ -3,7 +3,7 @@ import { BsSafe2, BsShieldLock } from 'react-icons/bs';
 import { BiTargetLock } from 'react-icons/bi';
 
 import { formatCurrency, timeFromNow } from '../utils/fun';
-import { TransactionProps } from '../data/users';
+import { TransactionProps, UserProps } from '../data/users';
 import { useAppSelector } from '../app/hooks';
 
 type TransactionsProps = {
@@ -11,7 +11,7 @@ type TransactionsProps = {
 };
 
 const Transactions = ({ transactions }: TransactionsProps) => {
-  const user = useAppSelector((state) => state.currentUserData.user);
+  const user: UserProps = useAppSelector((state) => state.currentUserData.user);
 
   const getTypeIcon = (type: string) => {
     switch (type) {
@@ -73,7 +73,9 @@ const Transactions = ({ transactions }: TransactionsProps) => {
                 {user.showBalance && (
                   <span className="font-sans font-medium mr-1">₦</span>
                 )}
-                {user.showBalance ? formatCurrency(amount) : '****'}
+
+                {user.showBalance && <span>{formatCurrency(amount)}</span>}
+                {!user.showBalance && '****'}
               </p>
             </div>
             <p className="text-gray-400 text-[12px]">{timeFromNow(date)}</p>
