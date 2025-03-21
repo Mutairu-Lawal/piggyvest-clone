@@ -1,7 +1,9 @@
 import { BsArrowRepeat } from 'react-icons/bs';
-import { ToggleStateProps } from '../../types/types';
+import { useAppDispatch } from '../../app/hooks';
+import { toggleQuickSaveState } from '../../app/features/QuickSaveSlice';
 
-export const HomeShortcut = ({ setStateAction }: ToggleStateProps) => {
+export const HomeShortcut = () => {
+  const dispatch = useAppDispatch();
   return (
     <div className="flex justify-between items-center">
       <div
@@ -12,7 +14,7 @@ export const HomeShortcut = ({ setStateAction }: ToggleStateProps) => {
       </div>
       <div
         className="uppercase text-center text-sm bg-primary text-white py-3 px-6 rounded-bl-none rounded-lg font-bold cursor-pointer"
-        onClick={() => setStateAction((prevState) => !prevState)}
+        onClick={() => dispatch(toggleQuickSaveState())}
       >
         + quick save
       </div>

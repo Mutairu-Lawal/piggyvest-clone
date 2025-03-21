@@ -14,21 +14,18 @@ import { formatCurrency, generatedReceipt } from '../../utils/fun';
 import { syncData } from '../../api/apiRequest';
 import { useAppDispatch } from '../../app/hooks';
 import { updateUserState } from '../../app/features/currentUserData';
+import { toggleQuickSaveState } from '../../app/features/QuickSaveSlice';
 
 type QuickSaveProps = {
-  setShowQuickSave: React.Dispatch<React.SetStateAction<boolean>>;
   setToastModal: React.Dispatch<React.SetStateAction<boolean>>;
   setServerResponse: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const QuickSave = ({
-  setShowQuickSave,
-  setToastModal,
-  setServerResponse,
-}: QuickSaveProps) => {
+const QuickSave = ({ setToastModal, setServerResponse }: QuickSaveProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const accoutTypes = ['savings', 'flexNaira', 'safeLock', 'target'] as const;
   const user = getSessionStorage('user');
+  const dipatch = useAppDispatch();
 
   // schema for form validation
   const userSchema = z.object({
@@ -36,7 +33,6 @@ const QuickSave = ({
     accountType: z.enum(accoutTypes).optional(),
   });
 
-  const dipatch = useAppDispatch();
   type UserSchema = z.infer<typeof userSchema>;
 
   // react-hook-form
@@ -106,10 +102,10 @@ const QuickSave = ({
         // update the user state in the web storage
         setSessionStorage('user', updatedState);
         dipatch(updateUserState(updatedState));
+        dipatch(toggleQuickSaveState());
 
         // set state to false
         setIsLoading(false);
-        setShowQuickSave(false);
 
         // show the modal
         setToastModal(true);
@@ -125,9 +121,7 @@ const QuickSave = ({
       <div className="flex justify-end items-end mb-4">
         <div
           className="icon cursor-pointer text-4xl"
-          onClick={() => {
-            setShowQuickSave(false);
-          }}
+          onClick={() => dipatch(toggleQuickSaveState())}
         >
           <IoClose />
         </div>

@@ -15,13 +15,18 @@ import TransactionsHistory from '../components/homepage/TransactionsHistory';
 
 import { getTheDayTime, getTotalBalance } from '../utils/fun';
 import { useAppSelector } from '../app/hooks';
+import { UserProps } from '../data/users';
 
 export default function HomePage() {
-  const [showQuickSave, setShowQuickSave] = useState(false);
+  const showQuickSave = useAppSelector(
+    (state) => state.quickSave.showQuickSave
+  );
   const [showTransactionHistory, setShowTransactionHistory] = useState(false);
   const [toastModal, setToastModal] = useState(false);
   const [serverResponse, setServerResponse] = useState<string | null>(null);
-  const currentUser = useAppSelector((state) => state.currentUserData.user);
+  const currentUser: UserProps = useAppSelector(
+    (state) => state.currentUserData.user
+  );
 
   return (
     <>
@@ -34,7 +39,7 @@ export default function HomePage() {
             )},`}
             subtitle={getTheDayTime()}
           />
-          <HomeShortcut setStateAction={setShowQuickSave} />
+          <HomeShortcut />
           {currentUser && (
             <AccountBalance
               title="Total Savings"
@@ -53,7 +58,12 @@ export default function HomePage() {
               />
             </div>
           </GetStarted>
-          <Todos />
+
+          {/* render todos only when its availabe */}
+          {currentUser.transactions.length === 0 || !currentUser.userName ? (
+            <Todos />
+          ) : null}
+
           <Navigations />
           <Stores />
           <BestClient />
@@ -64,7 +74,6 @@ export default function HomePage() {
       )}
       {showQuickSave && currentUser && (
         <QuickSave
-          setShowQuickSave={setShowQuickSave}
           setToastModal={setToastModal}
           setServerResponse={setServerResponse}
         />

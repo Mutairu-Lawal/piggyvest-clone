@@ -56,7 +56,6 @@ export const timeFromNow = (date: string): string => {
   dayjs.extend(relativeTime);
   return dayjs(date).fromNow();
 };
-console.log(timeFromNow('2025-03-19T11:15:51+01:00'));
 /**
  * Generates a receipt object for a transaction
  */
