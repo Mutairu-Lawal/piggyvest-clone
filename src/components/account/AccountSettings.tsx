@@ -71,8 +71,9 @@ const AccountSettings = () => {
           onClick={() => {
             if (heading === 'Log Out') {
               removeSessionStorage('user');
+              return navigate(url);
             }
-            navigate(url);
+            alert('Sorry!.. Only Log-out option is available 😉');
           }}
           className={`rounded-bl-none border p-4 cursor-pointer rounded-xl flex items-center gap-1 ${
             heading === 'Log Out' ? 'text-red-700' : ''

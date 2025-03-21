@@ -98,7 +98,6 @@ export default function SignUpPage() {
   });
 
   const onSubmit = (data: UserSchema) => {
-    // const API_URL = 'http://localhost:3000/users';
     // const API_KEY = import.meta.env.VITE_SOME_KEY;
 
     // create new user object
@@ -108,7 +107,8 @@ export default function SignUpPage() {
       userName: '',
       piggyPoints: 0,
       transactions: [],
-      authPin: undefined,
+      authPin: '',
+      firstTransaction: false,
       referrerPoints: 0,
       showBalance: false,
       accounts: [
@@ -121,8 +121,6 @@ export default function SignUpPage() {
       ],
       ...data,
     };
-
-    // console.log(newClient);
 
     const getAndPostData = async () => {
       try {
@@ -166,8 +164,8 @@ export default function SignUpPage() {
         setSessionStorage('user', newClient);
         dispatch(updateUserState(newClient));
 
-        // navigate to homepage
-        navigate('/');
+        // navigate to login Page
+        navigate('/login');
       } catch (err: unknown) {
         if (err instanceof Error) {
           if (err.message === 'Email already exists') {
@@ -297,6 +295,7 @@ export default function SignUpPage() {
                 </option>
               ))}
             </select>
+            <div className="dropdown"></div>
           </div>
 
           <button
