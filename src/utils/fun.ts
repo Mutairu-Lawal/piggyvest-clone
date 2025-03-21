@@ -31,7 +31,11 @@ export const getTheDayTime = (): string => {
  * Formats a number as a currency string
  */
 export const formatCurrency = (amount: number): string => {
-  return `${amount.toLocaleString()}`;
+  return `${amount.toLocaleString('en-NG', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+    currency: 'NGN',
+  })}`;
 };
 
 /**

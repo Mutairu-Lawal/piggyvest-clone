@@ -17,7 +17,7 @@ const RecentTransactions = ({
       </p>
 
       {user.transactions.length === 0 ? (
-        <p className="text-center">No Transaction</p>
+        <p className="text-center">You don't have any transactions yet.</p>
       ) : (
         <div className="space-y-2">
           <Transactions transactions={recents} />

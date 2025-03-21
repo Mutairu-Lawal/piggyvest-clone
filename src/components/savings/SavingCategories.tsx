@@ -58,7 +58,7 @@ const SavingCategories = ({ user }: { user: UserProps }) => {
       name: 'flex dollar',
       description:
         'Save & grow your wealth in dollars. up to 7% p.a in dollars',
-      balance: 200,
+      balance: 0,
       icon: <BsCurrencyDollar />,
       bgColor: '#EFF5F5',
       accentColor: '#000000',

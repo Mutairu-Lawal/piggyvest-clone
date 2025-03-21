@@ -64,7 +64,7 @@ export default function HomePage() {
             <Todos />
           ) : null}
 
-          <Navigations />
+          <Navigations setShowTransactionHistory={setShowTransactionHistory} />
           <Stores />
           <BestClient />
           <RecentTransactions

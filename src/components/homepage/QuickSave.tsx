@@ -99,6 +99,7 @@ const QuickSave = ({ setToastModal, setServerResponse }: QuickSaveProps) => {
           setServerResponse(error.message);
         }
       } finally {
+        setToastModal(true);
         // update the user state in the web storage
         setSessionStorage('user', updatedState);
         dipatch(updateUserState(updatedState));
@@ -108,7 +109,6 @@ const QuickSave = ({ setToastModal, setServerResponse }: QuickSaveProps) => {
         setIsLoading(false);
 
         // show the modal
-        setToastModal(true);
       }
     }, 2000);
 

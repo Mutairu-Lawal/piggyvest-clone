@@ -2,10 +2,17 @@ import { AiOutlineLike } from 'react-icons/ai';
 import { FiAtSign } from 'react-icons/fi';
 import { IoIosHeart } from 'react-icons/io';
 
-const Navigations = () => {
+const Navigations = ({
+  setShowTransactionHistory,
+}: {
+  setShowTransactionHistory: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   return (
     <div className="mt-6 space-y-3">
-      <div className="box rounded-bl-none border py-3 px-4 rounded-lg border-blue-500 flex items-center gap-2 text-blue-500">
+      <div
+        className="box rounded-bl-none border py-3 px-4 rounded-lg border-blue-500 flex items-center gap-2 text-blue-500 cursor-pointer"
+        onClick={() => setShowTransactionHistory(true)}
+      >
         <div className="icon">
           <AiOutlineLike size={40} />
         </div>
@@ -16,7 +23,7 @@ const Navigations = () => {
           </p>
         </div>
       </div>
-      <div className="box rounded-bl-none border py-3 px-4 rounded-lg border-purple-700 flex items-center gap-2 text-purple-700">
+      <div className="box rounded-bl-none border py-3 px-4 rounded-lg border-purple-700 flex items-center gap-2 text-purple-700 cursor-pointer">
         <div className="icon">
           <FiAtSign size={40} />
         </div>

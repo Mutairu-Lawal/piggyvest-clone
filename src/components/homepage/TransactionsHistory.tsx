@@ -3,13 +3,14 @@ import { IoClose } from 'react-icons/io5';
 
 import Transactions from '../Transactions';
 import { getSessionStorage } from '../../utils/sessionStorage';
+import { UserProps } from '../../data/users';
 
 const TransactionsHistory = ({
   setShowTransactionHistory,
 }: {
   setShowTransactionHistory: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const currentUser = getSessionStorage('user');
+  const currentUser: UserProps = getSessionStorage('user');
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -35,6 +36,12 @@ const TransactionsHistory = ({
           This shows the most recent activities across your piggyvest account
         </p>
       </div>
+
+      {currentUser.transactions.length === 0 && (
+        <p className="mt-5 text-center font-bold">
+          No recent transactions found.
+        </p>
+      )}
 
       <div className="space-y-3 mt-3 overflow-x-hidden flex-1 overflow-auto pb-5">
         <Transactions transactions={currentUser.transactions.reverse()} />
