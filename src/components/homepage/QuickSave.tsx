@@ -3,6 +3,7 @@ import { IoClose } from 'react-icons/io5';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { IoMdArrowDropdown } from 'react-icons/io';
 
 import { UserProps } from '../../data/users';
 import {
@@ -174,6 +175,9 @@ const QuickSave = ({
                 My Target - ₦{formatCurrency(user.accounts[0].target)}
               </option>
             </select>
+            <div className="absolute top-[50%] right-[3%] translate-x-[5%] translate-y-[-10%]">
+              <IoMdArrowDropdown />
+            </div>
           </div>
         </div>
         {/* form submit button */}

@@ -36,6 +36,7 @@ nav a.active > p {
 
 .form-group {
   @apply space-y-2;
+  position: relative;
 }
 
 .form-group label {

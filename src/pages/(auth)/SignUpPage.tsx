@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import { Bounce, toast, ToastContainer } from 'react-toastify';
+import { IoMdArrowDropdown } from 'react-icons/io';
 
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
@@ -295,7 +296,9 @@ export default function SignUpPage() {
                 </option>
               ))}
             </select>
-            <div className="dropdown"></div>
+            <div className="absolute top-[50%] right-[3%] translate-x-[5%] translate-y-[-10%]">
+              <IoMdArrowDropdown />
+            </div>
           </div>
 
           <button
