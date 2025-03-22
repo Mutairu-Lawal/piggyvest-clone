@@ -102,14 +102,14 @@ export default function SignUpPage() {
     // const API_KEY = import.meta.env.VITE_SOME_KEY;
 
     // create new user object
-    const newClient = {
+    const newClient: UserProps = {
       id: uuidv4(),
       accountNumber: generateAccountNumber(),
       userName: '',
       piggyPoints: 0,
+      userHasSeenConditions: false,
       transactions: [],
       authPin: '',
-      firstTransaction: false,
       referrerPoints: 0,
       showBalance: false,
       accounts: [

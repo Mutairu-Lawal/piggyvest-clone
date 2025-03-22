@@ -16,6 +16,7 @@ import TransactionsHistory from '../components/homepage/TransactionsHistory';
 import { getTheDayTime, getTotalBalance } from '../utils/fun';
 import { useAppSelector } from '../app/hooks';
 import { UserProps } from '../data/users';
+import ConditionsOfUse from '../components/homepage/ConditionsOfUse';
 
 export default function HomePage() {
   const showQuickSave = useAppSelector(
@@ -72,18 +73,27 @@ export default function HomePage() {
           />
         </main>
       )}
+
+      {/* render quick save modal */}
       {showQuickSave && currentUser && (
         <QuickSave
           setToastModal={setToastModal}
           setServerResponse={setServerResponse}
         />
       )}
+
+      {/* render toast modal */}
       {toastModal && (
         <ShowModal
           setToastModal={setToastModal}
           serverResponse={serverResponse}
         />
       )}
+
+      {/* render conditions of use modal */}
+      {!currentUser.userHasSeenConditions && <ConditionsOfUse />}
+
+      {/* render transaction history modal */}
       {showTransactionHistory && (
         <TransactionsHistory
           setShowTransactionHistory={setShowTransactionHistory}
