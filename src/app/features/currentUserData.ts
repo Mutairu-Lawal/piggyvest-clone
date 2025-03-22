@@ -26,7 +26,7 @@ const fetchUserDb = async () => {
     return data;
   } catch (err: unknown) {
     if (err instanceof Error) {
-      console.log(err.message);
+      // console.log(err.message);
     }
     return undefined;
   }
