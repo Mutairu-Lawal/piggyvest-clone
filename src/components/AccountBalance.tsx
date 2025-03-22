@@ -19,9 +19,9 @@ const AccountBalance = ({
   return (
     <div className="py-2">
       <div
-        className={`rounded-xl rounded-bl-none p-6 flex items-center gap-3 ${
+        className={`rounded-xl rounded-bl-none py-6 px-4 flex items-center gap-3 ${
           isHome ? 'bg-primary text-white' : 'border'
-        }  `}
+        }`}
       >
         {isHome && (
           <div className="icon">

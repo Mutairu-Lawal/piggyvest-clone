@@ -17,7 +17,7 @@
           "savings": 50000,
           "flexNaira": 100000,
           "safeLock": 40000,
-          "target": 12000
+          "target": 20000
         }
       ],
       "transactions": [
@@ -110,6 +110,24 @@
           "date": "2025-03-22T08:27:04+01:00",
           "transaction_Number": "773053557140188828014123465689",
           "sessionId": "645963923611654032463688"
+        },
+        {
+          "id": "XUBA4l0aTea-KHTWYoeFK",
+          "type": "target",
+          "amount": 8000,
+          "status": "successful",
+          "date": "2025-03-22T08:44:59+01:00",
+          "transaction_Number": "649574395753472120131566859398",
+          "sessionId": "872885268126660142269647"
+        },
+        {
+          "id": "YgZTX2c1puiwB5F0BirsT",
+          "type": "savings",
+          "amount": 200000,
+          "status": "failed",
+          "date": "2025-03-22T08:45:37+01:00",
+          "transaction_Number": "632956586491087255223335389278",
+          "sessionId": "214742862387172084307361"
         }
       ]
     },
@@ -133,6 +151,112 @@
           "target": 7000
         }
       ]
+    },
+    {
+      "id": "9ae1cfda-cd51-4878-88af-d895e02e5e3a",
+      "accountNumber": "2630069947",
+      "userName": "",
+      "piggyPoints": 0,
+      "transactions": [
+        {
+          "id": "26s_D1dLLot5buaShSESX",
+          "type": "safeLock",
+          "amount": 20000,
+          "status": "successful",
+          "date": "2025-03-22T08:58:10+01:00",
+          "transaction_Number": "587420277003026319478749467258",
+          "sessionId": "525498555405398609297562"
+        },
+        {
+          "id": "guB5mM7oGUK2v9wPBf--u",
+          "type": "savings",
+          "amount": 10000,
+          "status": "successful",
+          "date": "2025-03-22T08:59:05+01:00",
+          "transaction_Number": "409842697088885619406918714253",
+          "sessionId": "428323918108725506111605"
+        },
+        {
+          "id": "RYpV9h1SCd67F6J-Tu9Pv",
+          "type": "flexNaira",
+          "amount": 80000,
+          "status": "successful",
+          "date": "2025-03-22T08:59:20+01:00",
+          "transaction_Number": "036844112195223065849240033389",
+          "sessionId": "537288806364606800625602"
+        },
+        {
+          "id": "u-AwD9AsHc4XQxZkyeYeR",
+          "type": "target",
+          "amount": 1000000,
+          "status": "failed",
+          "date": "2025-03-22T08:59:34+01:00",
+          "transaction_Number": "215349080695239881405395549950",
+          "sessionId": "014856088000152289345152"
+        },
+        {
+          "id": "egeuGsXBQTYtn3HwKQBVj",
+          "type": "target",
+          "amount": 10000,
+          "status": "successful",
+          "date": "2025-03-22T09:01:16+01:00",
+          "transaction_Number": "762381210895666603850265805647",
+          "sessionId": "775640193688001956946973"
+        }
+      ],
+      "authPin": "",
+      "firstTransaction": false,
+      "referrerPoints": 0,
+      "showBalance": true,
+      "accounts": [
+        {
+          "savings": 10000,
+          "flexNaira": 80000,
+          "safeLock": 20000,
+          "target": 10000
+        }
+      ],
+      "fullName": "lawal olatunji",
+      "email": "thebillionnairadream@gmail.com",
+      "phoneNumber": "08033981075",
+      "password": "qwerty12345",
+      "referrerCode": "",
+      "referrerName": "Google Playstore"
+    },
+    {
+      "id": "948b4a24-e3fd-4fba-9be4-6d963e71bb9e",
+      "accountNumber": "2630726425",
+      "userName": "",
+      "piggyPoints": 0,
+      "transactions": [
+        {
+          "id": "1DgGLaIxLlcY-IRHYU_Gr",
+          "type": "safeLock",
+          "amount": 10000,
+          "status": "successful",
+          "date": "2025-03-22T09:12:23+01:00",
+          "transaction_Number": "699090434904223040524544207522",
+          "sessionId": "279163490740388203632585"
+        }
+      ],
+      "authPin": "",
+      "firstTransaction": false,
+      "referrerPoints": 0,
+      "showBalance": false,
+      "accounts": [
+        {
+          "savings": 0,
+          "flexNaira": 0,
+          "safeLock": 10000,
+          "target": 0
+        }
+      ],
+      "fullName": "usman abdulazeez",
+      "email": "jazenilyoung@gmail.com",
+      "phoneNumber": "08124693072",
+      "password": "Nilly@piggy1",
+      "referrerCode": "",
+      "referrerName": ""
     }
   ]
 }

@@ -22,13 +22,13 @@ const FooterLink = () => {
       id: 1,
       href: '/login',
       linkName: 'login',
-      label: `Don't have an account? login`,
+      label: `Already have an account? Login`,
     },
     {
       id: 2,
       href: '#',
       label: `privacy policy`,
-      linkName: 'privacys',
+      linkName: 'privacy',
     },
   ];
 
