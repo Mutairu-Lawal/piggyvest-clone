@@ -26,7 +26,7 @@ const Transactions = ({ transactions }: TransactionsProps) => {
     }
   };
 
-  const getTypeColor = (type: string) => {
+  const getIconBgColor = (type: string) => {
     switch (type) {
       case 'flexNaira':
         return 'bg-pink-600';
@@ -62,7 +62,16 @@ const Transactions = ({ transactions }: TransactionsProps) => {
     } else if (type === 'safeLock' && status === 'successful') {
       return 'Safe lock credited.';
     } else {
-      return `${getFailedTypeMessage(type)} payment failed`;
+      return `${getFailedTypeMessage(type)} payment failed.`;
+    }
+  };
+
+  const getStatusTextColor = (status: string) => {
+    switch (status) {
+      case 'failed':
+        return 'text-red-600';
+      default:
+        return '';
     }
   };
 
@@ -74,7 +83,7 @@ const Transactions = ({ transactions }: TransactionsProps) => {
           className="box rounded-bl-none border py-3 px-4 rounded-lg grid grid-cols-[60px_1fr] items-center"
         >
           <div
-            className={`w-[50px] h-[50px] rounded-[100%] text-white text-lg overflow-hidden flex justify-center items-center ${getTypeColor(
+            className={`w-[50px] h-[50px] rounded-[100%] text-white text-lg overflow-hidden flex justify-center items-center ${getIconBgColor(
               type
             )}`}
           >
@@ -86,18 +95,16 @@ const Transactions = ({ transactions }: TransactionsProps) => {
               <p>
                 {user.showBalance && (
                   <span
-                    className={`font-sans font-medium mr-1 ${
-                      status === 'failed' ? 'text-red-600' : ''
-                    }`}
+                    className={`font-sans font-medium mr-1 ${getStatusTextColor(
+                      status
+                    )}`}
                   >
                     ₦
                   </span>
                 )}
 
                 {user.showBalance && (
-                  <span
-                    className={`${status === 'failed' ? 'text-red-600' : ''}`}
-                  >
+                  <span className={getStatusTextColor(status)}>
                     {formatCurrency(amount)}
                   </span>
                 )}

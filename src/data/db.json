@@ -15,7 +15,7 @@
       "accounts": [
         {
           "savings": 50000,
-          "flexNaira": 20000,
+          "flexNaira": 100000,
           "safeLock": 40000,
           "target": 12000
         }
@@ -101,6 +101,15 @@
           "date": "2025-03-20T18:53:02+01:00",
           "transaction_Number": "021956782314757383805100181825",
           "sessionId": "153920666095677184121854"
+        },
+        {
+          "id": "oTiu-dkyFqk6z1cOc4Hp6",
+          "type": "flexNaira",
+          "amount": 80000,
+          "status": "successful",
+          "date": "2025-03-22T08:27:04+01:00",
+          "transaction_Number": "773053557140188828014123465689",
+          "sessionId": "645963923611654032463688"
         }
       ]
     },
