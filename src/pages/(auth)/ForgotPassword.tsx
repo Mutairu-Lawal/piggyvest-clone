@@ -44,7 +44,11 @@ export default function ForgotPassword() {
 
         const data: UserProps[] = await res.json();
 
-        const user = data.find((user) => user.email === userEmail.email);
+        const user = data.find(
+          (user) =>
+            user.email.toLocaleLowerCase() ===
+            userEmail.email.toLocaleLowerCase()
+        );
 
         if (!user) throw new Error('No user found on data');
 
