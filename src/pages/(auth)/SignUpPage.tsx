@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -53,7 +53,6 @@ export default function SignUpPage() {
   const [postError, setPostError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
 
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const referrerNames = [
     '',
@@ -165,8 +164,20 @@ export default function SignUpPage() {
         setSessionStorage('user', newClient);
         dispatch(updateUserState(newClient));
 
-        // navigate to login Page
-        navigate('/login');
+        toast.success(
+          'Account created successfully! You can now log in to access our services',
+          {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+            transition: Bounce,
+          }
+        );
       } catch (err: unknown) {
         if (err instanceof Error) {
           if (err.message === 'Email already exists') {
