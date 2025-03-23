@@ -38,7 +38,7 @@ const FooterLink = () => {
         id={`${id}`}
         to={href}
         className="hover:text-gray-300 md:text-sm text-xs font-medium"
-        aria-label={`click to vist ${linkName} page`}
+        aria-label={`click to visit ${linkName} page`}
       >
         <p className="mt-7">{label}</p>
       </Link>
@@ -143,11 +143,11 @@ export default function SignUpPage() {
         const data = await response.json();
         emails = data.map((user: UserProps) => user.email);
 
-        // checking of the new client email exist
+        // checking if the new client email exists
         if (emails.includes(newClient.email))
           throw new Error('Email already exists');
 
-        //  posting new user to database
+        // posting new user to database
         const res = await fetch('/api/users', {
           method: 'POST',
           headers: {
@@ -250,7 +250,7 @@ export default function SignUpPage() {
             {emailError && <p className="text-red-500">{emailError}</p>}
           </div>
 
-          {/* phone  number */}
+          {/* phone number */}
           <div className="form-group">
             <label htmlFor="phoneNumber">Phone Number</label>
             <input
