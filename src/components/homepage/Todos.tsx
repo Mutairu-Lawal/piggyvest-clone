@@ -1,4 +1,5 @@
 import { toggleQuickSaveState } from '../../app/features/QuickSaveSlice';
+import { toggleUserNameModal } from '../../app/features/UserNameSlice';
 import { useAppDispatch } from '../../app/hooks';
 import { UserProps } from '../../data/users';
 import { getSessionStorage } from '../../utils/sessionStorage';
@@ -14,9 +15,11 @@ const Todo = ({ type }: { type: string }) => {
   const handleClick = () => {
     if (type === Types.FIRST_TRANSACTION) {
       return dispatch(toggleQuickSaveState());
+    } else {
+      return dispatch(toggleUserNameModal());
     }
-    alert(Types.USERNAME);
   };
+
   return (
     <div
       onClick={handleClick}
@@ -30,6 +33,7 @@ const Todo = ({ type }: { type: string }) => {
 
 const Todos = () => {
   const user: UserProps = getSessionStorage('user');
+
   return (
     <div className="space-y-2 my-3 mt-4">
       <p className="text-sm uppercase">to-do list</p>

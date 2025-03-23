@@ -23,14 +23,14 @@ type QuickSaveProps = {
 
 const QuickSave = ({ setToastModal, setServerResponse }: QuickSaveProps) => {
   const [isLoading, setIsLoading] = useState(false);
-  const accoutTypes = ['savings', 'flexNaira', 'safeLock', 'target'] as const;
+  const accountTypes = ['savings', 'flexNaira', 'safeLock', 'target'] as const;
   const user = getSessionStorage('user');
-  const dipatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   // schema for form validation
   const userSchema = z.object({
     amount: z.number({ message: '' }).positive(),
-    accountType: z.enum(accoutTypes).optional(),
+    accountType: z.enum(accountTypes).optional(),
   });
 
   type UserSchema = z.infer<typeof userSchema>;
@@ -92,7 +92,7 @@ const QuickSave = ({ setToastModal, setServerResponse }: QuickSaveProps) => {
             'Transaction failed! maximum of ₦100,000 per transaction.'
           );
         } else {
-          setServerResponse(null);
+          setServerResponse('approved');
         }
       } catch (error: unknown) {
         if (error instanceof Error) {
@@ -102,13 +102,11 @@ const QuickSave = ({ setToastModal, setServerResponse }: QuickSaveProps) => {
         setToastModal(true);
         // update the user state in the web storage
         setSessionStorage('user', updatedState);
-        dipatch(updateUserState(updatedState));
-        dipatch(toggleQuickSaveState());
+        dispatch(updateUserState(updatedState));
+        dispatch(toggleQuickSaveState());
 
         // set state to false
         setIsLoading(false);
-
-        // show the modal
       }
     }, 2000);
 
@@ -121,7 +119,7 @@ const QuickSave = ({ setToastModal, setServerResponse }: QuickSaveProps) => {
       <div className="flex justify-end items-end mb-4">
         <div
           className="icon cursor-pointer text-4xl"
-          onClick={() => dipatch(toggleQuickSaveState())}
+          onClick={() => dispatch(toggleQuickSaveState())}
         >
           <IoClose />
         </div>

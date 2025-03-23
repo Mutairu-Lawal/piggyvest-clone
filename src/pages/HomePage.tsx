@@ -17,17 +17,22 @@ import { getTheDayTime, getTotalBalance } from '../utils/fun';
 import { useAppSelector } from '../app/hooks';
 import { UserProps } from '../data/users';
 import ConditionsOfUse from '../components/homepage/ConditionsOfUse';
+import UserName from '../components/homepage/UserName';
 
 export default function HomePage() {
   const showQuickSave = useAppSelector(
     (state) => state.quickSave.showQuickSave
   );
-  const [showTransactionHistory, setShowTransactionHistory] = useState(false);
-  const [toastModal, setToastModal] = useState(false);
-  const [serverResponse, setServerResponse] = useState<string | null>(null);
+  const userNameModal = useAppSelector(
+    (state) => state.userNameModal.showUserNameModal
+  );
   const currentUser: UserProps = useAppSelector(
     (state) => state.currentUserData.user
   );
+
+  const [showTransactionHistory, setShowTransactionHistory] = useState(false);
+  const [toastModal, setToastModal] = useState(false);
+  const [serverResponse, setServerResponse] = useState<string | null>(null);
 
   return (
     <>
@@ -87,6 +92,13 @@ export default function HomePage() {
         <ShowModal
           setToastModal={setToastModal}
           serverResponse={serverResponse}
+        />
+      )}
+
+      {userNameModal && (
+        <UserName
+          setToastModal={setToastModal}
+          setServerResponse={setServerResponse}
         />
       )}
 
