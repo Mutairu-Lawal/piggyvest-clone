@@ -1,8 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getSessionStorage } from '../../utils/sessionStorage';
+// import { UserProps } from '../../data/users';
+
+// Initialize user data
+const getCurrentUser = getSessionStorage('user');
 
 const initialState = {
-  user: getSessionStorage('user'),
+  user: getCurrentUser,
 };
 
 export const currentUserDataSlice = createSlice({

@@ -1,6 +1,30 @@
+import { toggleQuickSaveState } from '../../app/features/QuickSaveSlice';
+import { toggleUserNameModal } from '../../app/features/UserNameSlice';
+import { useAppDispatch } from '../../app/hooks';
+import { UserProps } from '../../data/users';
+import { getSessionStorage } from '../../utils/sessionStorage';
+
 const Todo = ({ type }: { type: string }) => {
+  const dispatch = useAppDispatch();
+
+  const Types = {
+    FIRST_TRANSACTION: 'Fund your first transaction',
+    USERNAME: 'Create your username',
+  };
+
+  const handleClick = () => {
+    if (type === Types.FIRST_TRANSACTION) {
+      return dispatch(toggleQuickSaveState());
+    } else {
+      return dispatch(toggleUserNameModal());
+    }
+  };
+
   return (
-    <div className="rounded-bl-none py-3 px-4 border flex items-center gap-3 rounded-lg">
+    <div
+      onClick={handleClick}
+      className="rounded-bl-none py-3 px-4 border flex items-center gap-3 rounded-lg cursor-pointer"
+    >
       <div className="w-[20px] h-[20px] border-2 rounded-full border-primary"></div>
       <p>{type}</p>
     </div>
@@ -8,11 +32,17 @@ const Todo = ({ type }: { type: string }) => {
 };
 
 const Todos = () => {
+  const user: UserProps = getSessionStorage('user');
+
   return (
     <div className="space-y-2 my-3 mt-4">
       <p className="text-sm uppercase">to-do list</p>
-      {/* box */}
-      <Todo type="Setup automatic savings" />
+
+      {user.transactions.length === 0 && (
+        <Todo type="Fund your first transaction" />
+      )}
+
+      {!user.userName && <Todo type="Create your username" />}
     </div>
   );
 };

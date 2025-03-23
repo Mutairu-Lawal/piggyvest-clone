@@ -3,54 +3,262 @@
     {
       "accountNumber": "0163810053",
       "email": "lawalmuktair@gmail.com",
-      "id": "b0b75173-350f-4a7c-8115-7f3c85910e04",
+      "id": "001",
       "password": "none",
       "phoneNumber": "07037686956",
-      "fullName": "lawal mutairu",
+      "fullName": "lawal Mutairu",
       "userName": "mtlaw",
-      "piggyPoints": 40,
-      "showBalance": false,
-      "balance": 50000
+      "referrerPoints": 1000,
+      "piggyPoints": 20,
+      "showBalance": true,
+      "userHasSeenConditions": true,
+      "authPin": 1234,
+      "accounts": [
+        {
+          "savings": 50000,
+          "flexNaira": 100000,
+          "safeLock": 40000,
+          "target": 20000
+        }
+      ],
+      "transactions": [
+        {
+          "id": "GcFaAVaLER6lCyiGVmaGM",
+          "type": "savings",
+          "amount": 10000,
+          "status": "successful",
+          "date": "2025-03-20T18:49:27+01:00",
+          "transaction_Number": "127683290147660455958283654312",
+          "sessionId": "115019904003164989810259"
+        },
+        {
+          "id": "2Xw6LrrumwVbZSQgFmomj",
+          "type": "flexNaira",
+          "amount": 10000,
+          "status": "successful",
+          "date": "2025-03-20T18:50:19+01:00",
+          "transaction_Number": "797201093421093570912894370865",
+          "sessionId": "666226591274744641711166"
+        },
+        {
+          "id": "FsYJIcAAtY6B8QMv16hTv",
+          "type": "safeLock",
+          "amount": 20000,
+          "status": "successful",
+          "date": "2025-03-20T18:50:33+01:00",
+          "transaction_Number": "162660152725765868126945213195",
+          "sessionId": "788519693789866930422136"
+        },
+        {
+          "id": "PB6VF969S4kzzjuS7SzM8",
+          "type": "target",
+          "amount": 2000,
+          "status": "successful",
+          "date": "2025-03-20T18:51:16+01:00",
+          "transaction_Number": "773359673293802124058507016925",
+          "sessionId": "906405977459449335244362"
+        },
+        {
+          "id": "aR4D_HCNT6Iy6EwfMjDGa",
+          "type": "savings",
+          "amount": 30000,
+          "status": "successful",
+          "date": "2025-03-20T18:52:05+01:00",
+          "transaction_Number": "634252298950020400976651564377",
+          "sessionId": "710209311438743673863409"
+        },
+        {
+          "id": "bB7BSUhw-UCcQ7KP8TlhB",
+          "type": "savings",
+          "amount": 4000000,
+          "status": "failed",
+          "date": "2025-03-20T18:52:16+01:00",
+          "transaction_Number": "681974601323027599534972420246",
+          "sessionId": "044148561582672582413289"
+        },
+        {
+          "id": "ufM966gSw89WuWauzKcY0",
+          "type": "flexNaira",
+          "amount": 300000,
+          "status": "failed",
+          "date": "2025-03-20T18:52:32+01:00",
+          "transaction_Number": "500080684763713789417182615895",
+          "sessionId": "568495003261640728889428"
+        },
+        {
+          "id": "oZ1UjG-i2ay2ggUOSrpLS",
+          "type": "safeLock",
+          "amount": 400000,
+          "status": "failed",
+          "date": "2025-03-20T18:52:47+01:00",
+          "transaction_Number": "040972448857550520788894666239",
+          "sessionId": "988982527927276054194807"
+        },
+        {
+          "id": "28ScnQoffYgnM8CEjWvbn",
+          "type": "target",
+          "amount": 600000,
+          "status": "failed",
+          "date": "2025-03-20T18:53:02+01:00",
+          "transaction_Number": "021956782314757383805100181825",
+          "sessionId": "153920666095677184121854"
+        },
+        {
+          "id": "oTiu-dkyFqk6z1cOc4Hp6",
+          "type": "flexNaira",
+          "amount": 80000,
+          "status": "successful",
+          "date": "2025-03-22T08:27:04+01:00",
+          "transaction_Number": "773053557140188828014123465689",
+          "sessionId": "645963923611654032463688"
+        },
+        {
+          "id": "XUBA4l0aTea-KHTWYoeFK",
+          "type": "target",
+          "amount": 8000,
+          "status": "successful",
+          "date": "2025-03-22T08:44:59+01:00",
+          "transaction_Number": "649574395753472120131566859398",
+          "sessionId": "872885268126660142269647"
+        },
+        {
+          "id": "YgZTX2c1puiwB5F0BirsT",
+          "type": "savings",
+          "amount": 200000,
+          "status": "failed",
+          "date": "2025-03-22T08:45:37+01:00",
+          "transaction_Number": "632956586491087255223335389278",
+          "sessionId": "214742862387172084307361"
+        }
+      ]
     },
     {
       "accountNumber": "5005634616",
-      "balance": 107000,
       "email": "mtlaw@gmail.com",
-      "id": "41440d4d-d3a4-46e8-a572-2e823b6df5a9",
+      "id": "002",
       "password": "null",
       "phoneNumber": "07046086074",
       "fullName": "mutairu oluwaseun",
       "userName": "mtlaw11",
+      "referrerPoints": 10000,
       "piggyPoints": 40,
-      "showBalance": false
+      "showBalance": false,
+      "userHasSeenConditions": true,
+      "transactions": [],
+      "accounts": [
+        {
+          "savings": 3000,
+          "flexNaira": 4000,
+          "safeLock": 6000,
+          "target": 7000
+        }
+      ]
     },
     {
-      "id": "2334ebc7-128e-4e4b-a6b9-12c599962778",
-      "accountNumber": "",
+      "id": "9ae1cfda-cd51-4878-88af-d895e02e5e3a",
+      "accountNumber": "2630069947",
       "userName": "",
-      "balance": 0,
+      "userHasSeenConditions": false,
       "piggyPoints": 0,
-      "transactions": [],
-      "showBalance": false,
-      "fullName": "lawaa",
-      "email": "lawalmuktair@gmail.com",
-      "phoneNumber": 990987077008,
-      "password": "okayasas",
+      "transactions": [
+        {
+          "id": "26s_D1dLLot5buaShSESX",
+          "type": "safeLock",
+          "amount": 20000,
+          "status": "successful",
+          "date": "2025-03-22T08:58:10+01:00",
+          "transaction_Number": "587420277003026319478749467258",
+          "sessionId": "525498555405398609297562"
+        },
+        {
+          "id": "guB5mM7oGUK2v9wPBf--u",
+          "type": "savings",
+          "amount": 10000,
+          "status": "successful",
+          "date": "2025-03-22T08:59:05+01:00",
+          "transaction_Number": "409842697088885619406918714253",
+          "sessionId": "428323918108725506111605"
+        },
+        {
+          "id": "RYpV9h1SCd67F6J-Tu9Pv",
+          "type": "flexNaira",
+          "amount": 80000,
+          "status": "successful",
+          "date": "2025-03-22T08:59:20+01:00",
+          "transaction_Number": "036844112195223065849240033389",
+          "sessionId": "537288806364606800625602"
+        },
+        {
+          "id": "u-AwD9AsHc4XQxZkyeYeR",
+          "type": "target",
+          "amount": 1000000,
+          "status": "failed",
+          "date": "2025-03-22T08:59:34+01:00",
+          "transaction_Number": "215349080695239881405395549950",
+          "sessionId": "014856088000152289345152"
+        },
+        {
+          "id": "egeuGsXBQTYtn3HwKQBVj",
+          "type": "target",
+          "amount": 10000,
+          "status": "successful",
+          "date": "2025-03-22T09:01:16+01:00",
+          "transaction_Number": "762381210895666603850265805647",
+          "sessionId": "775640193688001956946973"
+        }
+      ],
+      "authPin": "",
+      "firstTransaction": false,
+      "referrerPoints": 0,
+      "showBalance": true,
+      "accounts": [
+        {
+          "savings": 10000,
+          "flexNaira": 80000,
+          "safeLock": 20000,
+          "target": 10000
+        }
+      ],
+      "fullName": "lawal olatunji",
+      "email": "thebillionnairadream@gmail.com",
+      "phoneNumber": "08033981075",
+      "password": "qwerty12345",
       "referrerCode": "",
-      "referrerName": ""
+      "referrerName": "Google Playstore"
     },
     {
-      "id": "7cf2edea-14ce-4b17-b828-1c0ad519a4d3",
-      "accountNumber": "",
+      "id": "948b4a24-e3fd-4fba-9be4-6d963e71bb9e",
+      "accountNumber": "2630726425",
       "userName": "",
-      "balance": 0,
+      "userHasSeenConditions": false,
       "piggyPoints": 0,
-      "transactions": [],
+      "transactions": [
+        {
+          "id": "1DgGLaIxLlcY-IRHYU_Gr",
+          "type": "safeLock",
+          "amount": 10000,
+          "status": "successful",
+          "date": "2025-03-22T09:12:23+01:00",
+          "transaction_Number": "699090434904223040524544207522",
+          "sessionId": "279163490740388203632585"
+        }
+      ],
+      "authPin": "",
+      "firstTransaction": false,
+      "referrerPoints": 0,
       "showBalance": false,
-      "fullName": "lawal",
-      "email": "thebillionnairadream@outlook.com",
-      "phoneNumber": 11111,
-      "password": "111111111",
+      "accounts": [
+        {
+          "savings": 0,
+          "flexNaira": 0,
+          "safeLock": 10000,
+          "target": 0
+        }
+      ],
+      "fullName": "usman abdulazeez",
+      "email": "jazenilyoung@gmail.com",
+      "phoneNumber": "08124693072",
+      "password": "Nilly@piggy1",
       "referrerCode": "",
       "referrerName": ""
     }

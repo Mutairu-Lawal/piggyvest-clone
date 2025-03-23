@@ -5,6 +5,7 @@ import { TbTargetArrow } from 'react-icons/tb';
 import { IoIosRocket } from 'react-icons/io';
 import { FiUser } from 'react-icons/fi';
 
+// all the links in the nav bar
 const navlinks = [
   {
     text: 'Home',

@@ -1,28 +1,34 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
+import { Bounce, toast, ToastContainer } from 'react-toastify';
+import { IoMdArrowDropdown } from 'react-icons/io';
 
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
-import { users } from '../../data/users';
 import { generateAccountNumber } from '../../utils/fun';
+import { UserProps } from '../../data/users';
+import { useAppDispatch } from '../../app/hooks';
+import { updateUserState } from '../../app/features/currentUserData';
+import { setSessionStorage } from '../../utils/sessionStorage';
 
+// create footer links for signup page
 const FooterLink = () => {
   const footerLinks = [
     {
       id: 1,
       href: '/login',
       linkName: 'login',
-      label: `Don't have an account? login`,
+      label: `Already have an account? Login`,
     },
     {
       id: 2,
       href: '#',
       label: `privacy policy`,
-      linkName: 'privacys',
+      linkName: 'privacy',
     },
   ];
 
@@ -32,7 +38,7 @@ const FooterLink = () => {
         id={`${id}`}
         to={href}
         className="hover:text-gray-300 md:text-sm text-xs font-medium"
-        aria-label={`click to vist ${linkName} page`}
+        aria-label={`click to visit ${linkName} page`}
       >
         <p className="mt-7">{label}</p>
       </Link>
@@ -40,12 +46,14 @@ const FooterLink = () => {
   ));
 };
 
+// create signup page
 export default function SignUpPage() {
+  let emails = [];
   const [isLoading, setIsLoading] = useState(false);
   const [postError, setPostError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
 
-  const navigate = useNavigate();
-
+  const dispatch = useAppDispatch();
   const referrerNames = [
     '',
     'Facebook',
@@ -67,7 +75,10 @@ export default function SignUpPage() {
       .trim()
       .toLowerCase(),
     email: z.string().email().trim().toLowerCase(),
-    phoneNumber: z.number({ message: 'Please input your phone Number' }),
+    phoneNumber: z
+      .string()
+      .min(10, { message: 'Please enter a valid phone number' })
+      .trim(),
     password: z
       .string()
       .trim()
@@ -87,32 +98,56 @@ export default function SignUpPage() {
   });
 
   const onSubmit = (data: UserSchema) => {
-    // const API_URL = 'http://localhost:3000/users';
     // const API_KEY = import.meta.env.VITE_SOME_KEY;
 
-    const newClient = {
+    // create new user object
+    const newClient: UserProps = {
       id: uuidv4(),
       accountNumber: generateAccountNumber(),
       userName: '',
-      balance: 0,
       piggyPoints: 0,
+      userHasSeenConditions: false,
       transactions: [],
-      authPin: undefined,
+      authPin: '',
+      referrerPoints: 0,
       showBalance: false,
+      accounts: [
+        {
+          savings: 0,
+          flexNaira: 0,
+          safeLock: 0,
+          target: 0,
+        },
+      ],
       ...data,
     };
 
-    const postData = async () => {
+    const getAndPostData = async () => {
       try {
         setIsLoading(true);
         setPostError(null);
+        setEmailError(null);
 
+        // simulate a delay
         await new Promise((resolve) => {
           setTimeout(() => {
             resolve('done');
           }, 1000);
         });
 
+        // get all users emails
+        const response = await fetch('/api/users');
+
+        if (!response.ok) throw new Error(response.statusText);
+
+        const data = await response.json();
+        emails = data.map((user: UserProps) => user.email);
+
+        // checking if the new client email exists
+        if (emails.includes(newClient.email))
+          throw new Error('Email already exists');
+
+        // posting new user to database
         const res = await fetch('/api/users', {
           method: 'POST',
           headers: {
@@ -122,24 +157,52 @@ export default function SignUpPage() {
           body: JSON.stringify(newClient),
         });
 
-        if (!res.ok) throw new Error('Error creating an account');
+        if (!res.ok)
+          throw new Error('Error creating an account. Try Again Later');
 
-        users.push(newClient);
+        // save data to web storage
+        setSessionStorage('user', newClient);
+        dispatch(updateUserState(newClient));
+
+        toast.success(
+          'Account created successfully! You can now log in to access our services',
+          {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+            transition: Bounce,
+          }
+        );
       } catch (err: unknown) {
-        if (err instanceof Error) setPostError(err.message);
+        if (err instanceof Error) {
+          if (err.message === 'Email already exists') {
+            setEmailError(err.message);
+          } else {
+            setPostError(err.message);
+            toast.error(postError, {
+              position: 'top-right',
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'light',
+              transition: Bounce,
+            });
+          }
+        }
       } finally {
         setIsLoading(false);
-
-        // navigate to homepage
-        setTimeout(() => {
-          if (!postError) {
-            navigate('/');
-          }
-        }, 2000);
       }
     };
 
-    postData();
+    getAndPostData();
   };
 
   return (
@@ -148,6 +211,7 @@ export default function SignUpPage() {
         title="Login to your account"
         subtitle="Securely login to your PiggyVest"
       >
+        {/* signup form */}
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="pb-3 px-1 mt-5 text-left space-y-7"
@@ -176,21 +240,22 @@ export default function SignUpPage() {
               id="email"
               name="email"
               placeholder="Email Address"
+              onChange={() => {
+                setEmailError(null);
+              }}
             />
             {errors.email && (
               <span className="text-red-500">{errors.email.message}</span>
             )}
-            {/* {emailError && (
-              <span className="text-red-500">Email is available</span>
-            )} */}
+            {emailError && <p className="text-red-500">{emailError}</p>}
           </div>
 
-          {/* phone  number */}
+          {/* phone number */}
           <div className="form-group">
             <label htmlFor="phoneNumber">Phone Number</label>
             <input
-              {...register('phoneNumber', { valueAsNumber: true })}
-              type="number"
+              {...register('phoneNumber')}
+              type="text"
               id="phoneNumber"
               name="phoneNumber"
               placeholder="Phone Number"
@@ -242,6 +307,9 @@ export default function SignUpPage() {
                 </option>
               ))}
             </select>
+            <div className="absolute top-[50%] right-[3%] translate-x-[5%] translate-y-[-10%]">
+              <IoMdArrowDropdown />
+            </div>
           </div>
 
           <button
@@ -257,9 +325,7 @@ export default function SignUpPage() {
             )}
           </button>
 
-          {postError && (
-            <div className="text-center text-red-600">{postError}</div>
-          )}
+          <ToastContainer />
         </form>
       </Box>
       <FooterLink />

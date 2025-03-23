@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 
-interface BoxPops {
+interface BoxProps {
   title: string;
   subtitle: string;
   children: ReactNode;
 }
 
-const Box = ({ title, subtitle, children }: BoxPops) => {
+const Box = ({ title, subtitle, children }: BoxProps) => {
   return (
     <div className="box max-w-md mx-auto text-black bg-white py-10 px-5 md:px-10 rounded-2xl rounded-bl-none">
       <h2 className="text-[#083e9e] font-bold text-xl md:text-2xl">{title}</h2>
