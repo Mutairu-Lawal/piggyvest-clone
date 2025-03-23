@@ -36,6 +36,21 @@ export default function HomePage() {
 
   return (
     <>
+      {/* render toast modal */}
+      {toastModal && (
+        <ShowModal
+          setToastModal={setToastModal}
+          serverResponse={serverResponse}
+        />
+      )}
+
+      {userNameModal && (
+        <UserName
+          setToastModal={setToastModal}
+          setServerResponse={setServerResponse}
+        />
+      )}
+
       {!showQuickSave && !showTransactionHistory && (
         <main>
           <Header
@@ -82,21 +97,6 @@ export default function HomePage() {
       {/* render quick save modal */}
       {showQuickSave && currentUser && (
         <QuickSave
-          setToastModal={setToastModal}
-          setServerResponse={setServerResponse}
-        />
-      )}
-
-      {/* render toast modal */}
-      {toastModal && (
-        <ShowModal
-          setToastModal={setToastModal}
-          serverResponse={serverResponse}
-        />
-      )}
-
-      {userNameModal && (
-        <UserName
           setToastModal={setToastModal}
           setServerResponse={setServerResponse}
         />
