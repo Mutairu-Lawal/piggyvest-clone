@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
 import { useState } from 'react';
@@ -18,6 +18,7 @@ export default function ForgotPassword() {
   const [userEmail, setUserEmail] = useState({ email: '' });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -55,6 +56,8 @@ export default function ForgotPassword() {
 
         // Alert the user their password
         alert(`Your forgotten password is "${user.password}"`);
+        // Redirect the user to the login page
+        navigate('/login');
       } catch (error: unknown) {
         if (error instanceof Error) {
           setError(error.message);

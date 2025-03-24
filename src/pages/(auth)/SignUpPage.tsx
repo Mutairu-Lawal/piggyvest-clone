@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,7 +12,7 @@ import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
 
 // Utilities
-import { API_KEY, generateAccountNumber } from '../../utils/fun';
+import { API_KEY, BASE_URL, generateAccountNumber } from '../../utils/fun';
 import { UserProps } from '../../data/users';
 import { useAppDispatch } from '../../app/hooks';
 import { updateUserState } from '../../app/features/currentUserData';
@@ -56,7 +56,11 @@ const FooterLink = () => {
  * Create signup page
  */
 
-export default function SignUpPage() {
+export default function SignUpPage({
+  setSuccess,
+}: {
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   let emails = [];
   const [isLoading, setIsLoading] = useState(false);
   const [postError, setPostError] = useState<string | null>(null);
@@ -95,6 +99,8 @@ export default function SignUpPage() {
     referrerCode: z.string().trim().optional(),
     referrerName: z.enum(referrerNames).optional(),
   });
+
+  const navigate = useNavigate();
 
   type UserSchema = z.infer<typeof userSchema>;
 
@@ -136,7 +142,7 @@ export default function SignUpPage() {
         setEmailError(null);
 
         // get all users emails
-        const response = await fetch('/api', {
+        const response = await fetch(BASE_URL, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -176,24 +182,23 @@ export default function SignUpPage() {
         setSessionStorage('user', newClient);
         dispatch(updateUserState(newClient));
 
-        toast.success(
-          'Account created successfully! You can now log in to access our services',
-          {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'light',
-            transition: Bounce,
-          }
-        );
+        setSuccess(true);
+        navigate('/login');
       } catch (err: unknown) {
         if (err instanceof Error) {
           if (err.message === 'Email already exists') {
             setEmailError(err.message);
+            return toast.error(err.message, {
+              position: 'top-right',
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'light',
+              transition: Bounce,
+            });
           } else {
             setPostError(err.message);
             toast.error(postError, {
