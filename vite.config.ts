@@ -8,7 +8,7 @@ export default defineConfig({
     allowedHosts: ['79d2-129-205-124-210.ngrok-free.app'],
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
+        target: 'https://api.jsonbin.io/v3/b/67c7e315acd3cb34a8f53a7b/latest',
         changeOrigin: true,
         secure: false,
         rewrite: (path) => path.replace(/^\/api/, ''),

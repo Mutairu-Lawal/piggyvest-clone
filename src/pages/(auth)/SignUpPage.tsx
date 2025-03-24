@@ -7,15 +7,21 @@ import { useState } from 'react';
 import { Bounce, toast, ToastContainer } from 'react-toastify';
 import { IoMdArrowDropdown } from 'react-icons/io';
 
+// Components
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
-import { generateAccountNumber } from '../../utils/fun';
+
+// Utilities
+import { API_KEY, generateAccountNumber } from '../../utils/fun';
 import { UserProps } from '../../data/users';
 import { useAppDispatch } from '../../app/hooks';
 import { updateUserState } from '../../app/features/currentUserData';
 import { setSessionStorage } from '../../utils/sessionStorage';
 
-// create footer links for signup page
+/**
+ * Create footer links for signup page
+ */
+
 const FooterLink = () => {
   const footerLinks = [
     {
@@ -46,7 +52,10 @@ const FooterLink = () => {
   ));
 };
 
-// create signup page
+/**
+ * Create signup page
+ */
+
 export default function SignUpPage() {
   let emails = [];
   const [isLoading, setIsLoading] = useState(false);
@@ -98,8 +107,6 @@ export default function SignUpPage() {
   });
 
   const onSubmit = (data: UserSchema) => {
-    // const API_KEY = import.meta.env.VITE_SOME_KEY;
-
     // create new user object
     const newClient: UserProps = {
       id: uuidv4(),
@@ -128,34 +135,39 @@ export default function SignUpPage() {
         setPostError(null);
         setEmailError(null);
 
-        // simulate a delay
-        await new Promise((resolve) => {
-          setTimeout(() => {
-            resolve('done');
-          }, 1000);
-        });
-
         // get all users emails
-        const response = await fetch('/api/users');
+        const response = await fetch('/api', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Master-Key': API_KEY,
+          },
+        });
 
         if (!response.ok) throw new Error(response.statusText);
 
         const data = await response.json();
-        emails = data.map((user: UserProps) => user.email);
+
+        const dataRecords = data.record.users;
+
+        emails = dataRecords.map((user: UserProps) => user.email);
 
         // checking if the new client email exists
         if (emails.includes(newClient.email))
           throw new Error('Email already exists');
 
         // posting new user to database
-        const res = await fetch('/api/users', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            // 'X-Master-Key': API_KEY,
-          },
-          body: JSON.stringify(newClient),
-        });
+        const res = await fetch(
+          'https://api.jsonbin.io/v3/b/67c7e315acd3cb34a8f53a7b/',
+          {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Master-Key': API_KEY,
+            },
+            body: JSON.stringify({ users: [...dataRecords, newClient] }), // adding new user to the array
+          }
+        );
 
         if (!res.ok)
           throw new Error('Error creating an account. Try Again Later');

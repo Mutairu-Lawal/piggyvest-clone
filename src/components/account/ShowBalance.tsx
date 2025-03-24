@@ -15,6 +15,7 @@ const ShowBalance = () => {
 
   const handleToggleBalance = async () => {
     const currentState = getSessionStorage('user');
+
     try {
       if (currentState) {
         const updatedState = {
@@ -22,12 +23,13 @@ const ShowBalance = () => {
           showBalance: !currentState.showBalance,
         };
 
-        const response = await syncData(updatedState);
-        if (response) throw new Error(response);
-
-        // update the user on the client
+        // Update the user on the client
         setSessionStorage('user', updatedState);
         dispatch(updateUserState(updatedState));
+
+        // Sync with server
+        const response = await syncData(updatedState);
+        if (response) throw new Error(response);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {

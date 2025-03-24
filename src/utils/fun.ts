@@ -81,3 +81,7 @@ export const generatedReceipt = (
     sessionId: sessionId(),
   };
 };
+
+//
+
+export const API_KEY = import.meta.env.VITE_X_MASTER_KEY;

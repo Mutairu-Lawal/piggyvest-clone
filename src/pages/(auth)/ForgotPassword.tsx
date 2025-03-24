@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
-
 import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
 import { useState } from 'react';
 import { UserProps } from '../../data/users';
+import { API_KEY } from '../../utils/fun';
 
 const footerLinks = [
   {
@@ -23,7 +23,7 @@ export default function ForgotPassword() {
     e.preventDefault();
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-    // validate the user input before sending the request
+    // Validate the user input before sending the request
     if (!userEmail.email) return setError(`Input can't be empty`);
     if (!emailRegex.test(userEmail.email))
       return setError('Please enter a valid email address.');
@@ -32,27 +32,28 @@ export default function ForgotPassword() {
       try {
         setIsLoading(true);
 
-        await new Promise((resolve) => {
-          setTimeout(() => {
-            resolve('done');
-          }, 1000);
+        const res = await fetch('api', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Master-Key': API_KEY,
+          },
         });
-
-        const res = await fetch('/api/users');
 
         if (!res.ok) throw new Error(res.statusText);
 
-        const data: UserProps[] = await res.json();
+        const data = await res.json();
+        const dataRecords: UserProps[] | [] = data.record.users;
 
-        const user = data.find(
+        const user = dataRecords.find(
           (user) =>
             user.email.toLocaleLowerCase() ===
             userEmail.email.toLocaleLowerCase()
         );
 
-        if (!user) throw new Error('No user found on data');
+        if (!user) throw new Error('No matching user found in our records.');
 
-        // alert the user their password
+        // Alert the user their password
         alert(`Your forgotten password is "${user.password}"`);
       } catch (error: unknown) {
         if (error instanceof Error) {
@@ -67,10 +68,11 @@ export default function ForgotPassword() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (error) setError(''); // clear error message on input change
+    if (error) setError(''); // Clear error message on input change
     const { name, value } = e.target;
     setUserEmail((prevState) => ({ ...prevState, [name]: value }));
   };
+
   return (
     <AuthDashboard>
       <Box
@@ -119,7 +121,7 @@ export default function ForgotPassword() {
           key={id}
           to={href}
           className="hover:text-gray-300 md:text-sm text-xs font-medium"
-          aria-label={`click to vist ${linkName} page`}
+          aria-label={`click to visit ${linkName} page`}
         >
           <h6 className="mt-7">{label}</h6>
         </Link>
