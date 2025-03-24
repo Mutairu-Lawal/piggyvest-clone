@@ -1,9 +1,10 @@
 import { UserProps } from '../data/users';
-import { API_KEY } from '../utils/fun';
+import { API_KEY, BASE_URL } from '../utils/fun';
 
 export const getAllUsers = async () => {
   try {
-    const res = await fetch('api', {
+    const res = await fetch(BASE_URL, {
+      mode: 'cors',
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -39,17 +40,14 @@ export const syncData = async (newState: UserProps) => {
       return user;
     });
 
-    const res = await fetch(
-      'https://api.jsonbin.io/v3/b/67c7e315acd3cb34a8f53a7b/',
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Master-Key': API_KEY,
-        },
-        body: JSON.stringify({ users: [...updatedDataRecords] }),
-      }
-    );
+    const res = await fetch(BASE_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Master-Key': API_KEY,
+      },
+      body: JSON.stringify({ users: [...updatedDataRecords] }),
+    });
 
     if (!res.ok) {
       throw new Error(res.statusText);

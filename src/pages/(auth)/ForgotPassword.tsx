@@ -3,7 +3,7 @@ import AuthDashboard from '../../components/AuthDashboard';
 import Box from '../../components/Box';
 import { useState } from 'react';
 import { UserProps } from '../../data/users';
-import { API_KEY } from '../../utils/fun';
+import { API_KEY, BASE_URL } from '../../utils/fun';
 
 const footerLinks = [
   {
@@ -32,7 +32,7 @@ export default function ForgotPassword() {
       try {
         setIsLoading(true);
 
-        const res = await fetch('api', {
+        const res = await fetch(BASE_URL, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

@@ -51,8 +51,6 @@ export default function LoginPage() {
 
       const users: UserProps[] | string = await getAllUsers();
 
-      console.log(users);
-
       if (!Array.isArray(users)) throw new Error(users);
 
       // Check for corresponding data
@@ -189,7 +187,7 @@ export default function LoginPage() {
             key={id}
             to={href}
             className="hover:text-gray-300 md:text-sm text-xs font-medium"
-            aria-label={`click to vist ${linkName} page`}
+            aria-label={`click to visit ${linkName} page`}
           >
             <h6 className="mt-7">{label}</h6>
           </Link>

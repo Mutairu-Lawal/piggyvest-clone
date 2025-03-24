@@ -85,3 +85,4 @@ export const generatedReceipt = (
 //
 
 export const API_KEY = import.meta.env.VITE_X_MASTER_KEY;
+export const BASE_URL = 'https://api.jsonbin.io/v3/b/67c7e315acd3cb34a8f53a7b';
