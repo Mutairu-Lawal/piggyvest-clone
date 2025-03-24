@@ -14,20 +14,20 @@ const ConditionsOfUse = () => {
 
   const clearConditionModal = async () => {
     const currentState: UserProps = getSessionStorage('user');
+
     try {
-      if (currentState) {
-        const updatedState = {
-          ...currentState,
-          userHasSeenConditions: true,
-        };
+      const updatedState = {
+        ...currentState,
+        userHasSeenConditions: true,
+      };
 
-        const response = await syncData(updatedState);
-        if (response) throw new Error(response);
+      // Update the user on the client server
+      setSessionStorage('user', updatedState);
+      dispatch(updateUserState(updatedState));
 
-        // update the user on the client
-        setSessionStorage('user', updatedState);
-        dispatch(updateUserState(updatedState));
-      }
+      // Update the user on the server
+      const response = await syncData(updatedState);
+      if (response) throw new Error(response);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.log(error.message);
@@ -36,7 +36,7 @@ const ConditionsOfUse = () => {
   };
 
   useEffect(() => {
-    // prevent scrolling when modal is open
+    // Prevent scrolling when modal is open
     document.body.style.overflow = 'hidden';
 
     // Clean up
@@ -73,7 +73,7 @@ const ConditionsOfUse = () => {
           className="uppercase bg-[#0d60d8] hover:bg-[#0d4dd8] text-white px-5 py-3 rounded-lg w-full font-extrabold rounded-bl-none mt-3 transition-colors duration-200"
           onClick={clearConditionModal}
         >
-          Okay let&apos;s begin!
+          Okay let's begin!
         </button>
       </div>
     </div>

@@ -79,3 +79,17 @@ nav a.active > p {
     background: #000;
   }
 }
+
+.spin {
+  aspect-ratio: 1;
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

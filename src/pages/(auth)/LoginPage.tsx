@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 
@@ -10,6 +9,7 @@ import { setSessionStorage } from '../../utils/sessionStorage';
 import { useAppDispatch } from '../../app/hooks';
 import { updateUserState } from '../../app/features/currentUserData';
 import { UserProps } from '../../data/users';
+import { getAllUsers } from '../../api/apiRequest';
 
 type CurrentUser = {
   emailOrPhoneNumber: string;
@@ -46,22 +46,15 @@ export default function LoginPage() {
     try {
       setIsLoading(true);
       const { emailOrPhoneNumber, password } = currentUser;
-      let users: UserProps[] | [] = [];
 
-      //  simulate a delay
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve('done');
-        }, 1000);
-      });
+      // Fetch data
 
-      // fectch data
-      const res = await fetch('api/users');
-      if (!res.ok) throw new Error(res.statusText);
-      const data = await res.json();
-      users = [...data];
+      const users: UserProps[] | string = await getAllUsers();
 
-      // check for coresponding data
+      if (!Array.isArray(users)) throw new Error(users);
+
+      // Check for corresponding data
+
       const currentUserData = emailOrPhoneNumber.includes('@')
         ? users.filter(
             (user) => user.email === emailOrPhoneNumber.trim().toLowerCase()
@@ -70,7 +63,8 @@ export default function LoginPage() {
             (user) => user.phoneNumber === emailOrPhoneNumber.trim()
           );
 
-      // check for empty data
+      // Check for empty data
+
       if (currentUserData.length === 0) {
         toast.error('Incorrect email or password', {
           position: 'top-right',
@@ -87,7 +81,8 @@ export default function LoginPage() {
         return;
       }
 
-      //verify the user password
+      // Verify the user password
+
       if (currentUserData[0].password === password) {
         setSessionStorage('user', currentUserData[0]);
         dispatch(updateUserState(currentUserData[0]));
@@ -107,7 +102,8 @@ export default function LoginPage() {
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
-        // this a custom error message... kindly when deloying
+        // Custom error message when deploying
+
         toast.error(`Sorry we couldn't reach our server, Try again later`, {
           position: 'top-right',
           autoClose: 3000,
