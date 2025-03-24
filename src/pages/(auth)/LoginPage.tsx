@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
@@ -31,7 +31,7 @@ const footerLinks = [
   },
 ];
 
-export default function LoginPage() {
+export default function LoginPage({ success }: { success: boolean }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -120,6 +120,25 @@ export default function LoginPage() {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (success) {
+      toast.success(
+        'Account created successfully! You can now log in to access our services',
+        {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+          transition: Bounce,
+        }
+      );
+    }
+  }, [success]);
 
   return (
     <>

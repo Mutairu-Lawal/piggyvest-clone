@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 // relative paths
@@ -12,6 +14,8 @@ import InvestmentPage from './pages/InvestmentPage';
 import Error404Page from './pages/Error404Page';
 
 function App() {
+  const [success, setSuccess] = useState(false);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -21,8 +25,11 @@ function App() {
           <Route path="account" element={<Account />} />
           <Route path="invest" element={<InvestmentPage />} />
         </Route>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<SignUpPage />} />
+        <Route path="/login" element={<LoginPage success={success} />} />
+        <Route
+          path="/register"
+          element={<SignUpPage setSuccess={setSuccess} />}
+        />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<Error404Page />} />
       </Routes>
