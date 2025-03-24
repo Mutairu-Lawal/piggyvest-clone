@@ -51,6 +51,8 @@ export default function LoginPage() {
 
       const users: UserProps[] | string = await getAllUsers();
 
+      console.log(users);
+
       if (!Array.isArray(users)) throw new Error(users);
 
       // Check for corresponding data
