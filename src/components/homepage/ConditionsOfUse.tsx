@@ -7,7 +7,6 @@ import {
 import { syncData } from '../../api/apiRequest';
 import { UserProps } from '../../data/users';
 import { updateUserState } from '../../app/features/currentUserData';
-import warningImage from '../../assets/3d-warning-sign.png';
 
 const ConditionsOfUse = () => {
   const dispatch = useAppDispatch();
@@ -50,7 +49,7 @@ const ConditionsOfUse = () => {
       <div className="modal-box bg-white w-full max-w-[400px] flex flex-col justify-center gap-2 items-center p-4 rounded-lg">
         <div>
           <img
-            src={warningImage}
+            src="https://res.cloudinary.com/dymnal33p/image/upload/f_auto,q_auto/v1/piggyvestclone/x0gsfzkympnobpqkyqly"
             alt="Warning sign"
             className="w-full h-full object-contain"
           />

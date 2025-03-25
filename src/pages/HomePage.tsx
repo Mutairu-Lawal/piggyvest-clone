@@ -73,7 +73,7 @@ export default function HomePage() {
             <h1 className="font-semibold capitalize text-2xl">get started</h1>
             <div className="img">
               <img
-                src="/src/assets/cropped.png"
+                src="https://res.cloudinary.com/dymnal33p/image/upload/f_auto,q_auto/v1/piggyvestclone/wcx7pa3wcgxfuhjpef00"
                 alt="image of a piggy bank"
                 className="w-full h-full bg-blue-700 rounded-full"
               />
