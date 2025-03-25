@@ -6,6 +6,7 @@ export default function Logo() {
           src="https://res.cloudinary.com/dymnal33p/image/upload/f_auto,q_auto/v1/piggyvestclone/zmbcjfvfth3koswox7nr"
           alt="piggyvest-logo"
           className="w-16 h-16 object-contain"
+          loading="lazy"
         />
       </a>
       <h1 className="font-plus-jakartas font-extrabold">piggyVest</h1>

@@ -3,8 +3,9 @@ const InvestmentPage = () => {
     <section className="min-h-[93dvh] flex justify-center items-center">
       <img
         src="https://res.cloudinary.com/dymnal33p/image/upload/f_auto,q_auto/v1/piggyvestclone/zhu7rt3o0wmf0jufkrz1"
-        alt="image of contsruction"
+        alt="image of construction"
         className="w-full h-full object-contain"
+        loading="lazy"
       />
     </section>
   );

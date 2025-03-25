@@ -9,6 +9,7 @@ const BestClient = () => {
           src="https://res.cloudinary.com/dymnal33p/image/upload/f_auto,q_auto/v1/piggyvestclone/qs5ylikcxe3erctlvrtn"
           alt="our best client"
           className="w-full h-full object-contain"
+          loading="lazy"
         />
       </div>
     </div>
