@@ -120,14 +120,15 @@ export default function ForgotPassword() {
       </Box>
 
       {footerLinks.map(({ label, href, id, linkName }) => (
-        <Link
-          key={id}
-          to={href}
-          className="hover:text-gray-300 md:text-sm text-xs font-medium"
-          aria-label={`click to visit ${linkName} page`}
-        >
-          <h6 className="mt-7">{label}</h6>
-        </Link>
+        <div key={id} className="mt-3 w-max mx-auto p-2">
+          <Link
+            to={href}
+            className="hover:text-gray-300 md:text-sm text-xs font-medium"
+            aria-label={`click to visit ${linkName} page`}
+          >
+            <p>{label}</p>
+          </Link>
+        </div>
       ))}
     </AuthDashboard>
   );
