@@ -16,7 +16,7 @@ const Savings = () => {
       <AccountBalance title="total balance" balance={getTotalBalance(user)} />
       <GetStarted title="build your savings">
         <img
-          src="/src/assets/piggyvest-crop.jpg"
+          src="https://res.cloudinary.com/dymnal33p/image/upload/f_auto,q_auto/v1/piggyvestclone/wesxi8ovgaozasqamctd"
           alt="image of people saving money"
           className="w-full h-full"
         />

@@ -6,9 +6,10 @@ const BestClient = () => {
       </p>
       <div className="rounded-2xl overflow-hidden border max-h-[400px]">
         <img
-          src="/src/assets/theDeveloper.webp"
+          src="https://res.cloudinary.com/dymnal33p/image/upload/f_auto,q_auto/v1/piggyvestclone/qs5ylikcxe3erctlvrtn"
           alt="our best client"
-          className="w-full h-full object-left-top"
+          className="w-full h-full object-contain"
+          loading="lazy"
         />
       </div>
     </div>

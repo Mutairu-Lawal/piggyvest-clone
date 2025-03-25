@@ -1,6 +1,4 @@
 import { useEffect } from 'react';
-import marked from '../../assets/mark_Green.png';
-import cancel from '../../assets/cancel.png';
 
 type ShowModalProps = {
   setToastModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -44,11 +42,17 @@ const ShowModal = ({ setToastModal, serverResponse }: ShowModalProps) => {
       <div className="modal-box bg-white w-full max-w-[400px] flex flex-col justify-center gap-2 items-center">
         {serverResponse === 'approved' || serverResponse === 'username' ? (
           <div className="icon w-[150px] h-[150px] mb-4">
-            <img src={marked} alt="checked or mark image" />
+            <img
+              src="https://res.cloudinary.com/dymnal33p/image/upload/f_auto,q_auto/v1/piggyvestclone/w4aaohfbof8csefmsnk6"
+              alt="checked or mark image"
+            />
           </div>
         ) : (
           <div className="icon w-[100px] h-[100px] mb-4">
-            <img src={cancel} alt="error image" />
+            <img
+              src="https://res.cloudinary.com/dymnal33p/image/upload/f_auto,q_auto/v1/piggyvestclone/a5fewm152kntpcsbuyh1"
+              alt="error image"
+            />
           </div>
         )}
 
